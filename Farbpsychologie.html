@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · Farbpsychologie &amp; Bedeutung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #2E3A3A; background: #F5F7F8; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  h1,h2,h3,h4 { font-family: 'Archivo', sans-serif; letter-spacing: -.01em; }
+
+  .masthead { background: #23282A; color: #F3F2EC; padding: 60px 0 52px; }
+  .masthead .eyebrow { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: #7FB8A3; font-weight: 600; }
+  .masthead h1 { font-weight: 800; font-size: clamp(2rem,4.5vw,3.1rem); line-height: 1.08; margin: 12px 0 14px; }
+  .masthead p { max-width: 64ch; color: #C7C9C2; font-size: 1.05rem; }
+
+  .intro { padding: 46px 0 8px; }
+  .intro h2 { font-size: 1.5rem; margin-bottom: 14px; }
+  .principles { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; margin-top: 22px; }
+  .principle { background: #fff; border: 1px solid #e2e0d6; border-radius: 12px; padding: 20px 22px; }
+  .principle b { display: block; font-family:'Archivo',sans-serif; font-size: .95rem; margin-bottom: 5px; color:#2F5D4A; }
+  .principle p { font-size: .9rem; color: #55605d; }
+  .src { font-size: .78rem; color: #8a8b82; margin-top: 6px; }
+
+  section.colors { padding: 34px 0 20px; }
+  .color-card { background:#fff; border:1px solid #e2e0d6; border-radius: 16px; overflow: hidden; margin-bottom: 22px; display: grid; grid-template-columns: 260px 1fr; }
+  .swatchband { display: flex; flex-direction: column; }
+  .swatchband .main { flex: 1; min-height: 150px; display: flex; align-items: flex-end; padding: 16px; }
+  .swatchband .main span { font-family:'Archivo',sans-serif; font-weight:700; font-size: 1.05rem; }
+  .swatchband .main small { display:block; font-weight:500; font-size:.75rem; opacity:.85; }
+  .tints { display: flex; height: 40px; }
+  .tints div { flex: 1; }
+  .cc-body { padding: 24px 26px; }
+  .cc-body h3 { font-size: 1.3rem; margin-bottom: 4px; }
+  .keywords { display:flex; flex-wrap:wrap; gap:7px; margin: 10px 0 16px; }
+  .kw { font-size:.74rem; font-weight:600; background:#EEF4F0; color:#2F5D4A; padding:4px 10px; border-radius:999px; }
+  .cc-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 8px 26px; margin-top: 6px; }
+  .cc-grid .row b { font-family:'Archivo',sans-serif; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:#8a8b82; display:block; margin-bottom:2px; }
+  .cc-grid .row p { font-size:.9rem; color:#43443e; margin-bottom: 12px; }
+  .fitline { margin-top: 4px; font-size:.86rem; color:#55605d; border-top:1px solid #eceadf; padding-top:12px; }
+  .fitline b { color:#2F5D4A; }
+
+  section.semantic { background:#fff; border-top:1px solid #e2e0d6; border-bottom:1px solid #e2e0d6; padding: 44px 0; margin-top: 20px; }
+  section.semantic h2 { font-size:1.5rem; margin-bottom: 8px; }
+  section.semantic .lead { color:#55605d; max-width:70ch; margin-bottom: 24px; }
+  .sem-grid { display:grid; grid-template-columns: repeat(4,1fr); gap:16px; }
+  .sem { border:1px solid #e6e4da; border-radius:12px; overflow:hidden; }
+  .sem .cap { height: 8px; }
+  .sem .in { padding: 16px 16px 18px; }
+  .sem h4 { font-size:1rem; margin-bottom:6px; }
+  .sem p { font-size:.84rem; color:#55605d; }
+  .sem .hex { font-size:.72rem; color:#8a8b82; margin-top:8px; }
+
+  section.ratio { padding: 46px 0 60px; }
+  section.ratio h2 { font-size:1.5rem; margin-bottom: 16px; }
+  .bar { display:flex; height: 60px; border-radius:12px; overflow:hidden; border:1px solid #d5d3c8; }
+  .bar div { display:flex; align-items:center; justify-content:center; color:#fff; font-weight:600; font-size:.9rem; }
+  .ratio-note { margin-top:14px; color:#55605d; font-size:.92rem; max-width: 72ch; }
+
+  @media (max-width: 760px){ .principles,.cc-grid,.sem-grid{grid-template-columns:1fr} .color-card{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Vesta · Design-Grundlagen</div>
+    <h1>Farbpsychologie &amp; Bedeutung</h1>
+    <p>Warum jede Farbe etwas anderes sagt — und was das für eine seriöse Marke im Bauphysik-, Ökobilanz- und Nachhaltigkeitskontext bedeutet. Grundlage für die Wahl einer der fünf Brand-Richtungen.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="intro">
+    <h2>Wie Farbe in einer Marke wirkt</h2>
+    <p style="max-width:72ch;color:#43443e">Farbe transportiert Bedeutung schneller als jedes Wort — aber sie ist kontextabhängig, kulturell geprägt und darf nie <em>allein</em> Information tragen. Die folgenden Prinzipien (aus der Nielsen-Norman-Group-Literatur) gelten für alle fünf Richtungen gleichermaßen.</p>
+    <div class="principles">
+      <div class="principle"><b>Farbe verstärkt, sie ersetzt nicht</b><p>Farbe soll Information unterstützen (Status, Hierarchie), aber nie der einzige Träger sein — immer mit Icon, Label oder Position kombinieren.</p><div class="src">NN/g · „Using Color to Enhance Your Design"</div></div>
+      <div class="principle"><b>Kontrast ist Pflicht, nicht Kür</b><p>Text braucht mind. 4.5:1 Kontrast (AA). Zu blasser Text ist die häufigste Design-Sünde und schließt Nutzer aus.</p><div class="src">NN/g · „Low-Contrast Text Is Not the Answer"</div></div>
+      <div class="principle"><b>60/30/10 bzw. 70/20/10</b><p>Eine dominante Neutralfläche, eine tragende Markenfarbe, ein sparsamer Akzent. So bleibt die Marke ruhig und der Akzent wirksam.</p><div class="src">Refactoring UI · Farbkomposition</div></div>
+      <div class="principle"><b>Bedeutung ist kontextabhängig</b><p>„Es gibt keine universell richtige Farbe." Dieselbe Farbe wirkt je nach Branche, Kultur und Nachbarfarben anders — deshalb testen wir fünf Richtungen.</p><div class="src">NN/g · Farbwahrnehmung</div></div>
+    </div>
+    <div style="background:#fff;border:1px solid #e2e0d6;border-left:4px solid #2CA58D;border-radius:12px;padding:20px 22px;margin-top:18px">
+      <b style="font-family:'Archivo',sans-serif;color:#2F5D4A">Farbe entscheidet den ersten Eindruck — messbar.</b>
+      <p style="font-size:.92rem;color:#43443e;margin-top:6px">In der berühmten 50-ms-Studie von Lindgaard et al. (2006) war „gute vs. schlechte Farbe" mit <b>r² = 0,90</b> einer der stärksten Treiber der wahrgenommenen visuellen Attraktivität einer Website — noch bevor ein Wort gelesen wird. Die Farbwahl ist damit keine reine Geschmacksfrage, sondern ein belegter Faktor für Glaubwürdigkeit und ersten Eindruck.</p>
+      <div class="src" style="margin-top:8px">Lindgaard, Fernandes, Dudek &amp; Brown (2006) · Behaviour &amp; Information Technology 25(2)</div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+<section class="colors">
+
+  <!-- GRÜN -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#2F5D4A;color:#fff"><span>Tiefes Grün<small>#2F5D4A</small></span></div>
+      <div class="tints"><div style="background:#EEF4F0"></div><div style="background:#86B09B"></div><div style="background:#3F7A5F"></div><div style="background:#244A3B"></div><div style="background:#1A362B"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Grün</h3>
+      <div class="keywords"><span class="kw">Wachstum</span><span class="kw">Balance</span><span class="kw">Verantwortung</span><span class="kw">Natur</span><span class="kw">Ruhe</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Wachstum, Ausgewogenheit, Regeneration und Verlässlichkeit. Gedämpftes Grün wirkt erwachsen und beruhigend statt verspielt.</p></div>
+        <div class="row"><b>Im Baukontext</b><p>Die naheliegende Nachhaltigkeits-Farbe — Vertrauen durch Assoziation mit Natur und Ökologie. Genau deshalb aber auch die häufigste im Wettbewerb.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Sichere, kohärente Wahl (aktueller Kurs). Gedämpft halten, um „Greenwashing-Optik" zu vermeiden — Grün als Akzent, nicht als flächige Öko-Deko.</div>
+    </div>
+  </div>
+
+  <!-- TEAL / PETROL -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#14505E;color:#fff"><span>Petrol / Teal<small>#14505E</small></span></div>
+      <div class="tints"><div style="background:#E9F0F1"></div><div style="background:#6FA0A9"></div><div style="background:#2C6E7E"></div><div style="background:#0E3D48"></div><div style="background:#0A2A32"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Petrol / Teal</h3>
+      <div class="keywords"><span class="kw">Klarheit</span><span class="kw">Tiefe</span><span class="kw">Präzision</span><span class="kw">Technik</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Die Brücke zwischen Blau (Vertrauen, Kompetenz) und Grün (Natur). Liest sich als Tiefe, Klarheit und technisches Können.</p></div>
+        <div class="row"><b>Im Baukontext</b><p>Signalisiert Ingenieurwesen und Datenkompetenz — „wir rechnen genau" — bei gleichzeitig ökologischem Unterton.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Ideal, wenn die Ingenieurs-Präzision im Vordergrund stehen soll. Nexwerks Teal-Akzent knüpft hier bereits an.</div>
+    </div>
+  </div>
+
+  <!-- BLAU -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#1F3A53;color:#fff"><span>Slate-Navy<small>#1F3A53</small></span></div>
+      <div class="tints"><div style="background:#EAF0F4"></div><div style="background:#8AA6B7"></div><div style="background:#34586E"></div><div style="background:#16304A"></div><div style="background:#0E2032"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Blau (Slate / Navy)</h3>
+      <div class="keywords"><span class="kw">Vertrauen</span><span class="kw">Stabilität</span><span class="kw">Kompetenz</span><span class="kw">Institution</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Die klassische Vertrauensfarbe: Seriosität, Stabilität, Verantwortung. Tiefes Navy wirkt erwachsen und institutionell.</p></div>
+        <div class="row"><b>Im Baukontext</b><p>Corporate-Standard für Beratung und öffentliche Hand. Verlässlich, aber allgegenwärtig — Differenzierung nötig.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Stark bei Kommunen, Investoren und großen Organisationen. Braucht einen Grün-Akzent, um das Nachhaltigkeits-Profil zu halten.</div>
+    </div>
+  </div>
+
+  <!-- ANTHRAZIT / SCHWARZ -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#23282A;color:#fff"><span>Anthrazit<small>#23282A</small></span></div>
+      <div class="tints"><div style="background:#F7F7F2"></div><div style="background:#C9C8BF"></div><div style="background:#4f5651"></div><div style="background:#34352F"></div><div style="background:#181B18"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Anthrazit / Schwarz</h3>
+      <div class="keywords"><span class="kw">Autorität</span><span class="kw">Zeitlosigkeit</span><span class="kw">Premium</span><span class="kw">Architektur</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Ernst, Autorität, Zeitlosigkeit und Wertigkeit. Reduziert und selbstbewusst — muss nicht „laut" sein, um zu überzeugen.</p></div>
+        <div class="row"><b>Im Baukontext</b><p>Die Sprache von Architekturbüros und Premium-Beratung. Nachhaltigkeit erscheint als einzelner, präziser Akzent.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Höchste Gravitas, editorial. Risiko der Kühle — Wärme muss über Bild und Sprache kommen.</div>
+    </div>
+  </div>
+
+  <!-- ERD / LEHM -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#9A4A32;color:#fff"><span>Lehm / Terracotta<small>#9A4A32</small></span></div>
+      <div class="tints"><div style="background:#F4E9DC"></div><div style="background:#C99B84"></div><div style="background:#B0563C"></div><div style="background:#6E3421"></div><div style="background:#4A2216"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Erd- &amp; Lehmtöne</h3>
+      <div class="keywords"><span class="kw">Materialität</span><span class="kw">Wärme</span><span class="kw">Kreislauf</span><span class="kw">Ehrlichkeit</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Erdverbundenheit, Natürlichkeit, Handwerk und menschliche Wärme. Die Farbe des Baustoffs selbst — Lehm, Ziegel, Holz.</p></div>
+        <div class="row"><b>Im Baukontext</b><p>Spricht die Sprache von regenerativem, biobasiertem Bauen und Cradle-to-Cradle. Hebt sich klar von grüner Konkurrenz ab.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Starke Differenzierung, hohe Menschlichkeit. Weniger „Tech/Data" — für sehr technische Portale ggf. zu weich.</div>
+    </div>
+  </div>
+
+  <!-- OLIVE / KUPFER akzente -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#5C6544;color:#fff"><span>Olive &amp; Kupfer<small>#5C6544 · #C57B4E</small></span></div>
+      <div class="tints"><div style="background:#5C6544"></div><div style="background:#8A9068"></div><div style="background:#C98A3C"></div><div style="background:#C57B4E"></div><div style="background:#9A5A31"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Akzent-Töne: Olive, Kupfer, Ocker</h3>
+      <div class="keywords"><span class="kw">Wertigkeit</span><span class="kw">Handwerk</span><span class="kw">Reife</span><span class="kw">Wärme</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Olive = gereifte, ruhige Naturverbundenheit ohne Klischee-Grün. Kupfer/Ocker = Metall, Handwerk, Langlebigkeit und Wärme.</p></div>
+        <div class="row"><b>Im Baukontext</b><p>Perfekte Akzente zu dunklen Basisfarben — sie bringen Wärme und Materialbezug, ohne die Seriosität zu stören.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Dosiert einsetzen (10 %) — als CTA-Highlight, Datenvisualisierung oder Detail, nie flächig.</div>
+    </div>
+  </div>
+
+  <!-- NEUTRALS -->
+  <div class="color-card">
+    <div class="swatchband">
+      <div class="main" style="background:#E1E0D8;color:#2E3A3A"><span>Warme Neutrals<small>Greige-Strang</small></span></div>
+      <div class="tints"><div style="background:#FFFFFF"></div><div style="background:#F7F7F4"></div><div style="background:#E1E0D8"></div><div style="background:#A6A69C"></div><div style="background:#2E3A3A"></div></div>
+    </div>
+    <div class="cc-body">
+      <h3>Neutrals (Sand · Sage · Greige)</h3>
+      <div class="keywords"><span class="kw">Ruhe</span><span class="kw">Weißraum</span><span class="kw">Hochwertigkeit</span></div>
+      <div class="cc-grid">
+        <div class="row"><b>Verkörpert</b><p>Neutrals sind die 70 %-Basis jeder Richtung — sie schaffen Ruhe, Weißraum und lassen die Markenfarbe wirken.</p></div>
+        <div class="row"><b>Warm statt kalt</b><p>Leicht grün-/gelbstichige Greige-Töne harmonieren mit warmem Grün; reines Kaltgrau würde „steril" wirken.</p></div>
+      </div>
+      <div class="fitline"><b>Für Vesta:</b> Ein einziger, konsistenter Warm-Grau-Strang statt gemischter kalter/warmer Töne — wirkt sofort hochwertiger.</div>
+    </div>
+  </div>
+
+</section>
+</div>
+
+<section class="semantic">
+  <div class="wrap">
+    <h2>Semantik-Farben: Status kommunizieren</h2>
+    <p class="lead">Erfolg, Warnung, Fehler und Info brauchen eigene, eindeutige Farben. Kernproblem: „Erfolg = Grün" kollidiert mit dem Markengrün — deshalb ist das Status-Grün deutlich heller/gesättigter, und „Info" ist echtes Blau statt Teal.</p>
+    <div class="sem-grid">
+      <div class="sem"><div class="cap" style="background:#22A559"></div><div class="in"><h4>Erfolg</h4><p>Helles, frisches Grün — klar als „Status" lesbar, nicht als Marke. Positiv, bestätigend.</p><div class="hex">Fläche #22A559 · Text #15803D</div></div></div>
+      <div class="sem"><div class="cap" style="background:#E0A11B"></div><div class="in"><h4>Warnung</h4><p>Amber, kein Gelb-Grün (läge zu nah an der Marke). Aufmerksamkeit ohne Alarm.</p><div class="hex">Fläche #E0A11B · Text #8A5A00</div></div></div>
+      <div class="sem"><div class="cap" style="background:#D64535"></div><div class="in"><h4>Fehler</h4><p>Warmes, klares Rot — universell verstanden als „stopp/Problem". Deutlich getrennt.</p><div class="hex">Fläche #D64535 · Text #B42318</div></div></div>
+      <div class="sem"><div class="cap" style="background:#2563EB"></div><div class="in"><h4>Info</h4><p>Echtes Blau (nicht Teal!), damit es nicht mit dem Marken-Akzent verschwimmt.</p><div class="hex">Fläche #2563EB · Text #1D4ED8</div></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="ratio">
+    <h2>Die 70 / 20 / 10-Regel</h2>
+    <div class="bar">
+      <div style="background:#F4EDE2;color:#2E3A3A;flex:70">70 % Neutral</div>
+      <div style="background:#2F5D4A;flex:20">20 % Marke</div>
+      <div style="background:#2CA58D;color:#0c3327;flex:10">10 % Akzent</div>
+    </div>
+    <p class="ratio-note">Diese Aufteilung ist der Grund, warum eine seriöse Marke nie „bunt" wirkt: Die Fläche gehört den ruhigen Neutrals, die Markenfarbe strukturiert, und der Akzent lenkt gezielt Aufmerksamkeit (CTA, Fokus, wichtiges Detail). Sie gilt für <b>alle fünf Richtungen</b> — nur die konkreten Farben wechseln.</p>
+  </section>
+</div>
+
+</body>
+</html>

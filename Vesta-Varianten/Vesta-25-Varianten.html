@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · 25 Design-Varianten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&family=Public+Sans:wght@400;600;700&family=Work+Sans:wght@400;600;700&family=Manrope:wght@400;600;700;800&family=Montserrat:wght@500;600;700&family=Oswald:wght@500;600;700&family=Spectral:wght@500;600;700&family=Lora:wght@500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&family=Merriweather:wght@400;700&family=Instrument+Sans:wght@400;500;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --p:#2F5D4A; --p2:#3A6A5A; --ink:#22302B; --accent:#2CA58D; --onDark:#8FE6CF; --onP:#fff;
+    --bg:#F6F8F7; --surface:#FFFFFF; --heroBg:#EDF3F0; --footerBg:#18291F; --radius:8px;
+    --fh:'Archivo',sans-serif; --fb:'Inter',sans-serif;
+    --muted:color-mix(in srgb, var(--ink) 60%, var(--bg));
+    --border:color-mix(in srgb, var(--ink) 13%, var(--bg));
+    --border2:color-mix(in srgb, var(--ink) 28%, var(--bg));
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+  h1,h2,h3,h4{font-family:var(--fh);line-height:1.1;letter-spacing:-.01em;color:var(--ink)}
+  #site, #site *{transition:background-color .35s ease, color .35s ease, border-color .35s ease}
+  .wrap2{max-width:1200px;margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--p2)}
+
+  /* ---------- Switcher ---------- */
+  #switcher{position:sticky;top:0;z-index:100;background:#15181a;color:#f2f3f2;border-bottom:1px solid #2c3133;font-family:'Inter',sans-serif}
+  .sw-top{max-width:1280px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .sw-title{font-weight:700;font-size:.9rem;letter-spacing:.02em;color:#fff;white-space:nowrap}
+  .sw-title span{color:#5fccae}
+  .sw-nav{display:flex;align-items:center;gap:14px}
+  .sw-nav button{width:34px;height:34px;border-radius:8px;border:1px solid #3a4042;background:#20252700;color:#f2f3f2;font-size:1.2rem;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center}
+  .sw-nav button:hover{background:#262c2e}
+  .sw-cur{min-width:230px;text-align:center;line-height:1.25}
+  .sw-cur #vnum{font-size:.72rem;color:#8b9391;letter-spacing:.08em}
+  .sw-cur b{display:block;font-size:.98rem;color:#fff}
+  .sw-cur em{font-style:normal;font-size:.76rem;color:#9aa2a0}
+  .sw-meta{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap;font-size:.74rem;color:#9aa2a0}
+  .sw-meta .sws{display:flex;gap:5px}
+  .sw-meta .sws i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.18)}
+  .sw-meta b{color:#d5d9d8;font-weight:600}
+  .sw-hint{font-size:.72rem;color:#6f7674}
+  .sw-chips{max-width:1280px;margin:0 auto;padding:0 24px 12px;display:flex;gap:6px;flex-wrap:wrap}
+  .sw-chips button{width:30px;height:26px;border-radius:6px;border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.7rem;font-weight:600;cursor:pointer;opacity:.5;transition:opacity .15s, transform .15s}
+  .sw-chips button:hover{opacity:.9;transform:translateY(-1px)}
+  .sw-chips button.on{opacity:1;outline:2px solid #fff;outline-offset:1px}
+
+  /* ---------- Buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fb);font-weight:600;font-size:.95rem;line-height:1;padding:13px 22px;border-radius:var(--radius);text-decoration:none;cursor:pointer;border:1.5px solid transparent;min-height:46px}
+  .btn-primary{background:var(--p);color:var(--onP)}
+  .btn-primary:hover{filter:brightness(.93)}
+  .btn-secondary{background:transparent;color:var(--ink);border-color:var(--border2)}
+  .btn-secondary:hover{border-color:var(--p);color:var(--p)}
+  .btn-ghost{background:transparent;color:var(--ink);padding-left:8px;padding-right:8px;min-height:auto}
+  .btn-ghost:hover{color:var(--p);text-decoration:underline}
+
+  /* ---------- Header ---------- */
+  .site-header{position:relative;background:var(--bg);border-bottom:1px solid var(--border)}
+  .hd-inner{max-width:1200px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:24px}
+  .logo{display:flex;flex-direction:column;line-height:1.05}
+  .logo b{font-family:var(--fh);font-weight:800;font-size:1.35rem;color:var(--p);letter-spacing:-.02em}
+  .logo span{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .nav{display:flex;gap:26px;margin-left:20px}
+  .nav a{color:var(--ink);text-decoration:none;font-size:.92rem;font-weight:500;opacity:.85}
+  .nav a:hover{opacity:1;color:var(--p)}
+  .hd-cta{margin-left:auto}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--bg);padding:72px 0 84px}
+  .hero-inner{max-width:1200px;margin:0 auto;padding:0 32px}
+  .hero h1{font-size:clamp(2.1rem,4.4vw,3.6rem);margin:14px 0 18px}
+  .hero .lead{font-size:1.18rem;color:var(--muted);max-width:52ch}
+  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;align-items:center}
+  .hero-visual{display:none}
+  .hv-panel{background:linear-gradient(140deg,var(--p),var(--p2));border-radius:calc(var(--radius) + 10px);padding:30px;color:#fff;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 34px 60px -24px rgba(0,0,0,.35)}
+  .hv-badge{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--onDark);font-weight:700}
+  .hv-bars{display:flex;align-items:flex-end;gap:10px;height:160px;margin:10px 0}
+  .hv-bars i{flex:1;background:rgba(255,255,255,.26);border-radius:6px 6px 0 0}
+  .hv-bars i:nth-child(4){background:var(--onDark)}
+  .hv-cap{font-size:.82rem;color:rgba(255,255,255,.82)}
+  /* hero: center */
+  body.hero-center .hero-inner{max-width:840px;text-align:center}
+  body.hero-center .hero .lead{margin:0 auto}
+  body.hero-center .hero-cta{justify-content:center}
+  /* hero: split */
+  body.hero-split .hero-inner{display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}
+  body.hero-split .hero-visual{display:block}
+  /* hero: left */
+  body.hero-left .hero-text{max-width:820px}
+  /* hero: textonly */
+  body.hero-textonly .hero{padding:92px 0 96px}
+  body.hero-textonly .hero h1{font-size:clamp(2.6rem,6vw,5rem);max-width:16ch}
+  body.hero-textonly .hero .lead{font-size:1.28rem}
+
+  /* ---------- Leistungen ---------- */
+  .leistungen{background:var(--surface);padding:80px 0;border-top:1px solid var(--border)}
+  .sec-head{max-width:1200px;margin:0 auto 34px;padding:0 32px}
+  .sec-head h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-top:8px}
+  .svc-grid{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px}
+  .svc-n{font-family:var(--fh);font-weight:700;font-size:1rem;color:var(--accent)}
+  .svc h3{font-size:1.16rem;margin:12px 0 10px}
+  .svc p{font-size:.95rem;color:var(--muted)}
+  /* services: bento */
+  body.svc-bento .svc-grid{grid-template-columns:1.5fr 1fr;grid-auto-rows:1fr}
+  body.svc-bento .svc:nth-child(1){grid-row:span 2;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(150deg,var(--heroBg),var(--surface))}
+  body.svc-bento .svc:nth-child(1) h3{font-size:1.5rem}
+  /* services: list */
+  body.svc-list .svc-grid{display:flex;flex-direction:column;gap:0}
+  body.svc-list .svc{background:transparent;border:none;border-top:1px solid var(--border);border-radius:0;padding:26px 32px}
+  body.svc-list .svc-lead{display:flex;gap:16px;align-items:baseline;margin-bottom:8px}
+  body.svc-list .svc-n{font-size:1.6rem}
+  body.svc-list .svc h3{margin:0}
+  body.svc-list .svc p{max-width:70ch}
+  /* services: rows */
+  body.svc-rows .svc-grid{display:flex;flex-direction:column;gap:0}
+  body.svc-rows .svc{background:transparent;border:none;border-top:1px solid var(--border);border-radius:0;display:grid;grid-template-columns:1fr 1.3fr;gap:32px;padding:30px 32px;align-items:baseline}
+  body.svc-rows .svc .svc-lead{display:flex;gap:16px;align-items:baseline}
+  body.svc-rows .svc h3{margin:0}
+  body.svc-rows .svc p{font-size:1rem}
+
+  /* ---------- Nachhaltigkeit ---------- */
+  .nachhaltigkeit{background:var(--bg);padding:80px 0}
+  .nh-grid{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .nh-grid h2{font-size:clamp(1.7rem,3vw,2.3rem);margin-top:8px}
+  .nh-grid p{color:var(--muted);font-size:1.02rem;margin-top:16px}
+  .nh-sub{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+  .nh-sub h3{font-size:1.25rem}
+  @media(max-width:820px){.nh-grid{grid-template-columns:1fr}}
+
+  /* ---------- Referenzen ---------- */
+  .referenzen{background:var(--surface);padding:66px 0;border-top:1px solid var(--border)}
+  .ref-wall{max-width:1200px;margin:22px auto 0;padding:0 32px;display:flex;flex-wrap:wrap;gap:12px}
+  .ref{border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px;font-family:var(--fh);font-weight:600;font-size:.92rem;color:var(--muted);letter-spacing:.02em;background:var(--bg)}
+
+  /* ---------- Kontakt ---------- */
+  .kontakt{background:var(--p);padding:74px 0}
+  .kontakt .wrap2{text-align:center}
+  .kontakt h2{color:#fff;font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:20ch;margin:0 auto}
+  .k-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .kontakt .btn-primary{background:#fff;color:var(--p)}
+  .kontakt .btn-secondary{color:#fff;border-color:rgba(255,255,255,.5)}
+  .kontakt .btn-secondary:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:var(--footerBg);color:#cdd6d1;padding:56px 0 40px}
+  .ft-grid{max-width:1200px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:32px}
+  .site-footer .logo b{color:#fff}
+  .site-footer .logo span{color:#8fa298}
+  .ft-grid h4{color:#fff;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-family:var(--fb);font-weight:700}
+  .ft-grid p,.ft-grid a{font-size:.9rem;color:#b7c3bc;text-decoration:none;display:block;margin-bottom:6px}
+  .ft-grid a:hover{color:#fff}
+  .ft-legal{max-width:1200px;margin:36px auto 0;padding:20px 32px 0;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#8fa298}
+  .ft-legal a{color:#8fa298;text-decoration:none;margin-left:16px}
+  .ft-legal a:hover{color:#fff}
+
+  @media(max-width:900px){
+    body.hero-split .hero-inner{grid-template-columns:1fr;gap:36px}
+    .svc-grid{grid-template-columns:1fr!important}
+    body.svc-bento .svc:nth-child(1){grid-row:auto}
+    .nav{display:none}
+    .ft-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body class="hero-split svc-cards">
+
+<div id="switcher">
+  <div class="sw-top">
+    <div class="sw-title">VESTA <span>· 25 Design-Varianten</span></div>
+    <div class="sw-nav">
+      <button id="prev" aria-label="Zurück">‹</button>
+      <div class="sw-cur"><span id="vnum">1 / 25</span><b id="vname">—</b><em id="vtag">—</em></div>
+      <button id="next" aria-label="Weiter">›</button>
+    </div>
+    <div class="sw-meta" id="vmeta"></div>
+  </div>
+  <div class="sw-chips" id="chips"></div>
+</div>
+
+<main id="site">
+  <header class="site-header">
+    <div class="hd-inner">
+      <div class="logo"><b>vesta</b><span>sustainability consulting</span></div>
+      <nav class="nav">
+        <a href="#nachhaltigkeit">Nachhaltigkeit</a>
+        <a href="#nachhaltigkeit">Über uns</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#referenzen">Referenzen</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a class="btn btn-primary hd-cta" href="#kontakt">Kontakt</a>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow">Bauphysik · Nachhaltigkeit · Ökobilanz</div>
+        <h1>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere</h1>
+        <p class="lead">Wir beraten Sie bei der Planung und Umsetzung von nachhaltigen und energieeffizienten Gebäuden und Portfolios.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#kontakt">Nachhaltigkeitsberatung</a>
+          <a class="btn btn-secondary" href="#leistungen">Unsere Leistungen</a>
+          <a class="btn btn-ghost" href="#kontakt">Kontakt →</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hv-panel">
+          <div class="hv-badge">DGNB · QNG · EU-Taxonomie · EN 15978</div>
+          <div class="hv-bars"><i style="height:42%"></i><i style="height:66%"></i><i style="height:54%"></i><i style="height:82%"></i><i style="height:36%"></i><i style="height:60%"></i></div>
+          <div class="hv-cap">CO₂-Bilanz · kWh/m² · Lebenszykluskosten · Klimarisiko</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leistungen" id="leistungen">
+    <div class="sec-head"><div class="eyebrow">Leistungen</div><h2>Was wir für Ihr Projekt tun</h2></div>
+    <div class="svc-grid">
+      <article class="svc"><div class="svc-lead"><span class="svc-n">01</span><h3>Nachhaltigkeitsberatung und Zertifizierung</h3></div><p>Zertifizierungen nach DGNB und QNG, Lebenszykluskostenanalysen, Konformitätsprüfung nach EU-Taxonomie und ESG-Kriterien, individuelle Nachhaltigkeitskonzepte.</p></article>
+      <article class="svc"><div class="svc-lead"><span class="svc-n">02</span><h3>Ökobilanzierung für Gebäude und Quartiere</h3></div><p>Auf Gebäude- und Portfolioebene, in der frühen Planungsphase bis nach Fertigstellung der Projekte sowie für Zertifizierungen, B-Pläne, Wettbewerbe, Fördermittelanträge, etc.</p></article>
+      <article class="svc"><div class="svc-lead"><span class="svc-n">03</span><h3>Bauphysik für mehr Energieeffizienz und Komfort</h3></div><p>Energiebilanzierungen, Thermische Gebäudesimulationen, Sommerlicher Wärmeschutz, Berechnung von Wärmebrücken, Entwicklung von Sanierungskonzepten, Klimarisikoanalysen.</p></article>
+    </div>
+  </section>
+
+  <section class="nachhaltigkeit" id="nachhaltigkeit">
+    <div class="nh-grid">
+      <div>
+        <div class="eyebrow">Nachhaltigkeit</div>
+        <h2>Nachhaltiges Bauen sichert Wert und schützt die Umwelt</h2>
+        <p>Nachhaltiges und energieeffizientes Bauen sichert langfristig den Wert Ihrer Immobilie und schützt aktiv die Umwelt. Wir begleiten Sie von der Planung bis zur Umsetzung und entwickeln individuelle Lösungen, die Wirtschaftlichkeit, Klimaschutz und Zukunftssicherheit verbinden. Durch umfassende Ökobilanzierung bewerten wir die Umweltauswirkungen Ihres Projekts und optimieren es gezielt. Mit innovativer thermischer Bauphysik reduzieren wir Wärmeverluste, steigern die Energieeffizienz und senken Betriebskosten nachhaltig. Setzen Sie auf ressourcenschonendes Bauen und gestalten Sie Ihre Zukunft verantwortungsvoll.</p>
+      </div>
+      <div class="nh-sub">
+        <div class="eyebrow">Projektpartner</div>
+        <h3>Gemeinsam zu energieeffizienten Gebäuden</h3>
+        <p>Sie sind auf der Suche nach geeigneten Expert:innen für die Umsetzung energieeffizienter und nachhaltiger Gebäude? Mit unserem Know-how in nachhaltigem Bauen, Ökobilanzierung und thermischer Bauphysik unterstützen wir Sie bei jedem Schritt. Gemeinsam entwickeln wir individuelle Lösungen, die Ihre Immobilien wirtschaftlich, klimafreundlich und zukunftssicher machen.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="referenzen" id="referenzen">
+    <div class="sec-head"><div class="eyebrow">Referenzen</div><h2>Partner &amp; Referenzen</h2></div>
+    <div class="ref-wall">
+      <div class="ref">Deutscher Alpenverein</div>
+      <div class="ref">Bauindustrie Bayern</div>
+      <div class="ref">Riedelbau</div>
+      <div class="ref">Phase H</div>
+      <div class="ref">Lang Hugger Rampp</div>
+      <div class="ref">IKL</div>
+      <div class="ref">Geopard Digital</div>
+      <div class="ref">DGNB</div>
+      <div class="ref">Bauplan 21</div>
+    </div>
+  </section>
+
+  <section class="kontakt" id="kontakt">
+    <div class="wrap2">
+      <h2>Ihr Partner für nachhaltiges Bauen aus München</h2>
+      <div class="k-cta">
+        <a class="btn btn-primary" href="#">Unser Kontakt</a>
+        <a class="btn btn-secondary" href="#referenzen">Unsere Referenzen</a>
+        <a class="btn btn-secondary" href="mailto:info@vesta-consult.de">Kontaktieren Sie uns – Let's get in touch!</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="ft-grid">
+      <div>
+        <div class="logo"><b>vesta</b><span>sustainability consulting</span></div>
+        <p style="margin-top:14px">Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere.</p>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <p>c/o ImpactHub<br>Gotzinger Str. 8<br>81371 München</p>
+        <a href="mailto:info@vesta-consult.de">info@vesta-consult.de</a>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <a href="#">Instagram · vesta_consult.de</a>
+        <a href="#">LinkedIn · vestasustainabilityconsulting</a>
+      </div>
+    </div>
+    <div class="ft-legal">
+      <span>©vesta sustainability consulting UG</span>
+      <span><a href="#">Impressum</a><a href="#">AGB</a></span>
+    </div>
+  </footer>
+</main>
+
+<script>
+const variants = [
+  {n:"Ruhiger Wald",t:"Deep Green · klassisch",p:"#2F5D4A",p2:"#3A6A5A",ink:"#22302B",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF3F0",ft:"#18291F",r:8,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"split",svc:"cards"},
+  {n:"Klare Kante",t:"Deep Green · scharf, editorial",p:"#2F5D4A",p2:"#3A6A5A",ink:"#20302A",ac:"#2CA58D",od:"#8FE6CF",bg:"#FFFFFF",sf:"#FBFCFB",hb:"#F0F4F2",ft:"#1A362B",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"textonly",svc:"list"},
+  {n:"Präzision & Kupfer",t:"Petrol + Kupfer · technisch",p:"#14505E",p2:"#2C6E7E",ink:"#1E2E33",ac:"#C57B4E",od:"#E7A878",bg:"#F5F8F8",sf:"#FFFFFF",hb:"#EAF1F2",ft:"#0A2A32",r:4,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"split",svc:"bento"},
+  {n:"Ingenieurbüro",t:"Petrol · IBM Plex, sachlich",p:"#134E4A",p2:"#2C6E7E",ink:"#1C2B2A",ac:"#14B8A6",od:"#7EE0D6",bg:"#F5F8F8",sf:"#FFFFFF",hb:"#E9F1F0",ft:"#0C2E2C",r:6,fh:"'IBM Plex Sans',sans-serif",fb:"'IBM Plex Sans',sans-serif",hero:"left",svc:"cards"},
+  {n:"Architektur-Autorität",t:"Anthrazit + Signalgrün · Serif",p:"#23282A",p2:"#4F5651",ink:"#20241F",ac:"#1FA971",od:"#4FD79B",bg:"#FFFFFF",sf:"#FAFAF9",hb:"#F2F4F3",ft:"#181B18",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"textonly",svc:"rows"},
+  {n:"Redaktion",t:"Anthrazit · Newsreader, magazin",p:"#262B2D",p2:"#3f4643",ink:"#202426",ac:"#2CA58D",od:"#8FE6CF",bg:"#F7F8F8",sf:"#FFFFFF",hb:"#EFF1F1",ft:"#16191A",r:2,fh:"'Newsreader',serif",fb:"'Source Sans 3',sans-serif",hero:"split",svc:"list"},
+  {n:"Institutionelles Vertrauen",t:"Slate-Navy + Frischgrün",p:"#1F3A53",p2:"#34586E",ink:"#1B2733",ac:"#2FA36A",od:"#6FD6A2",bg:"#F5F7F9",sf:"#FFFFFF",hb:"#EBF1F4",ft:"#0E2032",r:8,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"split",svc:"cards"},
+  {n:"Behörde & Kommune",t:"Navy · Public Sans, strukturiert",p:"#1D3A5F",p2:"#345A7E",ink:"#16202B",ac:"#2563EB",od:"#93B4FB",bg:"#F6F8FA",sf:"#FFFFFF",hb:"#EAF0F6",ft:"#101F30",r:4,fh:"'Public Sans',sans-serif",fb:"'Public Sans',sans-serif",hero:"left",svc:"list"},
+  {n:"Lehm & Olive",t:"Terracotta + Olive · warm",p:"#9A4A32",p2:"#5C6544",ink:"#33302A",ac:"#C98A3C",od:"#F0C078",bg:"#F7F7F5",sf:"#FFFFFF",hb:"#F1F0EB",ft:"#2A1F17",r:14,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"split",svc:"cards"},
+  {n:"Regenerativ",t:"Olive + Kupfer · Fraunces/Lato",p:"#4A5334",p2:"#5C6544",ink:"#2C2E24",ac:"#B87333",od:"#E0A45E",bg:"#F6F8F5",sf:"#FFFFFF",hb:"#EFF2EC",ft:"#22261A",r:12,fh:"'Fraunces',serif",fb:"'Lato',sans-serif",hero:"left",svc:"bento"},
+  {n:"Waldgrün & Gold",t:"Forest + Gold · Spectral",p:"#1E4636",p2:"#2C5A47",ink:"#1C2A23",ac:"#C9A24B",od:"#EAD08A",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF2EF",ft:"#132018",r:6,fh:"'Spectral',serif",fb:"'Inter',sans-serif",hero:"split",svc:"cards"},
+  {n:"Teal & Koralle",t:"Teal + Koralle · Manrope",p:"#146E6E",p2:"#0f8a8a",ink:"#14312F",ac:"#E4795B",od:"#F4A78F",bg:"#F4F8F8",sf:"#FFFFFF",hb:"#E7F2F1",ft:"#0A302E",r:10,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif",hero:"split",svc:"bento"},
+  {n:"Nachtblau",t:"Midnight Navy · Montserrat",p:"#12263A",p2:"#284B6B",ink:"#111C27",ac:"#2FA36A",od:"#7BDBAA",bg:"#F5F7F9",sf:"#FFFFFF",hb:"#E9EEF3",ft:"#0B1622",r:6,fh:"'Montserrat',sans-serif",fb:"'Inter',sans-serif",hero:"left",svc:"cards"},
+  {n:"Stahl & Bernstein",t:"Steel Blue + Amber · Work Sans",p:"#2B4C63",p2:"#3D647D",ink:"#1C2B36",ac:"#E0A11B",od:"#F3CE7A",bg:"#F5F8F9",sf:"#FFFFFF",hb:"#EAF0F3",ft:"#152430",r:4,fh:"'Work Sans',sans-serif",fb:"'Work Sans',sans-serif",hero:"split",svc:"list"},
+  {n:"Galerie Emerald",t:"Dark Canvas · Emerald",dark:true,p:"#34D399",onP:"#082018",p2:"#0F766E",ink:"#E7EAE9",ac:"#34D399",od:"#34D399",bg:"#181B1C",sf:"#22282A",hb:"#20272A",ft:"#0E1213",r:8,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"split",svc:"bento"},
+  {n:"Galerie Teal",t:"Dark Canvas · Teal",dark:true,p:"#2DD4BF",onP:"#07302B",p2:"#0D9488",ink:"#E6EDEC",ac:"#2DD4BF",od:"#2DD4BF",bg:"#111C1E",sf:"#1B2A2C",hb:"#17282A",ft:"#0A1416",r:4,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"textonly",svc:"list"},
+  {n:"Espresso & Salbei",t:"Espresso + Sage · Fraunces",p:"#3E2C23",p2:"#5A4234",ink:"#2A1F18",ac:"#7C9473",od:"#B7CBAE",bg:"#F6F7F5",sf:"#FFFFFF",hb:"#EEF1EC",ft:"#241812",r:8,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"left",svc:"cards"},
+  {n:"Petrol & Serif",t:"Petrol · Fraunces, gehoben",p:"#14505E",p2:"#2C6E7E",ink:"#1E2E33",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F8",sf:"#FFFFFF",hb:"#EAF1F2",ft:"#0A2A32",r:2,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"split",svc:"cards"},
+  {n:"Manrope Mint",t:"Deep Green · rund, modern",p:"#146152",p2:"#1C7A67",ink:"#173029",ac:"#2CA58D",od:"#8FE6CF",bg:"#F5F8F7",sf:"#FFFFFF",hb:"#EAF3F0",ft:"#0E2A24",r:14,fh:"'Manrope',sans-serif",fb:"'Manrope',sans-serif",hero:"center",svc:"bento"},
+  {n:"Montserrat Navy",t:"Navy · geometrisch",p:"#1F3A53",p2:"#34586E",ink:"#1B2733",ac:"#2FA36A",od:"#6FD6A2",bg:"#F6F8FA",sf:"#FFFFFF",hb:"#EBF1F4",ft:"#0E2032",r:6,fh:"'Montserrat',sans-serif",fb:"'Inter',sans-serif",hero:"center",svc:"cards"},
+  {n:"Oswald Impact",t:"Deep Green · Oswald, plakativ",p:"#274539",p2:"#356450",ink:"#1E2A24",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF2EF",ft:"#14201A",r:4,fh:"'Oswald',sans-serif",fb:"'Inter',sans-serif",hero:"left",svc:"rows"},
+  {n:"Spectral Prestige",t:"Bottle Green · Spectral, elegant",p:"#1F4A3D",p2:"#2C6350",ink:"#1A2A24",ac:"#C9A24B",od:"#EAD08A",bg:"#F7F8F7",sf:"#FFFFFF",hb:"#EFF3F0",ft:"#122019",r:2,fh:"'Spectral',serif",fb:"'Source Sans 3',sans-serif",hero:"textonly",svc:"list"},
+  {n:"Lora Warm",t:"Teal-Grün · Lora, humane",p:"#1C5A54",p2:"#26766E",ink:"#182F2C",ac:"#E0A44E",od:"#F3CE85",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EAF2F0",ft:"#0F2E2A",r:10,fh:"'Lora',serif",fb:"'Inter',sans-serif",hero:"split",svc:"cards"},
+  {n:"Instrument Neutral",t:"Slate · Instrument Sans, ruhig",p:"#31474F",p2:"#456069",ink:"#1F2C30",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F8",sf:"#FFFFFF",hb:"#EDF2F2",ft:"#182428",r:6,fh:"'Instrument Sans',sans-serif",fb:"'Instrument Sans',sans-serif",hero:"left",svc:"bento"},
+  {n:"Merriweather Solide",t:"Forest · Merriweather, seriös",p:"#20463B",p2:"#2C5A4A",ink:"#1B2B24",ac:"#2FA36A",od:"#6FD6A2",bg:"#F7F8F7",sf:"#FFFFFF",hb:"#EEF2F0",ft:"#132019",r:4,fh:"'Merriweather',serif",fb:"'Source Sans 3',sans-serif",hero:"split",svc:"cards"}
+];
+
+const R = document.documentElement.style;
+const el = id => document.getElementById(id);
+let cur = 0;
+
+function fontName(s){ return s.split(',')[0].replace(/'/g,''); }
+
+function applyVariant(i){
+  cur = (i + variants.length) % variants.length;
+  const v = variants[cur];
+  R.setProperty('--p', v.p);
+  R.setProperty('--p2', v.p2 || v.p);
+  R.setProperty('--ink', v.ink);
+  R.setProperty('--accent', v.ac);
+  R.setProperty('--onDark', v.od || v.ac);
+  R.setProperty('--onP', v.onP || '#fff');
+  R.setProperty('--bg', v.bg);
+  R.setProperty('--surface', v.sf);
+  R.setProperty('--heroBg', v.hb);
+  R.setProperty('--footerBg', v.ft);
+  R.setProperty('--radius', (v.r != null ? v.r : 8) + 'px');
+  R.setProperty('--fh', v.fh);
+  R.setProperty('--fb', v.fb);
+  document.body.className = 'hero-' + v.hero + ' svc-' + v.svc + (v.dark ? ' dark' : '');
+
+  el('vnum').textContent = (cur + 1) + ' / 25';
+  el('vname').textContent = v.n;
+  el('vtag').textContent = v.t;
+  el('vmeta').innerHTML =
+    '<span class="sws">' +
+      '<i style="background:'+v.p+'"></i><i style="background:'+v.ac+'"></i><i style="background:'+v.ink+'"></i><i style="background:'+v.bg+'"></i>' +
+    '</span>' +
+    '<span>Head <b>'+fontName(v.fh)+'</b> · Text <b>'+fontName(v.fb)+'</b></span>' +
+    '<span>Radius <b>'+(v.r!=null?v.r:8)+'px</b> · Hero <b>'+v.hero+'</b> · Leistungen <b>'+v.svc+'</b></span>';
+
+  [...el('chips').children].forEach((c, ci) => c.classList.toggle('on', ci === cur));
+  const active = el('chips').children[cur];
+  if (active) active.scrollIntoView({block:'nearest', inline:'nearest'});
+}
+
+// build chips
+const chips = el('chips');
+variants.forEach((v, i) => {
+  const b = document.createElement('button');
+  b.textContent = i + 1;
+  b.style.background = v.p;
+  b.title = v.n;
+  b.addEventListener('click', () => applyVariant(i));
+  chips.appendChild(b);
+});
+
+el('prev').addEventListener('click', () => applyVariant(cur - 1));
+el('next').addEventListener('click', () => applyVariant(cur + 1));
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') applyVariant(cur - 1);
+  if (e.key === 'ArrowRight') applyVariant(cur + 1);
+});
+
+applyVariant(0);
+</script>
+</body>
+</html>

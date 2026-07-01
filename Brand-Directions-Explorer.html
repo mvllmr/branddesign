@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · Brand-Richtungen im Vergleich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --maxw: 1180px; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #2E3A3A;
+    background: #F5F7F8;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- Page intro ---------- */
+  .masthead {
+    background: #23282A; color: #F3F2EC; padding: 56px 0 48px;
+  }
+  .masthead .eyebrow { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: #7FB8A3; font-weight: 600; }
+  .masthead h1 { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.08; margin: 12px 0 14px; letter-spacing: -.02em; }
+  .masthead p { max-width: 62ch; color: #C7C9C2; font-size: 1.05rem; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-top: 26px; font-size: .85rem; color: #AEB2AB; }
+  .legend b { color: #F3F2EC; font-weight: 600; }
+
+  /* ---------- Board ---------- */
+  .board { padding: 64px 0; border-bottom: 1px solid #DAD8CF; }
+  .board-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 8px; }
+  .board-num { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 1rem; color: var(--p); background: var(--chip); width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; flex: none; }
+  .board-title { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 1.5rem; color: #2E3A3A; letter-spacing: -.01em; }
+  .board-pos { color: #63645C; font-size: .98rem; margin: 2px 0 30px 56px; max-width: 70ch; font-style: italic; }
+
+  .cols { display: grid; grid-template-columns: 1.15fr .85fr; gap: 32px; align-items: start; }
+
+  /* ---------- Live preview panel ---------- */
+  .preview { border-radius: 16px; overflow: hidden; border: 1px solid rgba(46,58,58,.10); box-shadow: 0 1px 2px rgba(46,58,58,.05), 0 12px 30px rgba(46,58,58,.07); }
+  .pv-hero { background: var(--bg); padding: 34px 32px 30px; font-family: var(--font-body); }
+  .pv-eyebrow { font-family: var(--font-body); font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--p2); }
+  .pv-h1 { font-family: var(--font-head); font-weight: var(--head-weight); font-size: clamp(1.5rem, 2.6vw, 2rem); line-height: 1.12; color: var(--ink); margin: 10px 0 12px; letter-spacing: var(--head-track); }
+  .pv-lead { color: var(--muted); font-size: .98rem; max-width: 46ch; }
+  .pv-actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+  .btn { font-family: var(--font-body); font-weight: 600; font-size: .92rem; padding: 11px 20px; border-radius: var(--radius); text-decoration: none; display: inline-block; cursor: pointer; border: none; transition: transform .15s ease; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--p); color: #fff; }
+  .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+  .pv-body { background: #fff; padding: 26px 32px 30px; }
+  .pv-card { background: var(--bg2); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 18px 20px; }
+  .pv-card h4 { font-family: var(--font-head); font-weight: 600; font-size: 1rem; color: var(--ink); margin-bottom: 6px; }
+  .pv-card p { color: var(--muted); font-size: .9rem; }
+  .pv-card .lnk { color: var(--accent-ink); font-weight: 600; font-size: .88rem; text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; display: inline-block; margin-top: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+  .chip { font-size: .74rem; font-weight: 600; padding: 5px 11px 5px 9px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+  .chip::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: .9; }
+  .chip.ok { color: #15803D; background: #E7F6EC; }
+  .chip.warn { color: #8A5A00; background: #FDF4E3; }
+  .chip.err { color: #B42318; background: #FDECEA; }
+  .chip.info { color: #1D4ED8; background: #EAF0FE; }
+  .pv-anchor { background: var(--p); color: #fff; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .pv-anchor span { font-family: var(--font-head); font-weight: 600; font-size: .95rem; }
+  .pv-anchor .a-accent { color: var(--on-dark-accent); font-weight: 700; }
+
+  /* ---------- Meta column ---------- */
+  .meta h5 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: #8a8b82; margin-bottom: 12px; }
+  .meta-block { margin-bottom: 26px; }
+  .palette { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+  .sw { border-radius: 9px; height: 56px; border: 1px solid rgba(46,58,58,.10); position: relative; display: flex; align-items: flex-end; padding: 6px; }
+  .sw span { font-size: .58rem; font-weight: 600; letter-spacing: .01em; line-height: 1.15; }
+  .sw small { display: block; font-size: .55rem; font-weight: 500; opacity: .8; }
+  .fonts { font-size: .9rem; color: #4a4b45; }
+  .fonts .fh { font-family: var(--font-head); font-weight: var(--head-weight); font-size: 1.35rem; color: var(--ink); letter-spacing: var(--head-track); }
+  .fonts .fb { font-family: var(--font-body); font-size: .95rem; color: #4a4b45; }
+  .fonts .tag { font-size: .72rem; color: #8a8b82; }
+  .psych { font-size: .92rem; color: #43443e; }
+  .psych b { color: #2E3A3A; }
+  .psych .fitrow { margin-top: 10px; font-size: .82rem; color: #63645C; }
+  .psych .fitrow b { color: var(--p); }
+
+  @media (max-width: 860px) {
+    .cols { grid-template-columns: 1fr; }
+    .board-pos { margin-left: 0; }
+  }
+  footer { padding: 40px 0 70px; color: #63645C; font-size: .9rem; }
+  footer b { color: #2E3A3A; }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Vesta · Brand Exploration</div>
+    <h1>Fünf Richtungen, fünf Haltungen.</h1>
+    <p>Dieselbe Marke, dasselbe Layout — nur Farbe und Typografie ändern sich. So lässt sich die emotionale Wirkung jeder Richtung direkt vergleichen, bevor wir eine festlegen. Jede Palette ist auf WCAG-Kontrast geprüft (Primär-Button = weiße Schrift ≥ 4.5:1).</p>
+    <div class="legend">
+      <span><b>Zielgruppe:</b> Architekt:innen/Planer · Unternehmen/Bauträger/Kommunen</span>
+      <span><b>Prinzip:</b> 70 % Neutral · 20 % Marke · 10 % Akzent</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ 1 · RUHIGER WALD ============ -->
+<section class="board" style="
+  --p:#2F5D4A; --p2:#3A6A5A; --ink:#2E3A3A; --muted:#55605d;
+  --bg:#EDF3F0; --bg2:#FFFFFF; --border:#d3ddd6; --border-soft:#e6ebe7;
+  --accent:#2CA58D; --accent-ink:#1F8C74; --on-dark-accent:#8FE6CF; --chip:#E4EFE8;
+  --radius:10px; --font-head:'Archivo',sans-serif; --font-body:'Inter',sans-serif; --head-weight:700; --head-track:-.01em;">
+  <div class="wrap">
+    <div class="board-head"><div class="board-num">01</div><div class="board-title">Ruhiger Wald</div></div>
+    <div class="board-pos">Der aktuelle Kurs, verfeinert. Gedämpftes Grün als Grundhaltung — Balance, Verantwortung, Ruhe.</div>
+    <div class="cols">
+      <div class="preview">
+        <div class="pv-hero">
+          <div class="pv-eyebrow">Bauphysik · Ökobilanz</div>
+          <div class="pv-h1">Klare Orientierung bei komplexen Gebäudethemen.</div>
+          <div class="pv-lead">Fachlich fundierte Beratung für nachhaltiges Bauen — ruhig, präzise, verlässlich.</div>
+          <div class="pv-actions">
+            <a class="btn btn-primary">Projekt anfragen</a>
+            <a class="btn btn-secondary">Leistungen</a>
+          </div>
+        </div>
+        <div class="pv-body">
+          <div class="pv-card">
+            <h4>LCA nach EN 15978</h4>
+            <p>Lebenszyklus-Bewertung mit belastbaren Kennzahlen statt vager Nachhaltigkeitsversprechen.</p>
+            <a class="lnk">Methodik ansehen</a>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Erfolg</span><span class="chip warn">Hinweis</span><span class="chip err">Fehler</span><span class="chip info">Info</span>
+          </div>
+        </div>
+        <div class="pv-anchor"><span>Bereit für den nächsten Schritt?</span><span class="a-accent">Kontakt →</span></div>
+      </div>
+      <div class="meta">
+        <div class="meta-block"><h5>Palette</h5>
+          <div class="palette">
+            <div class="sw" style="background:#2F5D4A;color:#fff"><span>Deep Green<small>#2F5D4A</small></span></div>
+            <div class="sw" style="background:#3A6A5A;color:#fff"><span>Teal<small>#3A6A5A</small></span></div>
+            <div class="sw" style="background:#2E3A3A;color:#fff"><span>Anthrazit<small>#2E3A3A</small></span></div>
+            <div class="sw" style="background:#DCE8DE;color:#2E3A3A"><span>Sage<small>#DCE8DE</small></span></div>
+            <div class="sw" style="background:#F4EDE2;color:#2E3A3A"><span>Sand<small>#F4EDE2</small></span></div>
+          </div>
+          <div class="palette" style="margin-top:8px;grid-template-columns:repeat(5,1fr)">
+            <div class="sw" style="background:#2CA58D;color:#0c3327"><span>Akzent<small>#2CA58D</small></span></div>
+            <div class="sw" style="background:#EEF4F0;color:#2E3A3A"><span>50<small>#EEF4F0</small></span></div>
+            <div class="sw" style="background:#86B09B;color:#173226"><span>300<small>#86B09B</small></span></div>
+            <div class="sw" style="background:#244A3B;color:#fff"><span>800<small>#244A3B</small></span></div>
+            <div class="sw" style="background:#1A362B;color:#fff"><span>900<small>#1A362B</small></span></div>
+          </div>
+        </div>
+        <div class="meta-block"><h5>Typografie</h5>
+          <div class="fonts"><div class="fh">Archivo Bold</div><div class="fb">Inter · Fließtext, ruhig & sehr gut lesbar</div><div class="tag">Grotesk + Grotesk — technisch, klar, kohärent</div></div>
+        </div>
+        <div class="meta-block"><h5>Psychologie & Haltung</h5>
+          <div class="psych"><b>Grün</b> steht für Wachstum, Natur, Ausgewogenheit und Verlässlichkeit. Bewusst <b>gedämpft</b> gehalten, wirkt es seriös und erwachsen statt öko-verspielt — Vertrauen entsteht durch Ruhe und Ordnung.
+            <div class="fitrow"><b>Passt für:</b> Kontinuität zur bestehenden Marke · sicherste Wahl. <b>Risiko:</b> „grün wie alle anderen" — geringste Differenzierung im Wettbewerb.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 2 · PRÄZISION & KUPFER ============ -->
+<section class="board" style="
+  --p:#14505E; --p2:#2C6E7E; --ink:#1E2E33; --muted:#4f5d61;
+  --bg:#EAF1F2; --bg2:#FFFFFF; --border:#cdd8d9; --border-soft:#e0e6e6;
+  --accent:#C57B4E; --accent-ink:#9A5A31; --on-dark-accent:#E7A878; --chip:#DCE7E9;
+  --radius:8px; --font-head:'Space Grotesk',sans-serif; --font-body:'Inter',sans-serif; --head-weight:700; --head-track:-.02em;">
+  <div class="wrap">
+    <div class="board-head"><div class="board-num">02</div><div class="board-title">Präzision &amp; Kupfer</div></div>
+    <div class="board-pos">Tiefes Petrol trifft warmen Kupfer-Akzent — Ingenieurskompetenz mit handwerklicher Wertigkeit.</div>
+    <div class="cols">
+      <div class="preview">
+        <div class="pv-hero">
+          <div class="pv-eyebrow">Bauphysik · Ökobilanz</div>
+          <div class="pv-h1">Präzision, die man im Gebäude spürt.</div>
+          <div class="pv-lead">Bauphysikalische Analysen und Lebenszyklus-Daten, auf die Planer:innen bauen können.</div>
+          <div class="pv-actions">
+            <a class="btn btn-primary">Projekt anfragen</a>
+            <a class="btn btn-secondary">Leistungen</a>
+          </div>
+        </div>
+        <div class="pv-body">
+          <div class="pv-card">
+            <h4>LCA nach EN 15978</h4>
+            <p>Lebenszyklus-Bewertung mit belastbaren Kennzahlen statt vager Nachhaltigkeitsversprechen.</p>
+            <a class="lnk">Methodik ansehen</a>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Erfolg</span><span class="chip warn">Hinweis</span><span class="chip err">Fehler</span><span class="chip info">Info</span>
+          </div>
+        </div>
+        <div class="pv-anchor"><span>Bereit für den nächsten Schritt?</span><span class="a-accent">Kontakt →</span></div>
+      </div>
+      <div class="meta">
+        <div class="meta-block"><h5>Palette</h5>
+          <div class="palette">
+            <div class="sw" style="background:#14505E;color:#fff"><span>Petrol<small>#14505E</small></span></div>
+            <div class="sw" style="background:#2C6E7E;color:#fff"><span>Teal<small>#2C6E7E</small></span></div>
+            <div class="sw" style="background:#1E2E33;color:#fff"><span>Ink<small>#1E2E33</small></span></div>
+            <div class="sw" style="background:#C57B4E;color:#2a1608"><span>Kupfer<small>#C57B4E</small></span></div>
+            <div class="sw" style="background:#F2EDE6;color:#2E3A3A"><span>Sand<small>#F2EDE6</small></span></div>
+          </div>
+          <div class="palette" style="margin-top:8px">
+            <div class="sw" style="background:#9A5A31;color:#fff"><span>Kupfer-Ink<small>#9A5A31</small></span></div>
+            <div class="sw" style="background:#E9F0F1;color:#1E2E33"><span>50<small>#E9F0F1</small></span></div>
+            <div class="sw" style="background:#6FA0A9;color:#0e2c31"><span>300<small>#6FA0A9</small></span></div>
+            <div class="sw" style="background:#0E3D48;color:#fff"><span>800<small>#0E3D48</small></span></div>
+            <div class="sw" style="background:#0A2A32;color:#fff"><span>900<small>#0A2A32</small></span></div>
+          </div>
+        </div>
+        <div class="meta-block"><h5>Typografie</h5>
+          <div class="fonts"><div class="fh">Space Grotesk</div><div class="fb">Inter · Fließtext, sachlich & modern</div><div class="tag">Technische Grotesk mit Charakter — „Engineering"-Anmutung</div></div>
+        </div>
+        <div class="meta-block"><h5>Psychologie & Haltung</h5>
+          <div class="psych"><b>Petrol/Teal</b> verbindet die Vertrauens-Wirkung von Blau mit der Frische von Grün — es liest sich als Tiefe, Klarheit und technische Kompetenz. Der <b>Kupfer-Akzent</b> bringt Wärme, Materialität und Wertigkeit (Handwerk, Metall, Langlebigkeit) hinein.
+            <div class="fitrow"><b>Passt für:</b> Ingenieurs-Profil, Abgrenzung zum reinen „Öko-Grün". <b>Risiko:</b> Kupfer will dosiert eingesetzt sein, sonst wirkt es dekorativ.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 · ARCHITEKTUR-AUTORITÄT ============ -->
+<section class="board" style="
+  --p:#23282A; --p2:#4f5651; --ink:#20241F; --muted:#54574f;
+  --bg:#F0F3F3; --bg2:#FFFFFF; --border:#d3d8d7; --border-soft:#e5e9e8;
+  --accent:#1FA971; --accent-ink:#157A50; --on-dark-accent:#4FD79B; --chip:#E7E6DD;
+  --radius:6px; --font-head:'Fraunces',serif; --font-body:'Inter',sans-serif; --head-weight:600; --head-track:-.01em;">
+  <div class="wrap">
+    <div class="board-head"><div class="board-num">03</div><div class="board-title">Architektur-Autorität</div></div>
+    <div class="board-pos">Anthrazit &amp; Kalkweiß, ein einzelnes Signalgrün, eine Serif für Headlines — editorial, zeitlos, Premium.</div>
+    <div class="cols">
+      <div class="preview">
+        <div class="pv-hero">
+          <div class="pv-eyebrow">Bauphysik · Ökobilanz</div>
+          <div class="pv-h1">Kompetenz, die keine Farbe schreien muss.</div>
+          <div class="pv-lead">Reduziert auf das Wesentliche: Struktur, Daten und ein einziger grüner Akzent, der zählt.</div>
+          <div class="pv-actions">
+            <a class="btn btn-primary">Projekt anfragen</a>
+            <a class="btn btn-secondary">Leistungen</a>
+          </div>
+        </div>
+        <div class="pv-body">
+          <div class="pv-card">
+            <h4>LCA nach EN 15978</h4>
+            <p>Lebenszyklus-Bewertung mit belastbaren Kennzahlen statt vager Nachhaltigkeitsversprechen.</p>
+            <a class="lnk">Methodik ansehen</a>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Erfolg</span><span class="chip warn">Hinweis</span><span class="chip err">Fehler</span><span class="chip info">Info</span>
+          </div>
+        </div>
+        <div class="pv-anchor"><span>Bereit für den nächsten Schritt?</span><span class="a-accent">Kontakt →</span></div>
+      </div>
+      <div class="meta">
+        <div class="meta-block"><h5>Palette</h5>
+          <div class="palette">
+            <div class="sw" style="background:#23282A;color:#fff"><span>Anthrazit<small>#23282A</small></span></div>
+            <div class="sw" style="background:#4f5651;color:#fff"><span>Graphit<small>#4F5651</small></span></div>
+            <div class="sw" style="background:#1FA971;color:#062417"><span>Signal<small>#1FA971</small></span></div>
+            <div class="sw" style="background:#E6E4DA;color:#23282A"><span>Kalk<small>#E6E4DA</small></span></div>
+            <div class="sw" style="background:#F3F2EC;color:#23282A"><span>Kalkweiß<small>#F3F2EC</small></span></div>
+          </div>
+          <div class="palette" style="margin-top:8px">
+            <div class="sw" style="background:#157A50;color:#fff"><span>Signal-Ink<small>#157A50</small></span></div>
+            <div class="sw" style="background:#F7F7F2;color:#23282A"><span>50<small>#F7F7F2</small></span></div>
+            <div class="sw" style="background:#C9C8BF;color:#23282A"><span>300<small>#C9C8BF</small></span></div>
+            <div class="sw" style="background:#34352F;color:#fff"><span>800<small>#34352F</small></span></div>
+            <div class="sw" style="background:#181B18;color:#fff"><span>900<small>#181B18</small></span></div>
+          </div>
+        </div>
+        <div class="meta-block"><h5>Typografie</h5>
+          <div class="fonts"><div class="fh">Fraunces</div><div class="fb">Inter · Fließtext, klar & neutral</div><div class="tag">Serif-Headline + Sans-Body — maximale Beratungs-Gravitas</div></div>
+        </div>
+        <div class="meta-block"><h5>Psychologie & Haltung</h5>
+          <div class="psych"><b>Anthrazit/Schwarz</b> signalisiert Autorität, Zeitlosigkeit und architektonischen Ernst; die <b>Serif</b> fügt Beratungs-Gravitas und redaktionelle Wertigkeit hinzu. Nachhaltigkeit erscheint nicht als Fläche, sondern als <b>ein präziser grüner Akzent</b> — Haltung durch Zurückhaltung.
+            <div class="fitrow"><b>Passt für:</b> Premium-Positionierung, Architektur-nahes Fachpublikum. <b>Risiko:</b> kann kühl/streng wirken — Wärme muss über Bild &amp; Sprache kommen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 4 · LEHM & OLIVE ============ -->
+<section class="board" style="
+  --p:#9A4A32; --p2:#5C6544; --ink:#33302A; --muted:#5f594e;
+  --bg:#EFF2F0; --bg2:#FFFFFF; --border:#d4dbd6; --border-soft:#e6eae7;
+  --accent:#C98A3C; --accent-ink:#8A5A1E; --on-dark-accent:#F0C078; --chip:#EDE3D3;
+  --radius:9px; --font-head:'Archivo',sans-serif; --font-body:'Inter',sans-serif; --head-weight:700; --head-track:-.01em;">
+  <div class="wrap">
+    <div class="board-head"><div class="board-num">04</div><div class="board-title">Lehm &amp; Olive</div></div>
+    <div class="board-pos">Erdtöne aus Terracotta, Olive und Creme — Materialität, Kreislauf und menschliche Wärme.</div>
+    <div class="cols">
+      <div class="preview">
+        <div class="pv-hero">
+          <div class="pv-eyebrow">Bauphysik · Ökobilanz</div>
+          <div class="pv-h1">Bauen, das den Kreislauf mitdenkt.</div>
+          <div class="pv-lead">Von Materialgesundheit bis Cradle-to-Cradle — Beratung, die den Baustoff ernst nimmt.</div>
+          <div class="pv-actions">
+            <a class="btn btn-primary">Projekt anfragen</a>
+            <a class="btn btn-secondary">Leistungen</a>
+          </div>
+        </div>
+        <div class="pv-body">
+          <div class="pv-card">
+            <h4>LCA nach EN 15978</h4>
+            <p>Lebenszyklus-Bewertung mit belastbaren Kennzahlen statt vager Nachhaltigkeitsversprechen.</p>
+            <a class="lnk">Methodik ansehen</a>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Erfolg</span><span class="chip warn">Hinweis</span><span class="chip err">Fehler</span><span class="chip info">Info</span>
+          </div>
+        </div>
+        <div class="pv-anchor"><span>Bereit für den nächsten Schritt?</span><span class="a-accent">Kontakt →</span></div>
+      </div>
+      <div class="meta">
+        <div class="meta-block"><h5>Palette</h5>
+          <div class="palette">
+            <div class="sw" style="background:#9A4A32;color:#fff"><span>Lehm<small>#9A4A32</small></span></div>
+            <div class="sw" style="background:#5C6544;color:#fff"><span>Olive<small>#5C6544</small></span></div>
+            <div class="sw" style="background:#33302A;color:#fff"><span>Ink<small>#33302A</small></span></div>
+            <div class="sw" style="background:#C98A3C;color:#2c1c05"><span>Ocker<small>#C98A3C</small></span></div>
+            <div class="sw" style="background:#F6F1E9;color:#33302A"><span>Creme<small>#F6F1E9</small></span></div>
+          </div>
+          <div class="palette" style="margin-top:8px">
+            <div class="sw" style="background:#8A5A1E;color:#fff"><span>Ocker-Ink<small>#8A5A1E</small></span></div>
+            <div class="sw" style="background:#F4E9DC;color:#33302A"><span>50<small>#F4E9DC</small></span></div>
+            <div class="sw" style="background:#C99B84;color:#3a2116"><span>300<small>#C99B84</small></span></div>
+            <div class="sw" style="background:#6E3421;color:#fff"><span>800<small>#6E3421</small></span></div>
+            <div class="sw" style="background:#4A2216;color:#fff"><span>900<small>#4A2216</small></span></div>
+          </div>
+        </div>
+        <div class="meta-block"><h5>Typografie</h5>
+          <div class="fonts"><div class="fh">Archivo Bold</div><div class="fb">Inter · Fließtext, warm & lesbar</div><div class="tag">Sans/Sans — die Wärme kommt aus der Farbe, nicht der Schrift</div></div>
+        </div>
+        <div class="meta-block"><h5>Psychologie & Haltung</h5>
+          <div class="psych"><b>Erd- und Lehmtöne</b> stehen für Materialität, Natürlichkeit und Kreislauf — sie sprechen die Sprache des Baustoffs selbst (Lehm, Holz, Ziegel) und wirken warm, ehrlich, menschlich. <b>Olive</b> hält den Nachhaltigkeits-Bezug, ohne ins Klischee-Grün zu kippen.
+            <div class="fitrow"><b>Passt für:</b> regeneratives/biobasiertes Bauen, starke Differenzierung. <b>Risiko:</b> weniger „Tech/Data"-Anmutung — für sehr technische Portale ggf. zu weich.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 5 · INSTITUTIONELLES VERTRAUEN ============ -->
+<section class="board" style="
+  --p:#1F3A53; --p2:#34586E; --ink:#1B2733; --muted:#4d5a63;
+  --bg:#EBF1F4; --bg2:#FFFFFF; --border:#cdd8de; --border-soft:#e0e6ea;
+  --accent:#2FA36A; --accent-ink:#1E7A4C; --on-dark-accent:#6FD6A2; --chip:#DCE6EC;
+  --radius:8px; --font-head:'Archivo',sans-serif; --font-body:'Inter',sans-serif; --head-weight:700; --head-track:-.015em;">
+  <div class="wrap">
+    <div class="board-head"><div class="board-num">05</div><div class="board-title">Institutionelles Vertrauen</div></div>
+    <div class="board-pos">Tiefes Slate-Navy mit Frischgrün-Akzent — Stabilität, Kompetenz, Corporate-Seriosität.</div>
+    <div class="cols">
+      <div class="preview">
+        <div class="pv-hero">
+          <div class="pv-eyebrow">Bauphysik · Ökobilanz</div>
+          <div class="pv-h1">Verlässliche Grundlagen für weitreichende Entscheidungen.</div>
+          <div class="pv-lead">Für Kommunen, Bauträger und Unternehmen, die belastbare Daten und klare Verantwortung erwarten.</div>
+          <div class="pv-actions">
+            <a class="btn btn-primary">Projekt anfragen</a>
+            <a class="btn btn-secondary">Leistungen</a>
+          </div>
+        </div>
+        <div class="pv-body">
+          <div class="pv-card">
+            <h4>LCA nach EN 15978</h4>
+            <p>Lebenszyklus-Bewertung mit belastbaren Kennzahlen statt vager Nachhaltigkeitsversprechen.</p>
+            <a class="lnk">Methodik ansehen</a>
+          </div>
+          <div class="chips">
+            <span class="chip ok">Erfolg</span><span class="chip warn">Hinweis</span><span class="chip err">Fehler</span><span class="chip info">Info</span>
+          </div>
+        </div>
+        <div class="pv-anchor"><span>Bereit für den nächsten Schritt?</span><span class="a-accent">Kontakt →</span></div>
+      </div>
+      <div class="meta">
+        <div class="meta-block"><h5>Palette</h5>
+          <div class="palette">
+            <div class="sw" style="background:#1F3A53;color:#fff"><span>Slate-Navy<small>#1F3A53</small></span></div>
+            <div class="sw" style="background:#34586E;color:#fff"><span>Stahlblau<small>#34586E</small></span></div>
+            <div class="sw" style="background:#1B2733;color:#fff"><span>Ink<small>#1B2733</small></span></div>
+            <div class="sw" style="background:#2FA36A;color:#052316"><span>Frischgrün<small>#2FA36A</small></span></div>
+            <div class="sw" style="background:#F1F4F6;color:#1B2733"><span>Nebel<small>#F1F4F6</small></span></div>
+          </div>
+          <div class="palette" style="margin-top:8px">
+            <div class="sw" style="background:#1E7A4C;color:#fff"><span>Grün-Ink<small>#1E7A4C</small></span></div>
+            <div class="sw" style="background:#EAF0F4;color:#1B2733"><span>50<small>#EAF0F4</small></span></div>
+            <div class="sw" style="background:#8AA6B7;color:#0f2230"><span>300<small>#8AA6B7</small></span></div>
+            <div class="sw" style="background:#16304A;color:#fff"><span>800<small>#16304A</small></span></div>
+            <div class="sw" style="background:#0E2032;color:#fff"><span>900<small>#0E2032</small></span></div>
+          </div>
+        </div>
+        <div class="meta-block"><h5>Typografie</h5>
+          <div class="fonts"><div class="fh">Archivo Bold</div><div class="fb">Inter · Fließtext, nüchtern & klar</div><div class="tag">Sans/Sans — Corporate-Standard, maximale Seriosität</div></div>
+        </div>
+        <div class="meta-block"><h5>Psychologie & Haltung</h5>
+          <div class="psych"><b>Blau</b> ist die Vertrauensfarbe schlechthin — Stabilität, Kompetenz, Institution. Ein <b>tiefes Slate-Navy</b> wirkt erwachsen und verantwortungsvoll, der <b>Frischgrün-Akzent</b> setzt das Nachhaltigkeits-Signal, ohne die Seriosität zu verwässern.
+            <div class="fitrow"><b>Passt für:</b> öffentliche Hand, große Organisationen, Investoren. <b>Risiko:</b> Blau ist im B2B allgegenwärtig — Differenzierung muss über Grün-Akzent &amp; Bildwelt kommen.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <b>Vesta Brand Exploration</b> — Arbeitsstand zur Richtungsentscheidung. Palette-Hex-Werte sind Vorschläge; nach Wahl einer Richtung wird die vollständige 50–900-Skala, Semantik und das Komponenten-System ausgearbeitet.
+  </div>
+</footer>
+
+</body>
+</html>

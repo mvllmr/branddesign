@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · Sustainability Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Archivo:wght@600;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FBFBF9;--surface:#F2F1EC;--ink:#1E231F;--muted:#6a6f68;--line:#e2e1d9;--line2:#c9c8bf;--accent:#2F5D4A;--gold:#B08A4A;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Fraunces',serif;font-weight:600;line-height:1.05;letter-spacing:-.01em;color:var(--ink)}
+  .cont{max-width:1240px;margin:0 auto;padding:0 40px}
+  .label{font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  a{color:inherit}
+
+  [data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1)}
+  [data-reveal].in{opacity:1;transform:none}
+
+  /* ---------- Cover ---------- */
+  .cover{position:relative;height:100vh;min-height:600px;overflow:hidden;background:#0e0e0e;color:#fff}
+  .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .cover .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),rgba(0,0,0,.1) 50%,rgba(0,0,0,.35))}
+  .cover .top{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;justify-content:space-between;align-items:center;padding:28px 40px}
+  .cover .top .logo b{font-family:'Archivo',sans-serif;font-weight:700;font-size:1.3rem;color:#fff;letter-spacing:-.02em}
+  .cover .top .logo span{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);font-weight:600}
+  .cover .top nav{display:flex;gap:26px}
+  .cover .top nav a{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85);text-decoration:none;font-weight:600}
+  .cover .top nav a:hover{color:#fff}
+  .cover .inner{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:0 40px 9vh}
+  .cover .inner .in-wrap{max-width:1240px;margin:0 auto}
+  .cover .kick{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:600;display:inline-flex;align-items:center;gap:11px}
+  .cover .kick::before{content:"";width:9px;height:9px;background:var(--gold)}
+  .cover h1{color:#fff;font-size:clamp(2.4rem,6vw,5.2rem);max-width:20ch;margin-top:20px;font-weight:500}
+  .cover .cue{margin-top:36px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:12px}
+  .cover .cue::after{content:"";width:1px;height:36px;background:rgba(255,255,255,.7);animation:cue 1.7s ease-in-out infinite}
+  @keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+
+  /* ---------- Buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:.95rem;line-height:1;padding:14px 26px;border-radius:4px;text-decoration:none;cursor:pointer;transition:filter .2s,background-color .2s,color .2s}
+  .btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{filter:brightness(1.1)}
+  .btn-ghost{color:var(--ink);border-bottom:1px solid var(--ink);border-radius:0;padding:2px 2px 5px}
+  .btn-ghost:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- Intro ---------- */
+  .intro{padding:15vh 0}
+  .intro .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:70px;align-items:start;max-width:1240px;margin:0 auto;padding:0 40px}
+  .intro h2{font-size:clamp(1.9rem,3.4vw,3rem);font-weight:500}
+  .intro .big{font-size:clamp(1.1rem,1.5vw,1.35rem);line-height:1.65;color:#3a3f38}
+  .intro .cta{margin-top:30px;display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+
+  /* ---------- Leistungen ---------- */
+  .sec{padding:12vh 0;border-top:1px solid var(--line)}
+  .sec-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:50px}
+  .sec-top h2{font-size:clamp(1.8rem,3vw,2.6rem);font-weight:500}
+  .svc{display:grid;grid-template-columns:auto 1fr;gap:44px;padding:42px 0;border-top:1px solid var(--line);align-items:start}
+  .svc:last-child{border-bottom:1px solid var(--line)}
+  .svc .n{font-family:'Fraunces',serif;font-weight:600;font-size:clamp(3rem,6vw,5rem);color:var(--accent);line-height:.85}
+  .svc h3{font-size:clamp(1.3rem,2.2vw,1.9rem);font-weight:600;margin-bottom:12px}
+  .svc p{color:var(--muted);max-width:62ch;font-size:1.02rem}
+
+  /* ---------- Referenzen + Preview ---------- */
+  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .ref-item{display:flex;gap:18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .ref-item .k{font-family:'Fraunces',serif;font-weight:600;font-size:.85rem;color:var(--gold)}
+  .ref-item h3{font-size:clamp(1.15rem,2vw,1.7rem);font-weight:500;opacity:.45;transition:opacity .3s,transform .4s cubic-bezier(.16,1,.3,1)}
+  .ref-item .m{margin-left:auto;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .3s}
+  .ref-item.active h3,.ref-item:hover h3{opacity:1;transform:translateX(10px)}
+  .ref-item.active .m{opacity:1}
+  .ref-preview{position:sticky;top:6vh;height:80vh;border-radius:6px;overflow:hidden;border:1px solid var(--line);background:var(--surface)}
+  .ref-layer{position:absolute;inset:0;background-size:cover;background-position:center;display:flex;align-items:flex-end;padding:32px;color:#fff;opacity:0;transform:scale(1.05);transition:opacity .7s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .ref-layer::before{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 55%)}
+  .ref-layer.on{opacity:1;transform:none}
+  .ref-layer .cap{position:relative;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+  .ref-layer h4{position:relative;font-family:'Fraunces',serif;font-weight:600;font-size:clamp(1.5rem,2.4vw,2.2rem);color:#fff;margin-top:6px}
+
+  /* ---------- Kontakt ---------- */
+  .kontakt{padding:14vh 0;border-top:1px solid var(--line)}
+  .kontakt h2{font-size:clamp(2rem,5vw,4rem);max-width:16ch;font-weight:500}
+  .kontakt .mail{display:inline-block;margin-top:28px;font-family:'Fraunces',serif;font-size:clamp(1.4rem,3vw,2.4rem);color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent)}
+  .kontakt .meta{margin-top:36px;display:flex;gap:26px;flex-wrap:wrap;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);align-items:center}
+
+  /* ---------- Footer ---------- */
+  footer{padding:50px 0;border-top:1px solid var(--line);background:var(--surface)}
+  footer .ft{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  footer b{color:var(--ink);font-weight:600}
+  footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--ink)}
+
+  @media(max-width:860px){
+    .intro .grid,.ref-grid{grid-template-columns:1fr;gap:30px}
+    .svc{grid-template-columns:1fr;gap:12px}
+    .ref-preview{display:none}
+    .cover .top nav{display:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <img src="beispielbilder/zai-dan-cover.jpg" alt="Architektur" />
+  <div class="scrim"></div>
+  <div class="top">
+    <div class="logo"><b>vesta</b><span>sustainability consulting</span></div>
+    <nav><a href="#nachhaltigkeit">Nachhaltigkeit</a><a href="#leistungen">Leistungen</a><a href="#referenzen">Referenzen</a><a href="#kontakt">Kontakt</a></nav>
+  </div>
+  <div class="inner"><div class="in-wrap">
+    <div class="kick">Bauphysik · Nachhaltigkeit · Ökobilanz</div>
+    <h1>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere</h1>
+    <div class="cue">Scrollen</div>
+  </div></div>
+</section>
+
+<!-- INTRO / NACHHALTIGKEIT -->
+<section class="intro" id="nachhaltigkeit">
+  <div class="grid">
+    <div data-reveal>
+      <span class="label">Nachhaltigkeit</span>
+      <h2 style="margin-top:14px">Nachhaltiges Bauen sichert Wert und schützt die Umwelt.</h2>
+      <div class="cta">
+        <a class="btn btn-primary" href="#kontakt">Nachhaltigkeitsberatung</a>
+        <a class="btn btn-ghost" href="#leistungen">Unsere Leistungen →</a>
+      </div>
+    </div>
+    <p class="big" data-reveal>Wir beraten Sie bei der Planung und Umsetzung von nachhaltigen und energieeffizienten Gebäuden und Portfolios. Wir begleiten Sie von der Planung bis zur Umsetzung und entwickeln individuelle Lösungen, die Wirtschaftlichkeit, Klimaschutz und Zukunftssicherheit verbinden. Durch umfassende Ökobilanzierung bewerten wir die Umweltauswirkungen Ihres Projekts und optimieren es gezielt. Mit innovativer thermischer Bauphysik reduzieren wir Wärmeverluste, steigern die Energieeffizienz und senken Betriebskosten nachhaltig.</p>
+  </div>
+</section>
+
+<!-- LEISTUNGEN -->
+<section class="sec" id="leistungen">
+  <div class="cont">
+    <div class="sec-top" data-reveal><h2>Leistungen</h2><span class="label">(03)</span></div>
+    <article class="svc" data-reveal><span class="n">01</span><div><h3>Nachhaltigkeitsberatung und Zertifizierung</h3><p>Zertifizierungen nach DGNB und QNG, Lebenszykluskostenanalysen, Konformitätsprüfung nach EU-Taxonomie und ESG-Kriterien, individuelle Nachhaltigkeitskonzepte.</p></div></article>
+    <article class="svc" data-reveal><span class="n">02</span><div><h3>Ökobilanzierung für Gebäude und Quartiere</h3><p>Auf Gebäude- und Portfolioebene, in der frühen Planungsphase bis nach Fertigstellung der Projekte sowie für Zertifizierungen, B-Pläne, Wettbewerbe, Fördermittelanträge, etc.</p></div></article>
+    <article class="svc" data-reveal><span class="n">03</span><div><h3>Bauphysik für mehr Energieeffizienz und Komfort</h3><p>Energiebilanzierungen, Thermische Gebäudesimulationen, Sommerlicher Wärmeschutz, Berechnung von Wärmebrücken, Entwicklung von Sanierungskonzepten, Klimarisikoanalysen.</p></div></article>
+  </div>
+</section>
+
+<!-- REFERENZEN -->
+<section class="sec" id="referenzen">
+  <div class="cont">
+    <div class="sec-top" data-reveal><h2>Referenzen &amp; Partner</h2><span class="label">Projekte</span></div>
+    <div class="ref-grid">
+      <div id="reflist">
+        <div class="ref-item active" data-i="0"><span class="k">01</span><h3>Deutscher Alpenverein</h3><span class="m">Projekt</span></div>
+        <div class="ref-item" data-i="1"><span class="k">02</span><h3>Bauindustrie Bayern</h3><span class="m">Partner</span></div>
+        <div class="ref-item" data-i="2"><span class="k">03</span><h3>Riedelbau</h3><span class="m">Projekt</span></div>
+        <div class="ref-item" data-i="3"><span class="k">04</span><h3>Phase H</h3><span class="m">Projekt</span></div>
+        <div class="ref-item" data-i="4"><span class="k">05</span><h3>Lang Hugger Rampp</h3><span class="m">Architektur</span></div>
+        <div class="ref-item" data-i="5"><span class="k">06</span><h3>IKL</h3><span class="m">Projekt</span></div>
+        <div class="ref-item" data-i="6"><span class="k">07</span><h3>Geopard Digital</h3><span class="m">Partner</span></div>
+        <div class="ref-item" data-i="7"><span class="k">08</span><h3>DGNB</h3><span class="m">Zertifizierung</span></div>
+        <div class="ref-item" data-i="8"><span class="k">09</span><h3>Bauplan 21</h3><span class="m">Projekt</span></div>
+      </div>
+      <div class="ref-preview">
+        <div class="ref-layer on" style="background-image:url('beispielbilder/Bild1.jpg')"><div><span class="cap">01 · Referenzprojekt</span><h4>Deutscher Alpenverein</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild2.jpg')"><div><span class="cap">02 · Partner</span><h4>Bauindustrie Bayern</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild3.png')"><div><span class="cap">03 · Referenzprojekt</span><h4>Riedelbau</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild4.png')"><div><span class="cap">04 · Referenzprojekt</span><h4>Phase H</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild5.jpg')"><div><span class="cap">05 · Architektur</span><h4>Lang Hugger Rampp</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild1.jpg')"><div><span class="cap">06 · Referenzprojekt</span><h4>IKL</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild2.jpg')"><div><span class="cap">07 · Partner</span><h4>Geopard Digital</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild3.png')"><div><span class="cap">08 · Zertifizierung</span><h4>DGNB</h4></div></div>
+        <div class="ref-layer" style="background-image:url('beispielbilder/Bild4.png')"><div><span class="cap">09 · Referenzprojekt</span><h4>Bauplan 21</h4></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section class="kontakt" id="kontakt">
+  <div class="cont" data-reveal>
+    <span class="label">Kontakt</span>
+    <h2 style="margin-top:16px">Ihr Partner für nachhaltiges Bauen aus München.</h2>
+    <a class="mail" href="mailto:info@vesta-consult.de">info@vesta-consult.de</a>
+    <div class="meta"><span>c/o ImpactHub · Gotzinger Str. 8 · München</span><span>Instagram</span><span>LinkedIn</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="cont ft">
+    <span>©2026 <b>vesta sustainability consulting UG</b></span>
+    <span>c/o ImpactHub · Gotzinger Str. 8 · 81371 München</span>
+    <span><a href="#">Impressum</a> · <a href="#">AGB</a></span>
+  </div>
+</footer>
+
+<script>
+// reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('[data-reveal]').forEach(e=>io.observe(e));
+
+// reference preview
+const refItems=[...document.querySelectorAll('.ref-item')],refLayers=[...document.querySelectorAll('.ref-layer')];
+function setRef(i){refItems.forEach((it,n)=>it.classList.toggle('active',n===i));refLayers.forEach((l,n)=>l.classList.toggle('on',n===i));}
+refItems.forEach((it,i)=>it.addEventListener('mouseenter',()=>setRef(i)));
+const reflist=document.getElementById('reflist');
+// cover parallax + reference scroll-sync
+const cimg=document.querySelector('.cover img');
+let tick=false;
+function onScroll(){
+  if(cimg&&window.scrollY<window.innerHeight)cimg.style.transform='translateY('+(window.scrollY*0.15)+'px) scale(1.06)';
+  if(reflist){const s=reflist.getBoundingClientRect();if(s.top<window.innerHeight&&s.bottom>0){const mid=window.innerHeight*0.42;let best=0,bd=1e9;refItems.forEach((it,i)=>{const r=it.getBoundingClientRect();const d=Math.abs((r.top+r.height/2)-mid);if(d<bd){bd=d;best=i;}});setRef(best);}}
+  tick=false;
+}
+window.addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(onScroll);tick=true;}},{passive:true});
+onScroll();
+</script>
+</body>
+</html>

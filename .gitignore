@@ -1,0 +1,5 @@
+# Große eingebettete Referenz-Videos (nicht nötig im Repo)
+Literatur/**/*.mp4
+Literatur/**/*.webm
+# Zufalls-Screenshot
+Screenshot*.png

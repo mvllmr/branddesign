@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · 25 Layout-Varianten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=Source+Sans+3:wght@400;600&family=Public+Sans:wght@400;600;700&family=Manrope:wght@400;600;700;800&family=Montserrat:wght@500;600;700&family=Oswald:wght@500;600;700&family=Spectral:wght@500;600;700&family=Lora:wght@500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,600;6..72,700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --p:#2F5D4A;--p2:#3A6A5A;--ink:#22302B;--accent:#2CA58D;--onDark:#8FE6CF;--onP:#fff;
+    --bg:#F6F8F7;--surface:#FFFFFF;--heroBg:#EDF3F0;--footerBg:#18291F;--radius:8px;
+    --fh:'Archivo',sans-serif;--fb:'Inter',sans-serif;--swh:94px;
+    --muted:color-mix(in srgb,var(--ink) 58%,var(--bg));
+    --border:color-mix(in srgb,var(--ink) 13%,var(--bg));
+    --border2:color-mix(in srgb,var(--ink) 30%,var(--bg));
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.6}
+  h1,h2,h3,h4{font-family:var(--fh);line-height:1.08;letter-spacing:-.01em;color:var(--ink)}
+  #site,#site *{transition:background-color .35s ease,color .35s ease,border-color .35s ease}
+  .eyebrow{font-family:var(--fb);font-size:.74rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--p2)}
+  .sec-index{display:none}
+
+  /* ---------- Switcher ---------- */
+  #switcher{position:sticky;top:0;z-index:100;background:#15181a;color:#f2f3f2;border-bottom:1px solid #2c3133;font-family:'Inter',sans-serif}
+  .sw-top{max-width:1320px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .sw-title{font-weight:700;font-size:.9rem;color:#fff;white-space:nowrap}
+  .sw-title span{color:#5fccae}
+  .sw-nav{display:flex;align-items:center;gap:14px}
+  .sw-nav button{width:34px;height:34px;border-radius:8px;border:1px solid #3a4042;background:transparent;color:#f2f3f2;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .sw-nav button:hover{background:#262c2e}
+  .sw-cur{min-width:250px;text-align:center;line-height:1.25}
+  .sw-cur #vnum{font-size:.72rem;color:#8b9391;letter-spacing:.08em}
+  .sw-cur b{display:block;font-size:.98rem;color:#fff}
+  .sw-cur em{font-style:normal;font-size:.76rem;color:#9aa2a0}
+  .sw-meta{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap;font-size:.74rem;color:#9aa2a0}
+  .sw-meta .lay{background:#243b32;color:#7fe3c1;border:1px solid #2f5d4a;padding:3px 10px;border-radius:999px;font-weight:600;letter-spacing:.04em}
+  .sw-meta .sws{display:flex;gap:5px}
+  .sw-meta .sws i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.18)}
+  .sw-meta b{color:#d5d9d8;font-weight:600}
+  .sw-chips{max-width:1320px;margin:0 auto;padding:0 24px 12px;display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto}
+  .sw-chips button{flex:none;width:30px;height:26px;border-radius:6px;border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.7rem;font-weight:600;cursor:pointer;opacity:.5;transition:opacity .15s,transform .15s}
+  .sw-chips button:hover{opacity:.9;transform:translateY(-1px)}
+  .sw-chips button.on{opacity:1;outline:2px solid #fff;outline-offset:1px}
+
+  /* ---------- Buttons ---------- */
+  .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--fb);font-weight:600;font-size:.95rem;line-height:1;padding:13px 22px;border-radius:var(--radius);text-decoration:none;cursor:pointer;border:1.5px solid transparent;min-height:46px}
+  .btn-primary{background:var(--p);color:var(--onP)}
+  .btn-primary:hover{filter:brightness(.93)}
+  .btn-secondary{background:transparent;color:var(--ink);border-color:var(--border2)}
+  .btn-secondary:hover{border-color:var(--p);color:var(--p)}
+  .btn-ghost{background:transparent;color:var(--ink);padding-left:8px;padding-right:8px;min-height:auto}
+  .btn-ghost:hover{color:var(--p);text-decoration:underline}
+
+  /* ---------- Shell / structure ---------- */
+  .shell{display:block}
+  .cont{max-width:1160px;margin:0 auto;padding:0 32px}
+
+  /* ---------- Header ---------- */
+  .site-header{background:var(--bg);border-bottom:1px solid var(--border)}
+  .hd-inner{max-width:1160px;margin:0 auto;padding:18px 32px;display:flex;align-items:center;gap:24px}
+  .logo{display:flex;flex-direction:column;line-height:1.05}
+  .logo b{font-family:var(--fh);font-weight:800;font-size:1.35rem;color:var(--p);letter-spacing:-.02em}
+  .logo span{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .nav{display:flex;gap:26px;margin-left:20px}
+  .nav a{color:var(--ink);text-decoration:none;font-size:.92rem;font-weight:500;opacity:.85}
+  .nav a:hover{opacity:1;color:var(--p)}
+  .hd-cta{margin-left:auto}
+
+  /* ---------- Hero ---------- */
+  .hero{background:var(--bg);padding:74px 0 86px}
+  .hero-inner{max-width:1160px;margin:0 auto;padding:0 32px}
+  .hero h1{font-size:clamp(2.1rem,4.4vw,3.6rem);margin:14px 0 18px}
+  .hero .lead{font-size:1.18rem;color:var(--muted);max-width:52ch}
+  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;align-items:center}
+  .hero-visual{display:none}
+  .hv-panel{background:linear-gradient(140deg,var(--p),var(--p2));border-radius:calc(var(--radius) + 10px);padding:30px;color:#fff;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 34px 60px -24px rgba(0,0,0,.35)}
+  .hv-badge{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--onDark);font-weight:700}
+  .hv-bars{display:flex;align-items:flex-end;gap:10px;height:160px;margin:10px 0}
+  .hv-bars i{flex:1;background:rgba(255,255,255,.26);border-radius:6px 6px 0 0}
+  .hv-bars i:nth-child(4){background:var(--onDark)}
+  .hv-cap{font-size:.82rem;color:rgba(255,255,255,.82)}
+
+  /* ---------- Sections ---------- */
+  .sec-head{max-width:1160px;margin:0 auto 34px;padding:0 32px}
+  .sec-head h2{font-size:clamp(1.7rem,3vw,2.4rem);margin-top:8px}
+  .leistungen{background:var(--surface);padding:80px 0;border-top:1px solid var(--border)}
+  .svc-grid{max-width:1160px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .svc{background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);padding:26px 24px}
+  .svc-n{font-family:var(--fh);font-weight:700;font-size:1rem;color:var(--accent)}
+  .svc h3{font-size:1.16rem;margin:12px 0 10px}
+  .svc p{font-size:.95rem;color:var(--muted)}
+  .nachhaltigkeit{background:var(--bg);padding:80px 0}
+  .nh-grid{max-width:1160px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+  .nh-grid h2{font-size:clamp(1.7rem,3vw,2.3rem);margin-top:8px}
+  .nh-grid p{color:var(--muted);font-size:1.02rem;margin-top:16px}
+  .nh-sub{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px}
+  .nh-sub h3{font-size:1.25rem}
+  .referenzen{background:var(--surface);padding:66px 0;border-top:1px solid var(--border)}
+  .ref-wall{max-width:1160px;margin:22px auto 0;padding:0 32px;display:flex;flex-wrap:wrap;gap:12px}
+  .ref{border:1px solid var(--border);border-radius:var(--radius);padding:14px 20px;font-family:var(--fh);font-weight:600;font-size:.92rem;color:var(--muted);background:var(--bg)}
+  .kontakt{background:var(--p);padding:74px 0}
+  .kontakt .cont{text-align:center}
+  .kontakt h2{color:#fff;font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:20ch;margin:0 auto}
+  .k-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .kontakt .btn-primary{background:#fff;color:var(--p)}
+  .kontakt .btn-secondary{color:#fff;border-color:rgba(255,255,255,.5)}
+  .kontakt .btn-secondary:hover{border-color:#fff;color:#fff;background:rgba(255,255,255,.08)}
+
+  /* ---------- Footer ---------- */
+  .site-footer{background:var(--footerBg);color:#cdd6d1;padding:56px 0 40px}
+  .ft-grid{max-width:1160px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:32px}
+  .site-footer .logo b{color:#fff}.site-footer .logo span{color:#8fa298}
+  .ft-grid h4{color:#fff;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;font-family:var(--fb);font-weight:700}
+  .ft-grid p,.ft-grid a{font-size:.9rem;color:#b7c3bc;text-decoration:none;display:block;margin-bottom:6px}
+  .ft-grid a:hover{color:#fff}
+  .ft-legal{max-width:1160px;margin:36px auto 0;padding:20px 32px 0;border-top:1px solid rgba(255,255,255,.12);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.82rem;color:#8fa298}
+  .ft-legal a{color:#8fa298;text-decoration:none;margin-left:16px}.ft-legal a:hover{color:#fff}
+
+  /* ============================================================
+     LAYOUT ARCHETYPES
+     ============================================================ */
+
+  /* --- SPLIT (Referenz) --- */
+  body.lay-split .hero-inner{display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}
+  body.lay-split .hero-visual{display:block}
+
+  /* --- CENTER --- */
+  body.lay-center .hd-inner{flex-direction:column;gap:14px;align-items:center;text-align:center}
+  body.lay-center .nav{margin:0}
+  body.lay-center .hd-cta{display:none}
+  body.lay-center .hero-inner{max-width:860px;text-align:center}
+  body.lay-center .hero .lead{margin:0 auto}
+  body.lay-center .hero-cta{justify-content:center}
+  body.lay-center .sec-head{text-align:center}
+  body.lay-center .sec-head .eyebrow{display:block}
+  body.lay-center .svc-grid{max-width:820px;grid-template-columns:1fr;gap:14px}
+  body.lay-center .svc{text-align:center}
+  body.lay-center .svc-lead{flex-direction:column;align-items:center;gap:4px}
+  body.lay-center .nh-grid{grid-template-columns:1fr;max-width:760px;text-align:center;gap:26px}
+  body.lay-center .nh-grid p{margin-left:auto;margin-right:auto;max-width:62ch}
+  body.lay-center .ref-wall{justify-content:center}
+
+  /* --- SWISS / INTERNATIONAL --- */
+  body.lay-swiss .site-header{border-bottom:2px solid var(--ink)}
+  body.lay-swiss .nav a{text-transform:uppercase;letter-spacing:.1em;font-size:.76rem;font-weight:600}
+  body.lay-swiss .logo span{letter-spacing:.2em}
+  body.lay-swiss .hero{padding:64px 0 40px}
+  body.lay-swiss .hero-inner{display:grid;grid-template-columns:1fr 3fr;gap:24px;align-items:end;border-bottom:2px solid var(--ink);padding-bottom:48px}
+  body.lay-swiss .hero .eyebrow{writing-mode:horizontal-tb}
+  body.lay-swiss .hero h1{grid-column:2;font-size:clamp(2.2rem,5vw,4.2rem);letter-spacing:-.02em;margin:0}
+  body.lay-swiss .hero-text{display:contents}
+  body.lay-swiss .hero .lead{grid-column:2;max-width:60ch;margin-top:8px}
+  body.lay-swiss .hero-cta{grid-column:2}
+  body.lay-swiss .leistungen,body.lay-swiss .referenzen{border-top:none;background:var(--bg)}
+  body.lay-swiss .sec-head{display:grid;grid-template-columns:1fr 3fr;gap:24px;align-items:baseline;border-top:2px solid var(--ink);padding-top:20px}
+  body.lay-swiss .sec-head .sec-index{display:block;font-family:var(--fh);font-weight:700;font-size:.9rem;color:var(--accent)}
+  body.lay-swiss .sec-head .eyebrow{grid-column:1;grid-row:2}
+  body.lay-swiss .sec-head h2{grid-column:2;grid-row:1/3}
+  body.lay-swiss .svc-grid{gap:0;border-top:1px solid var(--border)}
+  body.lay-swiss .svc{background:transparent;border:none;border-bottom:1px solid var(--border);border-radius:0;display:grid;grid-template-columns:1fr 3fr;gap:24px;padding:26px 0;margin:0 32px;align-items:start}
+  body.lay-swiss .svc-lead{display:block}
+  body.lay-swiss .svc-n{font-size:1.4rem;display:block;margin-bottom:8px}
+  body.lay-swiss .svc h3{margin:0}
+  body.lay-swiss .nh-grid{border-top:2px solid var(--ink);padding-top:28px}
+
+  /* --- SIDEBAR --- */
+  body.lay-sidebar .shell{display:grid;grid-template-columns:264px 1fr}
+  body.lay-sidebar .site-header{position:sticky;top:var(--swh);height:calc(100vh - var(--swh));border-bottom:none;border-right:1px solid var(--border);align-self:start}
+  body.lay-sidebar .hd-inner{flex-direction:column;align-items:flex-start;gap:26px;height:100%;padding:34px 26px}
+  body.lay-sidebar .nav{flex-direction:column;gap:14px;margin:0}
+  body.lay-sidebar .nav a{font-size:1rem}
+  body.lay-sidebar .hd-cta{margin:auto 0 0}
+  body.lay-sidebar .hero{padding:60px 0 70px}
+  body.lay-sidebar .hero-inner,body.lay-sidebar .sec-head,body.lay-sidebar .svc-grid,body.lay-sidebar .nh-grid,body.lay-sidebar .ref-wall,body.lay-sidebar .kontakt .cont{max-width:960px}
+  body.lay-sidebar .svc-grid{grid-template-columns:1fr 1fr}
+  @media(max-width:900px){ body.lay-sidebar .shell{grid-template-columns:1fr} body.lay-sidebar .site-header{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border)} body.lay-sidebar .hd-inner{flex-direction:row;align-items:center} body.lay-sidebar .nav{flex-direction:row} }
+
+  /* --- MAGAZINE / EDITORIAL --- */
+  body.lay-magazine .hero{padding:80px 0 60px}
+  body.lay-magazine .hero-inner{display:grid;grid-template-columns:1.6fr 1fr;gap:44px;align-items:end}
+  body.lay-magazine .hero h1{font-size:clamp(2.6rem,5.6vw,4.6rem);grid-column:1}
+  body.lay-magazine .hero .eyebrow{grid-column:1}
+  body.lay-magazine .hero-text{display:contents}
+  body.lay-magazine .hero .lead{grid-column:2;border-left:2px solid var(--accent);padding-left:20px}
+  body.lay-magazine .hero-cta{grid-column:1/3}
+  body.lay-magazine .leistungen{padding-top:60px}
+  body.lay-magazine .svc-grid{grid-template-columns:1.6fr 1fr 1fr}
+  body.lay-magazine .svc:first-child{grid-row:span 2;background:linear-gradient(155deg,var(--heroBg),var(--surface));display:flex;flex-direction:column;justify-content:flex-end}
+  body.lay-magazine .svc:first-child h3{font-size:1.7rem}
+  body.lay-magazine .nh-grid p:first-of-type{font-size:1.14rem;line-height:1.7}
+  body.lay-magazine .nh-grid p:first-of-type::first-letter{font-family:var(--fh);font-size:3.4rem;float:left;line-height:.8;padding:6px 10px 0 0;color:var(--p)}
+
+  /* --- FULL-BLEED STORYTELLING --- */
+  body.lay-fullbleed .hero-inner{display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center}
+  body.lay-fullbleed .hero-visual{display:block}
+  body.lay-fullbleed .nachhaltigkeit{background:var(--p)}
+  body.lay-fullbleed .nachhaltigkeit .eyebrow{color:var(--onDark)}
+  body.lay-fullbleed .nachhaltigkeit h2,body.lay-fullbleed .nachhaltigkeit p{color:#fff}
+  body.lay-fullbleed .nachhaltigkeit .nh-sub{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+  body.lay-fullbleed .nachhaltigkeit .nh-sub h3{color:#fff}
+  body.lay-fullbleed .svc-grid{display:flex;flex-direction:column;gap:0}
+  body.lay-fullbleed .svc{background:transparent;border:none;border-top:1px solid var(--border);border-radius:0;display:grid;grid-template-columns:1fr 1.4fr;gap:32px;padding:34px 0;margin:0 32px;align-items:center}
+  body.lay-fullbleed .svc:nth-child(even){direction:rtl}
+  body.lay-fullbleed .svc:nth-child(even) *{direction:ltr}
+  body.lay-fullbleed .svc-lead{display:flex;gap:16px;align-items:baseline}
+  body.lay-fullbleed .svc h3{margin:0;font-size:1.5rem}
+  body.lay-fullbleed.dark .nachhaltigkeit{background:var(--surface)}
+  body.lay-fullbleed.dark .nachhaltigkeit h2,body.lay-fullbleed.dark .nachhaltigkeit p{color:var(--ink)}
+  body.lay-fullbleed.dark .nachhaltigkeit .eyebrow{color:var(--p2)}
+
+  /* --- CONTENT + RAIL --- */
+  body.lay-content .hero-text{max-width:820px}
+  body.lay-content .nh-grid{grid-template-columns:1.8fr 1fr}
+  body.lay-content .nh-sub{position:sticky;top:calc(var(--swh) + 16px)}
+  body.lay-content .svc-grid{grid-template-columns:1fr 1fr}
+  body.lay-content .leistungen{background:var(--bg)}
+  body.lay-content .svc{background:var(--surface)}
+
+  /* ---------- Dark tweaks ---------- */
+  body.dark .kontakt{background:var(--heroBg)}
+  body.dark .kontakt h2{color:var(--ink)}
+  body.dark .kontakt .btn-primary{background:var(--p);color:var(--onP)}
+  body.dark .kontakt .btn-secondary{color:var(--ink);border-color:var(--border2)}
+  body.dark .hv-bars i{background:rgba(255,255,255,.16)}
+
+  @media(max-width:900px){
+    body.lay-split .hero-inner,body.lay-fullbleed .hero-inner,body.lay-magazine .hero-inner,body.lay-swiss .hero-inner{grid-template-columns:1fr!important}
+    body.lay-swiss .sec-head,body.lay-swiss .svc{grid-template-columns:1fr!important}
+    .svc-grid{grid-template-columns:1fr!important}
+    .nh-grid{grid-template-columns:1fr!important}
+    .nav{display:none}.hd-cta{margin-left:auto}
+    .ft-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body class="lay-swiss">
+
+<div id="switcher">
+  <div class="sw-top">
+    <div class="sw-title">VESTA <span>· 25 Layout-Varianten</span></div>
+    <div class="sw-nav">
+      <button id="prev" aria-label="Zurück">‹</button>
+      <div class="sw-cur"><span id="vnum">1 / 25</span><b id="vname">—</b><em id="vtag">—</em></div>
+      <button id="next" aria-label="Weiter">›</button>
+    </div>
+    <div class="sw-meta" id="vmeta"></div>
+  </div>
+  <div class="sw-chips" id="chips"></div>
+</div>
+
+<div id="site">
+ <div class="shell">
+  <header class="site-header">
+    <div class="hd-inner">
+      <div class="logo"><b>vesta</b><span>sustainability consulting</span></div>
+      <nav class="nav">
+        <a href="#nachhaltigkeit">Nachhaltigkeit</a>
+        <a href="#nachhaltigkeit">Über uns</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#referenzen">Referenzen</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a class="btn btn-primary hd-cta" href="#kontakt">Kontakt</a>
+    </div>
+  </header>
+
+  <main class="site-main">
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <div class="eyebrow">Bauphysik · Nachhaltigkeit · Ökobilanz</div>
+          <h1>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere</h1>
+          <p class="lead">Wir beraten Sie bei der Planung und Umsetzung von nachhaltigen und energieeffizienten Gebäuden und Portfolios.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#kontakt">Nachhaltigkeitsberatung</a>
+            <a class="btn btn-secondary" href="#leistungen">Unsere Leistungen</a>
+            <a class="btn btn-ghost" href="#kontakt">Kontakt →</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="hv-panel">
+            <div class="hv-badge">DGNB · QNG · EU-Taxonomie · EN 15978</div>
+            <div class="hv-bars"><i style="height:42%"></i><i style="height:66%"></i><i style="height:54%"></i><i style="height:82%"></i><i style="height:36%"></i><i style="height:60%"></i></div>
+            <div class="hv-cap">CO₂-Bilanz · kWh/m² · Lebenszykluskosten · Klimarisiko</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="leistungen" id="leistungen">
+      <div class="sec-head"><span class="sec-index">01</span><div class="eyebrow">Leistungen</div><h2>Was wir für Ihr Projekt tun</h2></div>
+      <div class="svc-grid">
+        <article class="svc"><div class="svc-lead"><span class="svc-n">01</span><h3>Nachhaltigkeitsberatung und Zertifizierung</h3></div><p>Zertifizierungen nach DGNB und QNG, Lebenszykluskostenanalysen, Konformitätsprüfung nach EU-Taxonomie und ESG-Kriterien, individuelle Nachhaltigkeitskonzepte.</p></article>
+        <article class="svc"><div class="svc-lead"><span class="svc-n">02</span><h3>Ökobilanzierung für Gebäude und Quartiere</h3></div><p>Auf Gebäude- und Portfolioebene, in der frühen Planungsphase bis nach Fertigstellung der Projekte sowie für Zertifizierungen, B-Pläne, Wettbewerbe, Fördermittelanträge, etc.</p></article>
+        <article class="svc"><div class="svc-lead"><span class="svc-n">03</span><h3>Bauphysik für mehr Energieeffizienz und Komfort</h3></div><p>Energiebilanzierungen, Thermische Gebäudesimulationen, Sommerlicher Wärmeschutz, Berechnung von Wärmebrücken, Entwicklung von Sanierungskonzepten, Klimarisikoanalysen.</p></article>
+      </div>
+    </section>
+
+    <section class="nachhaltigkeit" id="nachhaltigkeit">
+      <div class="sec-head" style="margin-bottom:0"><span class="sec-index">02</span></div>
+      <div class="nh-grid">
+        <div>
+          <div class="eyebrow">Nachhaltigkeit</div>
+          <h2>Nachhaltiges Bauen sichert Wert und schützt die Umwelt</h2>
+          <p>Nachhaltiges und energieeffizientes Bauen sichert langfristig den Wert Ihrer Immobilie und schützt aktiv die Umwelt. Wir begleiten Sie von der Planung bis zur Umsetzung und entwickeln individuelle Lösungen, die Wirtschaftlichkeit, Klimaschutz und Zukunftssicherheit verbinden. Durch umfassende Ökobilanzierung bewerten wir die Umweltauswirkungen Ihres Projekts und optimieren es gezielt. Mit innovativer thermischer Bauphysik reduzieren wir Wärmeverluste, steigern die Energieeffizienz und senken Betriebskosten nachhaltig. Setzen Sie auf ressourcenschonendes Bauen und gestalten Sie Ihre Zukunft verantwortungsvoll.</p>
+        </div>
+        <div class="nh-sub">
+          <div class="eyebrow">Projektpartner</div>
+          <h3>Gemeinsam zu energieeffizienten Gebäuden</h3>
+          <p>Sie sind auf der Suche nach geeigneten Expert:innen für die Umsetzung energieeffizienter und nachhaltiger Gebäude? Mit unserem Know-how in nachhaltigem Bauen, Ökobilanzierung und thermischer Bauphysik unterstützen wir Sie bei jedem Schritt. Gemeinsam entwickeln wir individuelle Lösungen, die Ihre Immobilien wirtschaftlich, klimafreundlich und zukunftssicher machen.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="referenzen" id="referenzen">
+      <div class="sec-head"><span class="sec-index">03</span><div class="eyebrow">Referenzen</div><h2>Partner &amp; Referenzen</h2></div>
+      <div class="ref-wall">
+        <div class="ref">Deutscher Alpenverein</div><div class="ref">Bauindustrie Bayern</div><div class="ref">Riedelbau</div><div class="ref">Phase H</div><div class="ref">Lang Hugger Rampp</div><div class="ref">IKL</div><div class="ref">Geopard Digital</div><div class="ref">DGNB</div><div class="ref">Bauplan 21</div>
+      </div>
+    </section>
+
+    <section class="kontakt" id="kontakt">
+      <div class="cont">
+        <h2>Ihr Partner für nachhaltiges Bauen aus München</h2>
+        <div class="k-cta">
+          <a class="btn btn-primary" href="#">Unser Kontakt</a>
+          <a class="btn btn-secondary" href="#referenzen">Unsere Referenzen</a>
+          <a class="btn btn-secondary" href="mailto:info@vesta-consult.de">Kontaktieren Sie uns – Let's get in touch!</a>
+        </div>
+      </div>
+    </section>
+  </main>
+ </div>
+
+  <footer class="site-footer">
+    <div class="ft-grid">
+      <div><div class="logo"><b>vesta</b><span>sustainability consulting</span></div><p style="margin-top:14px">Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere.</p></div>
+      <div><h4>Kontakt</h4><p>c/o ImpactHub<br>Gotzinger Str. 8<br>81371 München</p><a href="mailto:info@vesta-consult.de">info@vesta-consult.de</a></div>
+      <div><h4>Social</h4><a href="#">Instagram · vesta_consult.de</a><a href="#">LinkedIn · vestasustainabilityconsulting</a></div>
+    </div>
+    <div class="ft-legal"><span>©vesta sustainability consulting UG</span><span><a href="#">Impressum</a><a href="#">AGB</a></span></div>
+  </footer>
+</div>
+
+<script>
+const variants = [
+  {n:"Swiss Grün",t:"International Style · striktes Raster",lay:"swiss",p:"#2F5D4A",p2:"#3A6A5A",ink:"#1F2C26",ac:"#2CA58D",od:"#8FE6CF",bg:"#FBFCFB",sf:"#FFFFFF",hb:"#EDF3F0",ft:"#18291F",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Swiss Anthrazit",t:"International Style · nüchtern",lay:"swiss",p:"#23282A",p2:"#4F5651",ink:"#1D2022",ac:"#1FA971",od:"#4FD79B",bg:"#FFFFFF",sf:"#FAFAF9",hb:"#F1F3F2",ft:"#181B18",r:0,fh:"'Inter',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Swiss Navy",t:"International Style · institutionell",lay:"swiss",p:"#1F3A53",p2:"#34586E",ink:"#182430",ac:"#2FA36A",od:"#6FD6A2",bg:"#FBFCFD",sf:"#FFFFFF",hb:"#EBF1F4",ft:"#0E2032",r:2,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Swiss Dark",t:"International Style · Dark, Emerald",lay:"swiss",dark:true,p:"#34D399",onP:"#082018",p2:"#0F766E",ink:"#E7EAE9",ac:"#34D399",od:"#34D399",bg:"#16191A",sf:"#1E2325",hb:"#20272A",ft:"#0E1213",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Swiss Petrol",t:"International Style · Petrol/Kupfer",lay:"swiss",p:"#14505E",p2:"#2C6E7E",ink:"#16282D",ac:"#C57B4E",od:"#E7A878",bg:"#FBFCFC",sf:"#FFFFFF",hb:"#EAF1F2",ft:"#0A2A32",r:0,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+
+  {n:"Zentriert Grün",t:"Centered · Serif-Headline",lay:"center",p:"#2F5D4A",p2:"#3A6A5A",ink:"#22302B",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF3F0",ft:"#18291F",r:8,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Zentriert Navy",t:"Centered · geometrisch",lay:"center",p:"#1F3A53",p2:"#34586E",ink:"#1B2733",ac:"#2FA36A",od:"#6FD6A2",bg:"#F6F8FA",sf:"#FFFFFF",hb:"#EBF1F4",ft:"#0E2032",r:6,fh:"'Montserrat',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Zentriert Dark",t:"Centered · Dark, Teal",lay:"center",dark:true,p:"#2DD4BF",onP:"#07302B",p2:"#0D9488",ink:"#E6EDEC",ac:"#2DD4BF",od:"#2DD4BF",bg:"#111C1E",sf:"#1B2A2C",hb:"#17282A",ft:"#0A1416",r:12,fh:"'Manrope',sans-serif",fb:"'Manrope',sans-serif"},
+  {n:"Zentriert Prestige",t:"Centered · Forest + Gold, Spectral",lay:"center",p:"#1E4636",p2:"#2C5A47",ink:"#1C2A23",ac:"#C9A24B",od:"#EAD08A",bg:"#F7F8F7",sf:"#FFFFFF",hb:"#EDF2EF",ft:"#132018",r:2,fh:"'Spectral',serif",fb:"'Source Sans 3',sans-serif"},
+  {n:"Zentriert Mint",t:"Centered · rund, modern",lay:"center",p:"#146152",p2:"#1C7A67",ink:"#173029",ac:"#2CA58D",od:"#8FE6CF",bg:"#F5F8F7",sf:"#FFFFFF",hb:"#EAF3F0",ft:"#0E2A24",r:14,fh:"'Manrope',sans-serif",fb:"'Manrope',sans-serif"},
+
+  {n:"Sidebar Grün",t:"Fixe Seitennavigation",lay:"sidebar",p:"#2F5D4A",p2:"#3A6A5A",ink:"#22302B",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF3F0",ft:"#18291F",r:6,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Sidebar Dark",t:"Portal-Look · Dark, Emerald",lay:"sidebar",dark:true,p:"#34D399",onP:"#082018",p2:"#0F766E",ink:"#E7EAE9",ac:"#34D399",od:"#34D399",bg:"#181B1C",sf:"#22282A",hb:"#20272A",ft:"#0E1213",r:4,fh:"'IBM Plex Sans',sans-serif",fb:"'IBM Plex Sans',sans-serif"},
+  {n:"Sidebar Petrol",t:"Portal-Look · Petrol, IBM Plex",lay:"sidebar",p:"#134E4A",p2:"#2C6E7E",ink:"#1C2B2A",ac:"#14B8A6",od:"#7EE0D6",bg:"#F5F8F8",sf:"#FFFFFF",hb:"#E9F1F0",ft:"#0C2E2C",r:4,fh:"'IBM Plex Sans',sans-serif",fb:"'IBM Plex Sans',sans-serif"},
+
+  {n:"Magazine Serif",t:"Editorial · Fraunces, Drop-Cap",lay:"magazine",p:"#262B2D",p2:"#3f4643",ink:"#202426",ac:"#2CA58D",od:"#8FE6CF",bg:"#F7F8F8",sf:"#FFFFFF",hb:"#EFF1F1",ft:"#16191A",r:2,fh:"'Fraunces',serif",fb:"'Source Sans 3',sans-serif"},
+  {n:"Magazine Warm",t:"Editorial · Lehm/Olive, Lora",lay:"magazine",p:"#9A4A32",p2:"#5C6544",ink:"#33302A",ac:"#C98A3C",od:"#F0C078",bg:"#F7F7F5",sf:"#FFFFFF",hb:"#F1F0EB",ft:"#2A1F17",r:8,fh:"'Lora',serif",fb:"'Inter',sans-serif"},
+  {n:"Magazine Dark",t:"Editorial · Dark, Newsreader/Gold",lay:"magazine",dark:true,p:"#C9A24B",onP:"#241a05",p2:"#a5842f",ink:"#ECE9E1",ac:"#C9A24B",od:"#EAD08A",bg:"#191817",sf:"#232220",hb:"#242220",ft:"#100F0E",r:2,fh:"'Newsreader',serif",fb:"'Inter',sans-serif"},
+
+  {n:"Full-Bleed Grün",t:"Storytelling · alternierende Bänder",lay:"fullbleed",p:"#2F5D4A",p2:"#3A6A5A",ink:"#22302B",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF3F0",ft:"#18291F",r:8,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Full-Bleed Petrol",t:"Storytelling · Petrol/Kupfer",lay:"fullbleed",p:"#14505E",p2:"#2C6E7E",ink:"#1E2E33",ac:"#C57B4E",od:"#E7A878",bg:"#F5F8F8",sf:"#FFFFFF",hb:"#EAF1F2",ft:"#0A2A32",r:4,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Full-Bleed Dark",t:"Storytelling · Dark, Teal",lay:"fullbleed",dark:true,p:"#2DD4BF",onP:"#07302B",p2:"#0D9488",ink:"#E6EDEC",ac:"#2DD4BF",od:"#2DD4BF",bg:"#111C1E",sf:"#1B2A2C",hb:"#17282A",ft:"#0A1416",r:6,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+
+  {n:"Content-Rail Navy",t:"Haupt + Randspalte · Public Sans",lay:"content",p:"#1D3A5F",p2:"#345A7E",ink:"#16202B",ac:"#2563EB",od:"#93B4FB",bg:"#F6F8FA",sf:"#FFFFFF",hb:"#EAF0F6",ft:"#101F30",r:4,fh:"'Public Sans',sans-serif",fb:"'Public Sans',sans-serif"},
+  {n:"Content-Rail Grün",t:"Haupt + Randspalte · Sticky",lay:"content",p:"#2F5D4A",p2:"#3A6A5A",ink:"#22302B",ac:"#2CA58D",od:"#8FE6CF",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF3F0",ft:"#18291F",r:8,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+
+  {n:"Split Prestige",t:"Split-Hero · Forest/Gold, Spectral",lay:"split",p:"#1E4636",p2:"#2C5A47",ink:"#1C2A23",ac:"#C9A24B",od:"#EAD08A",bg:"#F6F8F7",sf:"#FFFFFF",hb:"#EDF2EF",ft:"#132018",r:6,fh:"'Spectral',serif",fb:"'Inter',sans-serif"},
+  {n:"Split Koralle",t:"Split-Hero · Teal/Koralle, Manrope",lay:"split",p:"#146E6E",p2:"#0f8a8a",ink:"#14312F",ac:"#E4795B",od:"#F4A78F",bg:"#F4F8F8",sf:"#FFFFFF",hb:"#E7F2F1",ft:"#0A302E",r:10,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Split Dark",t:"Split-Hero · Dark, Emerald",lay:"split",dark:true,p:"#34D399",onP:"#082018",p2:"#0F766E",ink:"#E7EAE9",ac:"#34D399",od:"#34D399",bg:"#181B1C",sf:"#22282A",hb:"#20272A",ft:"#0E1213",r:8,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Zentriert Dark Oswald",t:"Centered · Dark, Oswald plakativ",lay:"center",dark:true,p:"#3CC98F",onP:"#08251A",p2:"#1f8a63",ink:"#E7ECEA",ac:"#3CC98F",od:"#7BE3BC",bg:"#141817",sf:"#1E2422",hb:"#1D2523",ft:"#0D1110",r:2,fh:"'Oswald',sans-serif",fb:"'Inter',sans-serif"}
+];
+
+const R = document.documentElement.style, el = id => document.getElementById(id);
+let cur = 0;
+const fontName = s => s.split(',')[0].replace(/'/g,'');
+const LAYLABEL = {swiss:"Swiss / Int'l",center:"Zentriert",sidebar:"Sidebar",magazine:"Magazine",fullbleed:"Full-Bleed",content:"Content+Rail",split:"Split"};
+
+function applyVariant(i){
+  cur = (i + variants.length) % variants.length;
+  const v = variants[cur];
+  R.setProperty('--p',v.p); R.setProperty('--p2',v.p2||v.p); R.setProperty('--ink',v.ink);
+  R.setProperty('--accent',v.ac); R.setProperty('--onDark',v.od||v.ac); R.setProperty('--onP',v.onP||'#fff');
+  R.setProperty('--bg',v.bg); R.setProperty('--surface',v.sf); R.setProperty('--heroBg',v.hb);
+  R.setProperty('--footerBg',v.ft); R.setProperty('--radius',(v.r!=null?v.r:8)+'px');
+  R.setProperty('--fh',v.fh); R.setProperty('--fb',v.fb);
+  document.body.className = 'lay-' + v.lay + (v.dark ? ' dark' : '');
+
+  el('vnum').textContent = (cur+1) + ' / 25';
+  el('vname').textContent = v.n;
+  el('vtag').textContent = v.t;
+  el('vmeta').innerHTML =
+    '<span class="lay">'+LAYLABEL[v.lay]+'</span>' +
+    '<span class="sws"><i style="background:'+v.p+'"></i><i style="background:'+v.ac+'"></i><i style="background:'+v.ink+'"></i><i style="background:'+v.bg+'"></i></span>' +
+    '<span>Head <b>'+fontName(v.fh)+'</b> · Text <b>'+fontName(v.fb)+'</b></span>' +
+    '<span>Radius <b>'+(v.r!=null?v.r:8)+'px</b>'+(v.dark?' · <b>Dark</b>':'')+'</span>';
+
+  [...el('chips').children].forEach((c,ci)=>c.classList.toggle('on',ci===cur));
+  const a = el('chips').children[cur]; if(a) a.scrollIntoView({block:'nearest',inline:'center'});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const chips = el('chips');
+variants.forEach((v,i)=>{
+  const b=document.createElement('button'); b.textContent=i+1; b.style.background=v.p; b.title=v.n+' — '+LAYLABEL[v.lay];
+  b.addEventListener('click',()=>applyVariant(i)); chips.appendChild(b);
+});
+el('prev').addEventListener('click',()=>applyVariant(cur-1));
+el('next').addEventListener('click',()=>applyVariant(cur+1));
+document.addEventListener('keydown',e=>{ if(e.key==='ArrowLeft')applyVariant(cur-1); if(e.key==='ArrowRight')applyVariant(cur+1); });
+applyVariant(0);
+</script>
+</body>
+</html>

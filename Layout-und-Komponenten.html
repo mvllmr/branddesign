@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · Layout &amp; Komponenten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #2E3A3A; background: #F5F7F8; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  h1,h2,h3,h4 { font-family: 'Archivo', sans-serif; letter-spacing: -.01em; }
+  a { color: #1F8C74; }
+
+  .masthead { background: #23282A; color: #F3F2EC; padding: 60px 0 52px; }
+  .masthead .eyebrow { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: #7FB8A3; font-weight: 600; }
+  .masthead h1 { font-weight: 800; font-size: clamp(2rem,4.5vw,3.1rem); line-height: 1.08; margin: 12px 0 14px; }
+  .masthead p { max-width: 64ch; color: #C7C9C2; font-size: 1.05rem; }
+  .toc { display:flex; flex-wrap:wrap; gap:8px 10px; margin-top:26px; }
+  .toc a { font-size:.8rem; color:#C7C9C2; text-decoration:none; border:1px solid #3c4245; padding:5px 12px; border-radius:999px; }
+  .toc a:hover { background:#2f3538; color:#fff; }
+
+  section { padding: 52px 0; border-bottom: 1px solid #e4e6e5; }
+  .kicker { font-size:.74rem; font-weight:600; letter-spacing:.12em; text-transform:uppercase; color:#2F5D4A; }
+  section > .wrap > h2 { font-size:1.7rem; margin:8px 0 8px; }
+  section > .wrap > .intro { color:#55605d; max-width:74ch; margin-bottom:26px; }
+
+  .card { background:#fff; border:1px solid #e2e4e3; border-radius:14px; padding:26px; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .note { font-size:.82rem; color:#8a8b82; margin-top:10px; }
+  .src { font-size:.76rem; color:#9a9b92; }
+
+  /* ---- buttons (live) ---- */
+  .btn { font-family:'Inter',sans-serif; font-weight:600; font-size:.95rem; line-height:1; padding:13px 22px; border:1.5px solid transparent; cursor:pointer; display:inline-flex; align-items:center; gap:8px; text-decoration:none; transition:background .15s ease, transform .1s ease, box-shadow .15s ease; min-height:44px; }
+  .btn:focus-visible { outline:3px solid #2CA58D; outline-offset:2px; }
+  .btn-primary { background:#2F5D4A; color:#fff; border-radius:6px; }
+  .btn-primary:hover { background:#264c3d; transform:translateY(-1px); box-shadow:0 6px 16px rgba(46,58,58,.14); }
+  .btn-primary:active { background:#1f4032; transform:translateY(0); box-shadow:none; }
+  .btn-secondary { background:#fff; color:#2E3A3A; border-color:#c4ccc8; border-radius:6px; }
+  .btn-secondary:hover { border-color:#2F5D4A; color:#2F5D4A; }
+  .btn-tertiary { background:transparent; color:#1F8C74; padding-left:6px; padding-right:6px; }
+  .btn-tertiary:hover { color:#2F5D4A; text-decoration:underline; }
+  .btn[disabled] { background:#e7eae9; color:#9aa19d; border-color:transparent; cursor:not-allowed; box-shadow:none; transform:none; }
+  .btnrow { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
+
+  /* radius scale demo */
+  .radius-scale { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:6px; }
+  .rs { text-align:center; }
+  .rs .demo { background:#2F5D4A; color:#fff; font-weight:600; font-size:.9rem; padding:14px 10px; min-height:52px; display:flex; align-items:center; justify-content:center; }
+  .rs h4 { font-size:.95rem; margin:12px 0 4px; }
+  .rs p { font-size:.82rem; color:#55605d; }
+  .rs .val { font-family:'Archivo',sans-serif; font-size:.72rem; color:#2CA58D; font-weight:700; letter-spacing:.04em; }
+
+  /* states demo */
+  .states { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; text-align:center; }
+  .states .st .box { display:flex; align-items:center; justify-content:center; padding:16px 8px; background:#fbfcfc; border:1px dashed #d7dbda; border-radius:10px; min-height:74px; }
+  .states .st h4 { font-size:.8rem; margin:10px 0 3px; }
+  .states .st p { font-size:.74rem; color:#8a8b82; }
+  .s-default{background:#2F5D4A;color:#fff;border-radius:6px;padding:12px 18px;font-weight:600;font-size:.85rem}
+  .s-hover{background:#264c3d;color:#fff;border-radius:6px;padding:12px 18px;font-weight:600;font-size:.85rem;box-shadow:0 6px 16px rgba(46,58,58,.18);transform:translateY(-1px)}
+  .s-active{background:#1f4032;color:#fff;border-radius:6px;padding:12px 18px;font-weight:600;font-size:.85rem}
+  .s-focus{background:#2F5D4A;color:#fff;border-radius:6px;padding:12px 18px;font-weight:600;font-size:.85rem;outline:3px solid #2CA58D;outline-offset:2px}
+  .s-disabled{background:#e7eae9;color:#9aa19d;border-radius:6px;padding:12px 18px;font-weight:600;font-size:.85rem}
+
+  /* per-direction button styles */
+  .dirbtns { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .db { border:1px solid #e2e4e3; border-radius:12px; padding:18px 16px; background:#fff; text-align:center; }
+  .db .bt { display:inline-flex; align-items:center; justify-content:center; color:#fff; font-weight:600; font-size:.82rem; padding:11px 16px; width:100%; }
+  .db h4 { font-size:.82rem; margin:12px 0 3px; }
+  .db p { font-size:.72rem; color:#8a8b82; }
+
+  /* page anatomy diagram */
+  .anatomy { display:flex; flex-direction:column; gap:8px; }
+  .blk { border-radius:8px; padding:14px 18px; display:flex; justify-content:space-between; align-items:center; gap:14px; border:1px solid transparent; }
+  .blk .l { font-family:'Archivo',sans-serif; font-weight:700; font-size:.95rem; }
+  .blk .d { font-size:.82rem; opacity:.85; text-align:right; max-width:60%; }
+  .blk.head{background:#23282A;color:#fff}
+  .blk.hero{background:#2F5D4A;color:#fff;padding:26px 18px}
+  .blk.trust{background:#EAF0EE;color:#2E3A3A;border-color:#d7e2dd}
+  .blk.sec{background:#fff;color:#2E3A3A;border-color:#e2e4e3}
+  .blk.alt{background:#F1F4F3;color:#2E3A3A;border-color:#e2e4e3}
+  .blk.cta{background:#2CA58D;color:#08301f;padding:22px 18px}
+  .blk.foot{background:#1A362B;color:#cfe0d7}
+
+  /* hero variants */
+  .heros { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .hv { border:1px solid #e2e4e3; border-radius:12px; overflow:hidden; background:#fff; }
+  .hv .frame { height:150px; background:#F1F4F3; padding:16px; display:flex; }
+  .hv h4 { font-size:.95rem; margin:14px 16px 2px; }
+  .hv p { font-size:.8rem; color:#55605d; margin:0 16px 16px; }
+  .bar { background:#2F5D4A; border-radius:3px; }
+  .bar.sm{height:7px} .bar.md{height:10px} .bar.btn{background:#2CA58D;height:20px;border-radius:4px}
+  .muted{background:#c9d3ce}
+  /* centered */
+  .hv.centered .frame{flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center}
+  .hv.centered .bar{width:70%} .hv.centered .bar.btn{width:40%}
+  /* split */
+  .hv.split .frame{gap:14px}
+  .hv.split .col{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px}
+  .hv.split .img{flex:1;background:#c9d3ce;border-radius:6px}
+  .hv.split .bar.btn{width:55%}
+  /* full image */
+  .hv.full .frame{background:#8f9c96;flex-direction:column;justify-content:flex-end;gap:8px}
+  .hv.full .bar{background:#fff;width:60%} .hv.full .bar.btn{background:#2CA58D;width:35%}
+  /* text only */
+  .hv.text .frame{flex-direction:column;justify-content:center;gap:10px}
+  .hv.text .bar.big{height:22px;width:85%;background:#23282A}
+  .hv.text .bar{width:65%}
+
+  /* grid + spacing */
+  .col12 { display:grid; grid-template-columns:repeat(12,1fr); gap:6px; }
+  .col12 div { background:#DCE8DE; height:46px; border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:.62rem; color:#2F5D4A; font-weight:600; }
+  .spacing .row { display:flex; align-items:center; gap:14px; margin-bottom:7px; }
+  .spacing .bar2 { background:#2F5D4A; height:16px; border-radius:3px; }
+  .spacing .lab { font-size:.78rem; color:#55605d; font-family:'Archivo',sans-serif; }
+
+  /* gestalt */
+  .gest { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .g { border:1px solid #e2e4e3; border-radius:12px; padding:18px; background:#fff; }
+  .g h4 { font-size:.95rem; margin-bottom:6px; }
+  .g p { font-size:.84rem; color:#55605d; }
+  .g .demo { height:70px; margin-bottom:12px; border-radius:8px; background:#F1F4F3; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .dot{width:14px;height:14px;border-radius:50%;background:#2F5D4A}
+  .sq{width:14px;height:14px;border-radius:3px;background:#2CA58D}
+
+  ul.clean { list-style:none; }
+  ul.clean li { font-size:.9rem; color:#43443e; padding-left:18px; position:relative; margin-bottom:8px; }
+  ul.clean li::before { content:''; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:2px; background:#2CA58D; }
+  ul.bad li::before { background:#D64535; border-radius:50%; }
+
+  .levers { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+  .lever { background:#fff; border:1px solid #e2e4e3; border-radius:12px; padding:16px; }
+  .lever b { font-family:'Archivo',sans-serif; display:block; font-size:.9rem; color:#2F5D4A; margin-bottom:5px; }
+  .lever p { font-size:.8rem; color:#55605d; }
+
+  /* first-impression science */
+  #impression { background:#23282A; }
+  #impression .kicker { color:#7FB8A3; }
+  #impression > .wrap > h2 { color:#fff; }
+  #impression > .wrap > .intro { color:#C7C9C2; }
+  .imp-hero { display:flex; align-items:baseline; gap:24px; flex-wrap:wrap; margin:10px 0 26px; }
+  .imp-big { font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(3.2rem,9vw,6rem); line-height:.9; color:#2CA58D; letter-spacing:-.03em; }
+  .imp-big small { display:block; font-family:'Inter',sans-serif; font-size:.95rem; font-weight:600; color:#C7C9C2; letter-spacing:.02em; margin-top:10px; }
+  .imp-hero > p { max-width:42ch; color:#C7C9C2; font-size:1rem; flex:1; min-width:260px; }
+  .imp-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .imp-drivers, .imp-halo { background:#2b3134; border:1px solid #3c4245; border-radius:14px; padding:22px 24px; }
+  .imp-drivers h4, .imp-halo h4 { color:#fff; font-size:1rem; margin-bottom:14px; }
+  .drow { margin-bottom:11px; }
+  .drow .dt { display:flex; justify-content:space-between; font-size:.85rem; color:#C7C9C2; margin-bottom:5px; }
+  .drow .dt b { color:#fff; font-family:'Archivo',sans-serif; }
+  .dbar { height:8px; background:#3c4245; border-radius:99px; overflow:hidden; }
+  .dbar span { display:block; height:100%; background:linear-gradient(90deg,#2CA58D,#7FB8A3); border-radius:99px; }
+  .imp-halo p { color:#C7C9C2; font-size:.9rem; margin-bottom:10px; }
+  .imp-halo b { color:#fff; }
+  .imp-cite { font-size:.78rem; color:#8f958f; margin-top:20px; }
+
+  /* layout archetypes */
+  section.archetypes .arch-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .arch { background:#fff; border:1px solid #e2e4e3; border-radius:12px; overflow:hidden; display:flex; flex-direction:column; }
+  .wf { height:120px; background:#eef1f0; padding:9px; display:flex; gap:6px; border-bottom:1px solid #e6e9e8; }
+  .wf .col { display:flex; flex-direction:column; gap:5px; }
+  .wf .bar { background:#9cbcae; border-radius:2px; height:6px; }
+  .wf .bar.h { background:#2F5D4A; height:9px; }
+  .wf .img { background:#c5cfca; border-radius:3px; }
+  .wf .cta { background:#2CA58D; border-radius:2px; height:9px; }
+  .arch-body { padding:14px 16px 16px; flex:1; display:flex; flex-direction:column; }
+  .arch-h { display:flex; justify-content:space-between; align-items:baseline; gap:8px; }
+  .arch-h h4 { font-size:.98rem; }
+  .arch-h .stars { color:#2CA58D; font-size:.78rem; letter-spacing:1px; white-space:nowrap; }
+  .arch-body > p { font-size:.83rem; color:#55605d; margin:5px 0 8px; }
+  .arch-tag { font-size:.75rem; color:#7a8b84; margin-top:auto; line-height:1.5; }
+  .arch-tag b { color:#2F5D4A; }
+  @media (max-width:820px){ section.archetypes .arch-grid{grid-template-columns:1fr 1fr} }
+  @media (max-width:560px){ section.archetypes .arch-grid{grid-template-columns:1fr} }
+
+  @media (max-width:820px){
+    .grid2,.grid3,.states,.dirbtns,.radius-scale,.heros,.gest,.levers,.imp-grid{grid-template-columns:1fr 1fr}
+    .col12{grid-template-columns:repeat(6,1fr)}
+  }
+  @media (max-width:560px){ .imp-grid{grid-template-columns:1fr} }
+  @media (max-width:560px){
+    .grid2,.grid3,.states,.dirbtns,.radius-scale,.heros,.gest,.levers{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Vesta · Design-Grundlagen</div>
+    <h1>Layout &amp; Komponenten</h1>
+    <p>Wie eine seriöse Website optisch aufgebaut ist — und warum ein Button mit scharfen Ecken etwas anderes sagt als eine Pille. Alle Regeln sind mit Quellen belegt; die Button-Beispiele sind live (fahre mit der Maus drüber, klick sie an, oder tabbe hin).</p>
+    <div class="toc">
+      <a href="#impression">Erster Eindruck (50 ms)</a>
+      <a href="#radius">Radius-Psychologie</a>
+      <a href="#hierarchie">Button-Hierarchie</a>
+      <a href="#states">States</a>
+      <a href="#dirbtn">Stil je Richtung</a>
+      <a href="#anatomy">Seitenaufbau</a>
+      <a href="#hero">Hero-Varianten</a>
+      <a href="#archetypes">Layout-Archetypen</a>
+      <a href="#grid">Grid &amp; Rhythmus</a>
+      <a href="#gestalt">Gestalt &amp; Hierarchie</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== ERSTER EINDRUCK (50 ms) ===== -->
+<section id="impression">
+  <div class="wrap">
+    <div class="kicker">Wissenschaftlicher Ausgangspunkt</div>
+    <h2>Du hast 50 Millisekunden.</h2>
+    <p class="intro">So lange dauert es, bis sich Nutzer ein Urteil über die optische Anmutung einer Website bilden — und dieses Urteil ist erstaunlich stabil. Design entscheidet über Glaubwürdigkeit, bevor ein einziges Wort gelesen wird.</p>
+    <div class="imp-hero">
+      <div class="imp-big">50 ms<small>bis zum ersten Eindruck</small></div>
+      <p>In kontrollierten Studien bewerteten Menschen die visuelle Attraktivität von Homepages nach nur 50 ms Einblendung — praktisch identisch zum Urteil nach 500 ms. Die Bewertungen waren hoch reliabel (r² ≈ 0,94): Menschen sind sich bemerkenswert einig, was „gut aussieht".</p>
+    </div>
+    <div class="imp-grid">
+      <div class="imp-drivers">
+        <h4>Was den ersten Eindruck treibt (r² mit „visual appeal")</h4>
+        <div class="drow"><div class="dt"><span>Gutes ↔ schlechtes Design</span><b>.92</b></div><div class="dbar"><span style="width:92%"></span></div></div>
+        <div class="drow"><div class="dt"><span>Interessant ↔ langweilig</span><b>.91</b></div><div class="dbar"><span style="width:91%"></span></div></div>
+        <div class="drow"><div class="dt"><span>Gute ↔ schlechte Farbe</span><b>.90</b></div><div class="dbar"><span style="width:90%"></span></div></div>
+        <div class="drow"><div class="dt"><span>Gutes ↔ schlechtes Layout</span><b>.88</b></div><div class="dbar"><span style="width:88%"></span></div></div>
+        <div class="drow"><div class="dt"><span>Fantasievoll ↔ einfallslos</span><b>.86</b></div><div class="dbar"><span style="width:86%"></span></div></div>
+        <p class="note" style="color:#8f958f;margin-top:10px">„Screen dominance" (Balance zwischen Text und Grafik) war die einzelne stärkste grafische Eigenschaft. <b style="color:#C7C9C2">Farbe und Layout</b> gehören zu den Top-Treibern — „simpel vs. komplex" war dagegen fast irrelevant (r²=.01).</p>
+      </div>
+      <div class="imp-halo">
+        <h4>Der Halo-Effekt: der erste Eindruck bleibt</h4>
+        <p>Ein positiver erster Eindruck überträgt sich auf alles Weitere (Confirmation Bias) — spätere Schwächen werden großzügig übersehen.</p>
+        <p>Umgekehrt gilt: Selbst eine sehr nützliche, gut bedienbare Seite <b>überzeugt nicht</b>, wenn der erste optische Eindruck negativ war. „What is beautiful is usable" (Tractinsky et al. 2000).</p>
+        <p>Die Reaktion ist <b>präattentiv/viszeral</b> — Emotion vor Kognition, ausgelöst noch bevor der Verstand den Inhalt analysiert.</p>
+        <p style="margin-bottom:0">Für eine Beratung heißt das: Der visuelle Auftritt ist kein Beiwerk, sondern das <b>erste Kompetenz-Signal</b>.</p>
+      </div>
+    </div>
+    <p class="imp-cite">Quelle: Lindgaard, Fernandes, Dudek &amp; Brown (2006): „Attention web designers: You have 50 milliseconds to make a good first impression!" — Behaviour &amp; Information Technology 25(2), 115–126. Ergänzend: Tractinsky, Katz &amp; Ikar (2000): „What is beautiful is usable".</p>
+  </div>
+</section>
+
+<!-- ===== RADIUS ===== -->
+<section id="radius">
+  <div class="wrap">
+    <div class="kicker">Button · Eckenrundung</div>
+    <h2>Der Radius ist ein Marken-Signal</h2>
+    <p class="intro">Die Eckenrundung positioniert eine Marke, bevor ein Wort gelesen wird. Grund ist der <b>Bouba/Kiki-Effekt</b>: über 95 % der Menschen ordnen eckige Formen harten, runde Formen weichen Eindrücken zu — kulturübergreifend. Runde Ecken werden minimal schneller verarbeitet (Gestalt-Kontinuität führt das Auge), scharfe wirken präziser und formeller.</p>
+    <div class="radius-scale">
+      <div class="rs"><div class="demo" style="border-radius:0">Anfragen</div><div class="val">0 px</div><h4>Scharf</h4><p>Seriös, präzise, technisch, autoritär. „Architektur / Engineering".</p></div>
+      <div class="rs"><div class="demo" style="border-radius:6px">Anfragen</div><div class="val">4–8 px</div><h4>Leicht gerundet</h4><p>Kompetent <b>und</b> zugänglich. Der vernünftige Default. <b>Empfehlung.</b></p></div>
+      <div class="rs"><div class="demo" style="border-radius:14px">Anfragen</div><div class="val">12–16 px</div><h4>Stark gerundet</h4><p>Freundlich, weich, „app-haft", menschlich-warm.</p></div>
+      <div class="rs"><div class="demo" style="border-radius:999px">Anfragen</div><div class="val">999 px</div><h4>Pille</h4><p>Modern, marketinglastig, „Startup". Kann unruhig wirken.</p></div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <b style="font-family:'Archivo',sans-serif">Empfehlung für Bauphysik/Ökobilanz: 6 px (Range 4–8).</b>
+      <p style="font-size:.9rem;color:#55605d;margin-top:6px">Liest sich als „präzise und zeitgemäß" ohne die Kühle von 0 px und ohne die Marketing-Konnotation der Pille. Für eine bewusst autoritäre Sub-Marke („Architektur-Autorität") konsequent 0–2 px. <b>Entscheidend ist die Konsistenz:</b> Der Radius ist ein Token und muss identisch auf Buttons, Cards, Inputs, Tags und Bilder wirken — gemischte Radien lesen als „nicht durchdacht".</p>
+      <p class="note">Vorsicht bei der oft zitierten „+17–55 % Klicks durch runde Buttons"-Zahl (Biswas/Abell/Chacko): stammt aus Consumer-/Impuls-Kontext, <b>nicht</b> auf B2B-Fachpublikum übertragbar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HIERARCHIE ===== -->
+<section id="hierarchie">
+  <div class="wrap">
+    <div class="kicker">Button · Hierarchie</div>
+    <h2>Drei Emphase-Stufen — ein Primär-CTA pro View</h2>
+    <p class="intro">Maximal <b>ein</b> Primär-Button pro Sektion. Zwei gleich starke CTAs zerstören die Hierarchie und erhöhen die Entscheidungslast (NN/g, Material, Carbon). Auf einer Beratungsseite ist Primär = Anfrage/Kontakt, Sekundär = Vertiefung.</p>
+    <div class="card">
+      <div class="btnrow">
+        <a href="#hierarchie" class="btn btn-primary">Projekt anfragen</a>
+        <a href="#hierarchie" class="btn btn-secondary">Referenzen ansehen</a>
+        <a href="#hierarchie" class="btn btn-tertiary">Mehr erfahren →</a>
+      </div>
+      <div class="grid3" style="margin-top:22px">
+        <div><b style="font-family:'Archivo',sans-serif;font-size:.9rem">Primär · solid</b><p style="font-size:.84rem;color:#55605d">Höchste Emphase, Markenfarbe gefüllt. Die eine Hauptaktion.</p></div>
+        <div><b style="font-family:'Archivo',sans-serif;font-size:.9rem">Sekundär · outline</b><p style="font-size:.84rem;color:#55605d">Mittlere Emphase. Nebenaktion, ohne dem CTA Konkurrenz zu machen.</p></div>
+        <div><b style="font-family:'Archivo',sans-serif;font-size:.9rem">Tertiär · text</b><p style="font-size:.84rem;color:#55605d">Minimale Emphase, wie ein Link. Optionale Aktion.</p></div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card">
+        <h4 style="font-size:1rem;margin-bottom:10px">Größe, Padding, Label</h4>
+        <ul class="clean">
+          <li>Mindesthöhe Desktop <b>40–44 px</b>, Mobile <b>48 px</b>. Trefferfläche <b>≥ 44×44 px</b> (Padding zählt mit).</li>
+          <li>Horizontal-Padding <b>16–24 px</b> ≈ 2× vertikales (10–14 px).</li>
+          <li>Label = <b>Verb + Objekt</b>, 1–3 Wörter: „Ökobilanz berechnen lassen", nicht „Absenden".</li>
+          <li>Icon links (neutral) oder rechts (Vorwärts-Pfeil), ~16–20 px, 8 px Abstand.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4 style="font-size:1rem;margin-bottom:10px">Anti-Patterns</h4>
+        <ul class="clean bad">
+          <li>Mehrere Primär-Buttons pro View.</li>
+          <li><code>outline:none</code> ohne sichtbaren Ersatz-Fokus (WCAG-2.2-Verstoß).</li>
+          <li>Generische Labels („Hier klicken", „Absenden").</li>
+          <li>Ghost-Buttons ohne Hover → wirken inaktiv.</li>
+          <li>Gemischte Radien/Höhen über Buttons hinweg.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATES ===== -->
+<section id="states">
+  <div class="wrap">
+    <div class="kicker">Button · Zustände</div>
+    <h2>Jeder Button braucht alle fünf States</h2>
+    <p class="intro">Ein Button ohne Hover/Focus wirkt „tot" und ist eine Barriere für Tastaturnutzer. Besonders wichtig: der <b>sichtbare Fokus-Ring</b> (WCAG 2.2, Kontrast ≥ 3:1) — der Live-Button links reagiert echt auf Maus, Klick und Tab.</p>
+    <div class="card">
+      <div class="states">
+        <div class="st"><div class="box"><span class="s-default">Anfragen</span></div><h4>Default</h4><p>Kontrast Text ≥ 4,5:1</p></div>
+        <div class="st"><div class="box"><span class="s-hover">Anfragen</span></div><h4>Hover</h4><p>Abdunkeln + leichter Lift</p></div>
+        <div class="st"><div class="box"><span class="s-active">Anfragen</span></div><h4>Active</h4><p>Reaktion in 100–150 ms</p></div>
+        <div class="st"><div class="box"><span class="s-focus">Anfragen</span></div><h4>Focus</h4><p>Ring ≥ 3:1, ~2–3 px</p></div>
+        <div class="st"><div class="box"><span class="s-disabled">Anfragen</span></div><h4>Disabled</h4><p>Grund kommunizieren</p></div>
+      </div>
+      <div class="btnrow" style="margin-top:22px;justify-content:center">
+        <span style="font-size:.82rem;color:#8a8b82">Live testen:</span>
+        <button class="btn btn-primary">Erstberatung anfragen</button>
+        <button class="btn btn-secondary">Leistungen</button>
+        <button class="btn btn-primary" disabled>Gesendet</button>
+      </div>
+      <p class="note" style="text-align:center">Touch-Target: WCAG 2.2 min. 24×24 px · empfohlen 44×44 px (Apple) / 48×48 px (Material).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STIL JE RICHTUNG ===== -->
+<section id="dirbtn">
+  <div class="wrap">
+    <div class="kicker">Differenzierung</div>
+    <h2>Ein eigener Button-Stil pro Marken-Richtung</h2>
+    <p class="intro">Layout und Radius sind ein Marken-Hebel wie Farbe und Schrift. So bekommt jede der fünf Richtungen einen eigenen Charakter — statt überall dieselbe Pille. Der Wert zählt weniger als die konsequente Durchführung.</p>
+    <div class="dirbtns">
+      <div class="db"><div class="bt" style="background:#2F5D4A;border-radius:6px">Anfragen</div><h4>01 Ruhiger Wald</h4><p>6 px · solid + outline</p></div>
+      <div class="db"><div class="bt" style="background:#14505E;border-radius:4px">Anfragen</div><h4>02 Präzision</h4><p>4 px · technisch, straff</p></div>
+      <div class="db"><div class="bt" style="background:#23282A;border-radius:0">Anfragen</div><h4>03 Autorität</h4><p>0 px · scharf, editorial</p></div>
+      <div class="db"><div class="bt" style="background:#9A4A32;border-radius:14px">Anfragen</div><h4>04 Lehm &amp; Olive</h4><p>14 px · weich, menschlich</p></div>
+      <div class="db"><div class="bt" style="background:#1F3A53;border-radius:8px">Anfragen</div><h4>05 Institutionell</h4><p>8 px · solide, korporativ</p></div>
+    </div>
+    <p class="note">Regel: Der gewählte Radius gilt im ganzen System identisch (Buttons, Cards, Inputs, Tags) — Konsistenz ist beim Fachpublikum selbst das stärkste Kompetenzsignal.</p>
+  </div>
+</section>
+
+<!-- ===== ANATOMY ===== -->
+<section id="anatomy">
+  <div class="wrap">
+    <div class="kicker">Seitenaufbau</div>
+    <h2>Anatomie einer seriösen B2B-Seite</h2>
+    <p class="intro">Bewährte Reihenfolge einer Beratungs-Startseite von oben nach unten. Kernregel: den Primär-CTA <b>above the fold</b> und nach jedem starken Beweis-Block wiederholen — jeder CTA in Sichtweite eines Trust-Signals (Logo, Zitat, Zahl).</p>
+    <div class="anatomy">
+      <div class="blk head"><span class="l">1 · Header / Nav</span><span class="d">Logo links · 5–7 Punkte · Primär-CTA rechts · sticky</span></div>
+      <div class="blk hero"><span class="l">2 · Hero</span><span class="d">Value Proposition (was / für wen / Nutzen) + 1 Primär-CTA</span></div>
+      <div class="blk trust"><span class="l">3 · Trust / Logos</span><span class="d">Referenzen, Zertifikate (DGNB, EN 15978, GEG, Kammer)</span></div>
+      <div class="blk sec"><span class="l">4 · Leistungen</span><span class="d">Card-Grid — Nutzen statt Features</span></div>
+      <div class="blk alt"><span class="l">5 · Case Studies</span><span class="d">Ausgangslage → Maßnahme → messbares Ergebnis</span></div>
+      <div class="blk sec"><span class="l">6 · Zahlen / Metriken</span><span class="d">Projekte, m², eingesparte CO₂ / kWh, Jahre</span></div>
+      <div class="blk alt"><span class="l">7 · Team / Über uns</span><span class="d">Gesichter, Qualifikationen — Vertrauen bei Beratung</span></div>
+      <div class="blk cta"><span class="l">8 · CTA-Band</span><span class="d">Vollbreiter, farbiger Wiederhol-CTA vor dem Footer</span></div>
+      <div class="blk foot"><span class="l">9 · Footer</span><span class="d">Nav, Kontakt, Impressum/Datenschutz (Pflicht DE), Newsletter</span></div>
+    </div>
+    <div class="card" style="margin-top:20px">
+      <b style="font-family:'Archivo',sans-serif">Konsistenz = Kompetenz.</b>
+      <p style="font-size:.9rem;color:#55605d;margin-top:6px">Fachpublikum liest präzise Ausrichtung und gleichmäßige Abstände unbewusst als Sorgfalt — und damit als fachliche Kompetenz. <b>Stanford/Fogg: 75 %</b> der Nutzer beurteilen die Glaubwürdigkeit eines Unternehmens anhand des Website-Designs. Ein Spacing-System, ein Radius-Token, ein Typo-Scale, exakte Kantenbündigkeit.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HERO ===== -->
+<section id="hero">
+  <div class="wrap">
+    <div class="kicker">Hero</div>
+    <h2>Vier Hero-Muster — wann welches</h2>
+    <p class="intro">Der Hero entscheidet über den ersten Eindruck. Für erklärungsbedürftige Bauphysik-Leistungen mit starkem Visual (Diagramm, Simulation, Gebäude) ist das <b>Split-Layout</b> oft ideal; bei einer einzigen klaren Botschaft das zentrierte. Slider/Carousels im Hero vermeiden.</p>
+    <div class="heros">
+      <div class="hv centered">
+        <div class="frame"><div class="bar md" style="width:80%"></div><div class="bar sm muted" style="width:60%"></div><div class="bar btn"></div></div>
+        <h4>Zentriert</h4><p>Eine klare Kernbotschaft, wenig Text, Marken-Fokus. Höchste Conversion bei fokussiertem Angebot.</p>
+      </div>
+      <div class="hv split">
+        <div class="frame"><div class="col"><div class="bar md" style="width:90%"></div><div class="bar sm muted" style="width:70%"></div><div class="bar btn"></div></div><div class="img"></div></div>
+        <h4>Split / Asymmetrisch</h4><p>Text = „logisches Hirn", Bild/Diagramm = „emotionales Hirn". Ideal für erklärungsbedürftige Leistung mit Visual.</p>
+      </div>
+      <div class="hv full">
+        <div class="frame"><div class="bar md"></div><div class="bar sm" style="background:#e6ebe9;width:45%"></div><div class="bar btn"></div></div>
+        <h4>Full-Screen-Bild</h4><p>Wenn Bildwirkung (Architektur) das Verkaufsargument ist. Kontrast/Lesbarkeit über Overlay sichern.</p>
+      </div>
+      <div class="hv text">
+        <div class="frame"><div class="bar big"></div><div class="bar md" style="width:75%"></div><div class="bar btn"></div></div>
+        <h4>Text-only</h4><p>Große Typo, kein Bild. Editorial, autoritär — passt zur „Architektur-Autorität".</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== LAYOUT-ARCHETYPEN ===== -->
+<section id="archetypes" class="archetypes">
+  <div class="wrap">
+    <div class="kicker">Seiten-Anordnung</div>
+    <h2>Layout-Archetypen — wie die ganze Seite angeordnet ist</h2>
+    <p class="intro">Nicht nur Farbe und Schrift, auch die Grundanordnung der Seite ist ein Marken-Hebel. 13 Muster mit Wirkung und Eignung für seriöses B2B im Bauwesen (★ = B2B-Eignung).</p>
+    <div class="arch-grid">
+
+      <div class="arch">
+        <div class="wf" style="flex-direction:column;align-items:center;justify-content:center">
+          <div class="bar h" style="width:68%"></div><div class="bar" style="width:52%"></div><div class="cta" style="width:30%"></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>1 · Zentriert</h4><span class="stars">★★★★★</span></div><p>Eine zentrierte Spalte, vertikal gestapelt — „ein Gedanke pro Bildschirm".</p><div class="arch-tag"><b>Einsatz:</b> Landing, klare Botschaft · <b>Risiko:</b> kann generisch wirken</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div class="col" style="flex:1;justify-content:center"><div class="bar h" style="width:90%"></div><div class="bar" style="width:70%"></div><div class="cta" style="width:55%"></div></div>
+          <div class="img" style="flex:1"></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>2 · Split-Screen</h4><span class="stars">★★★★☆</span></div><p>Viewport 50/50: Text ↔ Visual/Diagramm.</p><div class="arch-tag"><b>Einsatz:</b> Hero mit Key-Visual · <b>Risiko:</b> braucht Top-Bild</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf" style="align-items:flex-start">
+          <div class="col" style="flex:1;margin-top:26px"><div class="bar h" style="width:85%"></div><div class="bar" style="width:60%"></div></div>
+          <div class="img" style="flex:1;height:78px"></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>3 · Asymmetrisch</h4><span class="stars">★★☆☆☆</span></div><p>Ungleiche Spalten, versetzte/überlappende Blöcke.</p><div class="arch-tag"><b>Einsatz:</b> Studios/Portfolio · <b>Risiko:</b> wirkt schnell unseriös</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div style="display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:5px;width:100%">
+            <div class="img" style="grid-row:span 2"></div><div class="img"></div><div class="img"></div><div class="img"></div><div class="img"></div>
+          </div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>4 · Bento-Grid</h4><span class="stars">★★★★☆</span></div><p>Ungleich große Kacheln, ein Item je Kachel.</p><div class="arch-tag"><b>Einsatz:</b> Leistungen/Kennzahlen · <b>Risiko:</b> Mobile-Chaos ohne Plan</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf" style="flex-direction:column;gap:5px">
+          <div style="display:flex;gap:5px;flex:1"><div class="img" style="flex:2"></div><div class="col" style="flex:1"><div class="img" style="flex:1"></div><div class="img" style="flex:1"></div></div></div>
+          <div class="bar" style="width:100%"></div><div class="bar" style="width:88%"></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>5 · Magazine</h4><span class="stars">★★★★☆</span></div><p>Modulares Grid, gemischte redaktionelle Blöcke.</p><div class="arch-tag"><b>Einsatz:</b> Insights/Wissens-Hub · <b>Risiko:</b> bricht mobil</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div class="col" style="width:28%;background:#2F5D4A;border-radius:4px;padding:7px;gap:5px"><div class="bar" style="background:#8FE6CF;width:70%"></div><div class="bar" style="background:#cfe0d7;width:85%"></div><div class="bar" style="background:#cfe0d7;width:80%"></div></div>
+          <div class="col" style="flex:1;justify-content:center"><div class="bar h" style="width:65%"></div><div class="bar" style="width:92%"></div><div class="bar" style="width:85%"></div></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>6 · Sidebar-Nav</h4><span class="stars">★★★☆☆</span></div><p>Feste Menüspalte links, Content scrollt rechts.</p><div class="arch-tag"><b>Einsatz:</b> Tools/Doku/Portale · <b>Risiko:</b> wirkt „Software"</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf" style="flex-direction:column;gap:6px">
+          <div style="display:flex;gap:6px;flex:1"><div class="col" style="flex:1;justify-content:center"><div class="bar h" style="width:80%"></div><div class="bar" style="width:60%"></div></div><div class="img" style="flex:1"></div></div>
+          <div style="display:flex;gap:6px;flex:1"><div class="img" style="flex:1"></div><div class="col" style="flex:1;justify-content:center"><div class="bar h" style="width:80%"></div><div class="bar" style="width:60%"></div></div></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>7 · Full-Bleed alt.</h4><span class="stars">★★★★☆</span></div><p>Volle-Breite-Sektionen, gespiegeltes Layout, ein Thema je Sektion.</p><div class="arch-tag"><b>Einsatz:</b> Prozess/Methode erzählen · <b>Risiko:</b> CTA weit unten</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div class="col" style="flex:1;gap:7px"><div class="bar h" style="width:75%"></div><div class="bar" style="width:92%"></div><div class="bar" style="width:70%"></div><div class="bar" style="width:85%"></div></div>
+          <div class="img" style="flex:1;align-self:center;height:58px"></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>8 · Sticky-Scroll</h4><span class="stars">★★★★☆</span></div><p>Visual bleibt fixiert, Text-Steps scrollen synchron.</p><div class="arch-tag"><b>Einsatz:</b> LCA-Phasen erklären · <b>Risiko:</b> Scrolljacking/Mobile</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;width:100%;align-items:start"><div class="img" style="height:40px"></div><div class="img" style="height:56px"></div><div class="img" style="height:32px"></div><div class="img" style="height:52px"></div><div class="img" style="height:36px"></div><div class="img" style="height:50px"></div></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>9 · Card / Masonry</h4><span class="stars">★★★★☆</span></div><p>Karten in Spalten; Masonry = ungleiche Höhen.</p><div class="arch-tag"><b>Einsatz:</b> Referenzen/Blog · <b>Risiko:</b> Masonry stört Lesefluss</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf" style="padding:0">
+          <svg viewBox="0 0 120 80" width="100%" height="100%" preserveAspectRatio="none" style="display:block">
+            <rect x="10" y="10" width="30" height="7" rx="2" fill="#2F5D4A"/>
+            <rect x="86" y="10" width="24" height="7" rx="2" fill="#9cbcae"/>
+            <rect x="10" y="63" width="40" height="7" rx="2" fill="#9cbcae"/>
+            <rect x="80" y="60" width="30" height="10" rx="2" fill="#2CA58D"/>
+            <polyline points="16,20 104,20 22,58 104,64" fill="none" stroke="#2CA58D" stroke-width="2.5" stroke-dasharray="4 3"/>
+          </svg>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>10 · Z- / F-Pattern</h4><span class="stars">★★★★★</span></div><p>Blickführungs-Anker statt Voll-Layout — CTA an Scan-Punkte.</p><div class="arch-tag"><b>Einsatz:</b> Conversion-Anordnung · <b>Risiko:</b> rechts Platziertes übersehen</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:min-content;gap:6px;width:100%">
+            <div class="bar h" style="grid-column:1/3;height:10px;width:100%"></div>
+            <div class="img" style="grid-column:3/5;grid-row:1/3;height:40px"></div>
+            <div class="bar" style="grid-column:1/2;width:100%"></div>
+            <div class="bar" style="grid-column:1/3;width:100%"></div>
+          </div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>11 · Swiss / Int'l</h4><span class="stars">★★★★★</span></div><p>Striktes Modulraster, viel Weißraum, minimal.</p><div class="arch-tag"><b>Einsatz:</b> Grundhaltung Bauphysik · <b>Risiko:</b> kühl, verzeiht nichts</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf" style="align-items:center;overflow:hidden;position:relative">
+          <div class="img" style="min-width:42%;height:72px"></div><div class="img" style="min-width:42%;height:72px"></div><div class="img" style="min-width:42%;height:72px"></div>
+          <span style="position:absolute;right:5px;top:50%;transform:translateY(-50%);color:#2F5D4A;font-weight:800;font-size:1.1rem">›</span>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>12 · Horizontal-Scroll</h4><span class="stars">★★☆☆☆</span></div><p>Eine Sektion scrollt seitwärts (Panels/Slider).</p><div class="arch-tag"><b>Einsatz:</b> Timeline/Galerie · <b>Risiko:</b> „jarring", A11y</div></div>
+      </div>
+
+      <div class="arch">
+        <div class="wf">
+          <div class="col" style="flex:2.4;gap:5px"><div class="bar h" style="width:70%"></div><div class="bar" style="width:100%"></div><div class="bar" style="width:95%"></div><div class="bar" style="width:98%"></div><div class="bar" style="width:90%"></div></div>
+          <div class="col" style="flex:1;gap:5px"><div class="img" style="height:24px"></div><div class="img" style="height:24px"></div><div class="cta" style="width:100%"></div></div>
+        </div>
+        <div class="arch-body"><div class="arch-h"><h4>13 · Content-Focused</h4><span class="stars">★★★★☆</span></div><p>Breite Hauptspalte + schmale Kontext-Randspalte.</p><div class="arch-tag"><b>Einsatz:</b> Fachartikel/Case-Detail · <b>Risiko:</b> Randspalte mobil nachrangig</div></div>
+      </div>
+
+    </div>
+
+    <div class="grid2" style="margin-top:20px">
+      <div class="card">
+        <h4 style="font-size:1rem;margin-bottom:10px">Prinzipien über allen Archetypen</h4>
+        <ul class="clean">
+          <li><b>Above the fold:</b> Kernnutzen + primärer CTA gehören über die erste Viewport-Kante.</li>
+          <li><b>Rule of Odds:</b> ungerade Anzahl (3, 5) wirkt natürlicher — Bento/Cards in 3er-/5er-Gruppen.</li>
+          <li><b>Grid als Fundament:</b> „Fast jedes Webdesign basiert auf einem Raster" — Weißraum ist so wichtig wie Inhalt.</li>
+        </ul>
+      </div>
+      <div class="card" style="background:#2F5D4A;border-color:#2F5D4A">
+        <h4 style="font-size:1rem;margin-bottom:10px;color:#fff">Empfohlenes Kombi-Rezept</h4>
+        <p style="font-size:.86rem;color:#cfe0d7;margin-bottom:10px"><b style="color:#fff">Swiss-Grid als Basis</b> → <b style="color:#fff">Split-Hero</b> (Z-Pattern) → <b style="color:#fff">Bento</b> für Leistungen → <b style="color:#fff">Full-Bleed/Sticky</b> für den Prozess → <b style="color:#fff">Card-Grid</b> (F-Pattern) für Referenzen → <b style="color:#fff">zentrierte CTA-Sektion</b>.</p>
+        <p style="font-size:.82rem;color:#8FE6CF;font-style:italic;margin:0">„Raster gibt Vertrauen, Weißraum gibt Autorität, Fokus gibt Conversion — Effekte nur, wo sie erklären, nie wo sie beeindrucken sollen."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GRID ===== -->
+<section id="grid">
+  <div class="wrap">
+    <div class="kicker">Struktur</div>
+    <h2>Grid, Spacing &amp; Rhythmus</h2>
+    <p class="intro">Ein 12-Spalten-Grid (teilbar durch 2/3/4/6) und eine 8-px-Spacing-Skala sind das unsichtbare Skelett. Kleine Abstände gruppieren, große trennen — das steuert, was zusammengehört.</p>
+    <div class="card">
+      <h4 style="font-size:.95rem;margin-bottom:10px">12-Spalten-Grid · max. 1200–1440 px · Gutter 24 px</h4>
+      <div class="col12">
+        <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div><div>11</div><div>12</div>
+      </div>
+      <p class="note">Volle Sektions-Hintergründe dürfen 100 % breit sein — der Inhalt bleibt im Container. Textspalten schmaler (60–75 Zeichen).</p>
+    </div>
+    <div class="grid2" style="margin-top:18px">
+      <div class="card spacing">
+        <h4 style="font-size:.95rem;margin-bottom:12px">8-px-Spacing-Skala</h4>
+        <div class="row"><div class="bar2" style="width:4px"></div><span class="lab">4</span></div>
+        <div class="row"><div class="bar2" style="width:8px"></div><span class="lab">8</span></div>
+        <div class="row"><div class="bar2" style="width:16px"></div><span class="lab">16</span></div>
+        <div class="row"><div class="bar2" style="width:24px"></div><span class="lab">24</span></div>
+        <div class="row"><div class="bar2" style="width:32px"></div><span class="lab">32</span></div>
+        <div class="row"><div class="bar2" style="width:48px"></div><span class="lab">48</span></div>
+        <div class="row"><div class="bar2" style="width:64px"></div><span class="lab">64</span></div>
+        <div class="row"><div class="bar2" style="width:96px"></div><span class="lab">96</span></div>
+        <div class="row"><div class="bar2" style="width:128px"></div><span class="lab">128</span></div>
+      </div>
+      <div class="card">
+        <h4 style="font-size:.95rem;margin-bottom:10px">Vertikaler Rhythmus</h4>
+        <ul class="clean">
+          <li>Sektions-Padding vertikal: <b>80–120 px Desktop</b>, 48–64 px Mobile.</li>
+          <li>Innerhalb einer Gruppe kleine Abstände (8/16/24), zwischen Sektionen große (80–120).</li>
+          <li>Alternierende Hintergründe Weiß ↔ <code>#F5F7F8</code> gliedern lange Seiten — sparsam.</li>
+          <li>Großzügiger Weißraum liest als „Premium/durchdacht"; enge Layouts wirken billig.</li>
+        </ul>
+        <h4 style="font-size:.95rem;margin:16px 0 10px">Navigation</h4>
+        <ul class="clean">
+          <li>Logo links · 5–7 Punkte · Primär-CTA rechts · <b>sticky</b> bei langen Seiten.</li>
+          <li>Mega-Menü meist unnötig — flache Nav wirkt fokussierter/seriöser.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GESTALT ===== -->
+<section id="gestalt" style="border-bottom:none">
+  <div class="wrap">
+    <div class="kicker">Wahrnehmung</div>
+    <h2>Visuelle Hierarchie &amp; Gestalt — praktisch</h2>
+    <p class="intro">Fünf Hebel steuern die Aufmerksamkeit. Die Markenfarbe bleibt dem Primär-CTA vorbehalten — wird sie überall verwendet, verliert der CTA seine Kraft.</p>
+    <div class="levers">
+      <div class="lever"><b>Größe</b><p>Headline &gt; Subhead &gt; Body. Das Größte wird zuerst gesehen.</p></div>
+      <div class="lever"><b>Farbe</b><p>Akzent reserviert für den CTA → er „springt".</p></div>
+      <div class="lever"><b>Position</b><p>Scan startet oben-links (F-/Z-Muster). Wichtiges above the fold.</p></div>
+      <div class="lever"><b>Weißraum</b><p>Luft um ein Element = mehr Aufmerksamkeit darauf.</p></div>
+      <div class="lever"><b>Kontrast</b><p>Ein hochkontrastiges Element pro View gewinnt.</p></div>
+    </div>
+    <h3 style="font-size:1.1rem;margin:28px 0 14px">Gestalt-Prinzipien im Layout</h3>
+    <div class="gest">
+      <div class="g">
+        <div class="demo"><span class="dot"></span><span class="dot"></span><span style="width:26px"></span><span class="dot"></span><span class="dot"></span></div>
+        <h4>Nähe</h4><p>In Cards: Bild + Titel + Text eng; zwischen Cards 24–32 px. Label direkt an seinem Feld.</p>
+      </div>
+      <div class="g">
+        <div class="demo"><span class="sq"></span><span class="sq"></span><span class="sq"></span><span class="sq"></span></div>
+        <h4>Ähnlichkeit</h4><p>Alle Leistungs-Cards gleich (Höhe, Radius, Icon-Format) → „gleiche Art von Sache". Gleiche Funktion, gleicher Button.</p>
+      </div>
+      <div class="g">
+        <div class="demo"><span style="width:64px;height:44px;border:2px solid #2F5D4A;border-radius:8px;background:#EAF0EE"></span></div>
+        <h4>Gemeinsame Region</h4><p>Dezenter Rahmen/Hintergrund fasst zusammengehörige Infos sichtbar zusammen.</p>
+      </div>
+    </div>
+    <p class="src" style="margin-top:22px">Quellen: NN/g (Button-States, Hierarchie, sticky Header, visuelle Hierarchie) · WCAG 2.2 (Focus Appearance, Target Size) · Carbon/Material Design · Stanford Web Credibility (Fogg) · Gestalt-Prinzipien (IxDF) · Bouba/Kiki-Forschung. Vollständige URL-Liste im Recherche-Report.</p>
+  </div>
+</section>
+
+</body>
+</html>

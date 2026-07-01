@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · 25 Studio-Varianten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Sans+3:wght@400;600&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&family=Spectral:wght@400;500;600;700&family=Lora:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FBFBFA;--surface:#F1F1EF;--ink:#1C1C1A;--accent:#C0553B;--radius:0px;
+    --fh:'Archivo',sans-serif;--fb:'Inter',sans-serif;--swh:94px;
+    --muted:color-mix(in srgb,var(--ink) 50%,var(--bg));
+    --line:color-mix(in srgb,var(--ink) 15%,var(--bg));
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.55}
+  h1,h2,h3{font-family:var(--fh);line-height:1.02;letter-spacing:-.02em;color:var(--ink);font-weight:600}
+  #site,#site *{transition:background-color .4s ease,color .4s ease,border-color .4s ease}
+  .cont{max-width:1300px;margin:0 auto;padding:0 40px}
+  .label{font-family:var(--fb);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* Switcher */
+  #switcher{position:sticky;top:0;z-index:100;background:#111;color:#f2f3f2;border-bottom:1px solid #2a2a2a;font-family:'Inter',sans-serif}
+  .sw-top{max-width:1340px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
+  .sw-title{font-weight:700;font-size:.9rem;color:#fff;white-space:nowrap}.sw-title span{color:#c98a6a}
+  .sw-nav{display:flex;align-items:center;gap:14px}
+  .sw-nav button{width:34px;height:34px;border-radius:8px;border:1px solid #3a3a3a;background:transparent;color:#f2f3f2;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .sw-nav button:hover{background:#242424}
+  .sw-cur{min-width:250px;text-align:center;line-height:1.25}
+  .sw-cur #vnum{font-size:.72rem;color:#8b8b88;letter-spacing:.08em}
+  .sw-cur b{display:block;font-size:.98rem;color:#fff}.sw-cur em{font-style:normal;font-size:.76rem;color:#9a9a97}
+  .sw-meta{display:flex;align-items:center;gap:14px;margin-left:auto;flex-wrap:wrap;font-size:.74rem;color:#9a9a97}
+  .sw-meta .lay{background:#2a2320;color:#e0a882;border:1px solid #4a3a30;padding:3px 10px;border-radius:999px;font-weight:600;letter-spacing:.04em}
+  .sw-meta .sws{display:flex;gap:5px}.sw-meta .sws i{width:16px;height:16px;border-radius:4px;border:1px solid rgba(255,255,255,.18)}
+  .sw-meta b{color:#d5d5d2;font-weight:600}
+  .sw-chips{max-width:1340px;margin:0 auto;padding:0 24px 12px;display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto}
+  .sw-chips button{flex:none;width:30px;height:26px;border-radius:6px;border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.7rem;font-weight:600;cursor:pointer;opacity:.5;transition:opacity .15s,transform .15s}
+  .sw-chips button:hover{opacity:.9;transform:translateY(-1px)}.sw-chips button.on{opacity:1;outline:2px solid #fff;outline-offset:1px}
+
+  /* Links / CTA (editorial restraint) */
+  .tlink{font-family:var(--fb);font-size:.98rem;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:4px;white-space:nowrap}
+  .tlink:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* Header */
+  .site-header{border-bottom:1px solid var(--line)}
+  .hd{max-width:1340px;margin:0 auto;padding:22px 40px;display:flex;align-items:center;gap:26px}
+  .logo{display:flex;flex-direction:column;line-height:1.05}
+  .logo b{font-family:var(--fh);font-weight:700;font-size:1.25rem;color:var(--ink);letter-spacing:-.02em}
+  .logo span{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .nav{display:flex;gap:20px;margin-left:36px}
+  .nav a{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);text-decoration:none;font-weight:600}
+  .nav a::before{content:"[";margin-right:1px}.nav a::after{content:"]";margin-left:1px}
+  .nav a:hover{color:var(--ink)}
+  .hd-right{margin-left:auto;display:flex;align-items:center;gap:22px}
+  .loc{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+  .hd-cta{font-size:.7rem;text-transform:uppercase;letter-spacing:.14em;color:var(--ink);text-decoration:none;font-weight:600}
+  .hd-cta::before{content:"[";}.hd-cta::after{content:"]";}
+
+  /* Hero */
+  .hero{padding:96px 0 104px}
+  .kicker{font-family:var(--fb);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;display:inline-flex;align-items:center;gap:11px;margin-bottom:30px}
+  .kicker::before{content:"";width:9px;height:9px;background:var(--accent);display:inline-block}
+  .hero h1{font-size:clamp(2.4rem,6vw,5.4rem);max-width:20ch}
+  .hero .lead{font-size:1.16rem;color:var(--muted);max-width:46ch;margin-top:30px}
+  .hero-cta{margin-top:42px;display:flex;gap:30px;flex-wrap:wrap}
+  .plate{display:none}
+  .plate-in{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);min-height:440px;padding:28px;display:flex;flex-direction:column;justify-content:space-between}
+  .plate-cap{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  .plate-num{font-family:var(--fh);font-size:clamp(4rem,9vw,7.5rem);line-height:.82;color:var(--accent);font-weight:600;align-self:flex-end}
+  /* hero: statement */
+  body.hero-statement .hero .cont{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:end}
+  body.hero-statement .plate{display:block}
+  /* hero: mono */
+  body.hero-mono .hero h1{text-transform:uppercase;letter-spacing:-.005em;font-size:clamp(2.6rem,7.6vw,6.4rem);max-width:15ch;font-weight:700}
+  body.hero-mono .hero .lead{max-width:54ch}
+  /* hero: center */
+  body.hero-center .hero .cont{text-align:center;display:flex;flex-direction:column;align-items:center}
+  body.hero-center .hero h1{margin:0 auto}
+  body.hero-center .hero .lead{margin-left:auto;margin-right:auto}
+  body.hero-center .hero-cta{justify-content:center}
+
+  /* Section label row */
+  .sec-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:44px}
+  .sec-top h2{font-size:clamp(1.6rem,3vw,2.4rem)}
+
+  /* Leistungen */
+  .leistungen{padding:100px 0;border-top:1px solid var(--line)}
+  .svc-wrap{max-width:1300px;margin:0 auto;padding:0 40px}
+  .svc-n{font-family:var(--fh);color:var(--accent);font-weight:600;line-height:.85}
+  /* numbers */
+  body.svc-numbers .svc{display:grid;grid-template-columns:auto 1fr;gap:44px;padding:40px 0;border-top:1px solid var(--line);align-items:start}
+  body.svc-numbers .svc:last-child{border-bottom:1px solid var(--line)}
+  body.svc-numbers .svc-n{font-size:clamp(3rem,7vw,6rem)}
+  body.svc-numbers .svc h3{font-size:clamp(1.3rem,2.4vw,2rem);margin-bottom:12px}
+  body.svc-numbers .svc p{color:var(--muted);max-width:62ch;font-size:1.02rem}
+  /* index */
+  body.svc-index .svc{display:grid;grid-template-columns:56px 1.1fr 2fr;gap:28px;padding:26px 0;border-top:1px solid var(--line);align-items:baseline}
+  body.svc-index .svc:last-child{border-bottom:1px solid var(--line)}
+  body.svc-index .svc-n{font-size:1.2rem}
+  body.svc-index .svc h3{font-size:1.15rem}
+  body.svc-index .svc p{color:var(--muted);font-size:.95rem}
+  /* grid */
+  body.svc-grid .svc-wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:36px}
+  body.svc-grid .svc{border-top:2px solid var(--ink);padding-top:22px}
+  body.svc-grid .svc-n{font-size:1.1rem}
+  body.svc-grid .svc h3{font-size:1.35rem;margin:16px 0 12px}
+  body.svc-grid .svc p{color:var(--muted);font-size:.95rem}
+  .svc-lead{display:flex;gap:14px;align-items:baseline}
+  body.svc-numbers .svc-lead,body.svc-index .svc-lead{display:contents}
+
+  /* Nachhaltigkeit */
+  .nachhaltigkeit{padding:104px 0}
+  .nh{max-width:1300px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1.15fr;gap:64px;align-items:start}
+  .nh h2{font-size:clamp(1.8rem,3.2vw,2.8rem);margin:10px 0 22px}
+  .nh .big{font-size:clamp(1.1rem,1.5vw,1.35rem);line-height:1.6;color:var(--ink)}
+  .nh-note{margin-top:28px;border-top:1px solid var(--line);padding-top:20px}
+  .nh-note h3{font-size:1.1rem;margin:8px 0}
+  .nh-note p{color:var(--muted);font-size:.95rem}
+
+  /* Referenzen */
+  .referenzen{padding:92px 0;border-top:1px solid var(--line)}
+  .ref-index{max-width:1300px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:1fr 1fr;gap:0 64px}
+  .ri{display:flex;gap:18px;padding:17px 0;border-bottom:1px solid var(--line);text-transform:uppercase;letter-spacing:.05em;font-size:.9rem;color:var(--ink);font-weight:500}
+  .ri span{color:var(--accent);font-family:var(--fh);font-weight:600}
+
+  /* Kontakt */
+  .kontakt{padding:112px 0;border-top:1px solid var(--line)}
+  .kontakt h2{font-size:clamp(2.1rem,5.2vw,4.4rem);max-width:16ch}
+  .mail{display:inline-block;margin-top:28px;font-family:var(--fh);font-size:clamp(1.4rem,3.4vw,2.6rem);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}
+  .mail:hover{color:var(--accent);border-color:var(--accent)}
+  .k-meta{margin-top:40px;display:flex;gap:26px;flex-wrap:wrap;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+  /* Footer */
+  .site-footer{padding:48px 0;border-top:1px solid var(--line)}
+  .ft{max-width:1300px;margin:0 auto;padding:0 40px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .ft a{color:var(--muted);text-decoration:none}.ft a:hover{color:var(--ink)}
+  .ft b{color:var(--ink);font-weight:600}
+
+  @media(max-width:900px){
+    body.hero-statement .hero .cont{grid-template-columns:1fr;gap:40px}
+    body.hero-statement .plate{display:none}
+    .svc-wrap{grid-template-columns:1fr!important}
+    body.svc-numbers .svc,body.svc-index .svc{grid-template-columns:1fr!important;gap:10px}
+    .nh{grid-template-columns:1fr}
+    .ref-index{grid-template-columns:1fr}
+    .nav,.loc{display:none}
+  }
+</style>
+</head>
+<body class="hero-mono svc-numbers">
+
+<div id="switcher">
+  <div class="sw-top">
+    <div class="sw-title">VESTA <span>· 25 Studio-Varianten</span></div>
+    <div class="sw-nav">
+      <button id="prev">‹</button>
+      <div class="sw-cur"><span id="vnum">1 / 25</span><b id="vname">—</b><em id="vtag">—</em></div>
+      <button id="next">›</button>
+    </div>
+    <div class="sw-meta" id="vmeta"></div>
+  </div>
+  <div class="sw-chips" id="chips"></div>
+</div>
+
+<div id="site">
+  <header class="site-header">
+    <div class="hd">
+      <div class="logo"><b>vesta</b><span>sustainability consulting</span></div>
+      <nav class="nav">
+        <a href="#nachhaltigkeit">Nachhaltigkeit</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#referenzen">Referenzen</a>
+      </nav>
+      <div class="hd-right">
+        <span class="loc">München · 48.1°N</span>
+        <a class="hd-cta" href="#kontakt">Kontakt</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" id="top">
+    <div class="cont">
+      <div class="hero-main">
+        <div class="kicker">Bauphysik · Nachhaltigkeit · Ökobilanz</div>
+        <h1>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere</h1>
+        <p class="lead">Wir beraten Sie bei der Planung und Umsetzung von nachhaltigen und energieeffizienten Gebäuden und Portfolios.</p>
+        <div class="hero-cta">
+          <a class="tlink" href="#kontakt">Nachhaltigkeitsberatung →</a>
+          <a class="tlink" href="#leistungen">Unsere Leistungen →</a>
+        </div>
+      </div>
+      <aside class="plate">
+        <div class="plate-in">
+          <span class="plate-cap">Ökobilanz · EN 15978 · DGNB · QNG</span>
+          <span class="plate-num">Ø</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="leistungen" id="leistungen">
+    <div class="cont"><div class="sec-top"><h2>Leistungen</h2><span class="label">(03)</span></div></div>
+    <div class="svc-wrap">
+      <article class="svc"><span class="svc-n">01</span><div class="svc-lead"><h3>Nachhaltigkeitsberatung und Zertifizierung</h3><p>Zertifizierungen nach DGNB und QNG, Lebenszykluskostenanalysen, Konformitätsprüfung nach EU-Taxonomie und ESG-Kriterien, individuelle Nachhaltigkeitskonzepte.</p></div></article>
+      <article class="svc"><span class="svc-n">02</span><div class="svc-lead"><h3>Ökobilanzierung für Gebäude und Quartiere</h3><p>Auf Gebäude- und Portfolioebene, in der frühen Planungsphase bis nach Fertigstellung der Projekte sowie für Zertifizierungen, B-Pläne, Wettbewerbe, Fördermittelanträge, etc.</p></div></article>
+      <article class="svc"><span class="svc-n">03</span><div class="svc-lead"><h3>Bauphysik für mehr Energieeffizienz und Komfort</h3><p>Energiebilanzierungen, Thermische Gebäudesimulationen, Sommerlicher Wärmeschutz, Berechnung von Wärmebrücken, Entwicklung von Sanierungskonzepten, Klimarisikoanalysen.</p></div></article>
+    </div>
+  </section>
+
+  <section class="nachhaltigkeit" id="nachhaltigkeit">
+    <div class="nh">
+      <div>
+        <span class="label">Nachhaltigkeit</span>
+        <h2>Nachhaltiges Bauen sichert Wert und schützt die Umwelt</h2>
+        <div class="nh-note">
+          <span class="label">Projektpartner</span>
+          <h3>Gemeinsam zu energieeffizienten Gebäuden</h3>
+          <p>Sie sind auf der Suche nach geeigneten Expert:innen für die Umsetzung energieeffizienter und nachhaltiger Gebäude? Mit unserem Know-how in nachhaltigem Bauen, Ökobilanzierung und thermischer Bauphysik unterstützen wir Sie bei jedem Schritt. Gemeinsam entwickeln wir individuelle Lösungen, die Ihre Immobilien wirtschaftlich, klimafreundlich und zukunftssicher machen.</p>
+        </div>
+      </div>
+      <p class="big">Nachhaltiges und energieeffizientes Bauen sichert langfristig den Wert Ihrer Immobilie und schützt aktiv die Umwelt. Wir begleiten Sie von der Planung bis zur Umsetzung und entwickeln individuelle Lösungen, die Wirtschaftlichkeit, Klimaschutz und Zukunftssicherheit verbinden. Durch umfassende Ökobilanzierung bewerten wir die Umweltauswirkungen Ihres Projekts und optimieren es gezielt. Mit innovativer thermischer Bauphysik reduzieren wir Wärmeverluste, steigern die Energieeffizienz und senken Betriebskosten nachhaltig. Setzen Sie auf ressourcenschonendes Bauen und gestalten Sie Ihre Zukunft verantwortungsvoll.</p>
+    </div>
+  </section>
+
+  <section class="referenzen" id="referenzen">
+    <div class="cont"><div class="sec-top"><h2>Referenzen &amp; Partner</h2><span class="label">(09)</span></div></div>
+    <div class="ref-index">
+      <div class="ri"><span>01</span>Deutscher Alpenverein</div>
+      <div class="ri"><span>02</span>Bauindustrie Bayern</div>
+      <div class="ri"><span>03</span>Riedelbau</div>
+      <div class="ri"><span>04</span>Phase H</div>
+      <div class="ri"><span>05</span>Lang Hugger Rampp</div>
+      <div class="ri"><span>06</span>IKL</div>
+      <div class="ri"><span>07</span>Geopard Digital</div>
+      <div class="ri"><span>08</span>DGNB</div>
+      <div class="ri"><span>09</span>Bauplan 21</div>
+    </div>
+  </section>
+
+  <section class="kontakt" id="kontakt">
+    <div class="cont">
+      <span class="label">Kontakt</span>
+      <h2 style="margin-top:16px">Ihr Partner für nachhaltiges Bauen aus München</h2>
+      <a class="mail" href="mailto:info@vesta-consult.de">info@vesta-consult.de</a>
+      <div class="k-meta">
+        <span>Unser Kontakt</span><span>Unsere Referenzen</span><span>Let's get in touch!</span><span>c/o ImpactHub · Gotzinger Str. 8 · München</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="ft">
+      <span>©2026 <b>vesta sustainability consulting UG</b></span>
+      <span>c/o ImpactHub · Gotzinger Str. 8 · 81371 München</span>
+      <span><a href="#">Instagram</a> · <a href="#">LinkedIn</a> · <a href="#">Impressum</a> · <a href="#">AGB</a></span>
+    </div>
+  </footer>
+</div>
+
+<script>
+const variants = [
+  {n:"Kühles Atelier",t:"Off-White · Charcoal · Coral",p:"#C0553B",bg:"#FBFBFA",sf:"#F1F1EF",ink:"#1C1C1A",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"mono",svc:"numbers"},
+  {n:"Creme Editorial",t:"Warm Cream · Espresso · Serif",p:"#8A6A4A",bg:"#F3EFE7",sf:"#EAE4D8",ink:"#241E17",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"statement",svc:"numbers"},
+  {n:"Stein & Raum",t:"Stone Greige · minimal",p:"#5E6B60",bg:"#ECEAE4",sf:"#E1DED5",ink:"#26251F",r:0,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"statement",svc:"index"},
+  {n:"Waldschnitt",t:"Off-White · Deep Green Ink",p:"#2CA58D",bg:"#F7F8F6",sf:"#EDF2EE",ink:"#1E2A24",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"mono",svc:"numbers"},
+  {n:"Petrol Editorial",t:"Off-White · Petrol · Kupfer",p:"#C57B4E",bg:"#F5F8F8",sf:"#E8F0F0",ink:"#14343A",r:2,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"statement",svc:"grid"},
+  {n:"Marine Studio",t:"Off-White · Navy · geometrisch",p:"#2FA36A",bg:"#F6F7FA",sf:"#EAEEF4",ink:"#16202E",r:0,fh:"'Montserrat',sans-serif",fb:"'Inter',sans-serif",hero:"center",svc:"numbers"},
+  {n:"Olive Journal",t:"Cream · Olive · Newsreader",p:"#9A7B3C",bg:"#F4F3EC",sf:"#E9E7DB",ink:"#2C2E22",r:0,fh:"'Newsreader',serif",fb:"'Source Sans 3',sans-serif",hero:"statement",svc:"index"},
+  {n:"Salbei & Forst",t:"Pale Mint · Forest · Gold",p:"#C9A24B",bg:"#F1F5F1",sf:"#E6EFE8",ink:"#1A2B22",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"center",svc:"numbers"},
+  {n:"Nebelgrau",t:"Cool Grey · Manrope",p:"#2CA58D",bg:"#F0F1F0",sf:"#E6E7E5",ink:"#1E2220",r:0,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif",hero:"mono",svc:"grid"},
+  {n:"Lehmhaus",t:"Sand-Stone · Clay · Spectral",p:"#9A4A32",bg:"#F1ECE4",sf:"#E6DED2",ink:"#33261E",r:2,fh:"'Spectral',serif",fb:"'Source Sans 3',sans-serif",hero:"statement",svc:"numbers"},
+
+  {n:"Nacht-Atelier",t:"Near-Black · Off-White · Coral",dark:true,p:"#C0553B",bg:"#131312",sf:"#1E1E1C",ink:"#ECEAE4",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"mono",svc:"numbers"},
+  {n:"Kohle & Creme",t:"Charcoal · Cream · Serif",dark:true,p:"#B98E5A",bg:"#1A1917",sf:"#24221E",ink:"#EFE9DE",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"statement",svc:"index"},
+  {n:"Tiefwald",t:"Dark Green · Pale · technisch",dark:true,p:"#7FE3C1",bg:"#12201A",sf:"#1C2B23",ink:"#E7ECE7",r:0,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"statement",svc:"numbers"},
+  {n:"Petrol Noir",t:"Dark Petrol · Pale · Manrope",dark:true,p:"#E7A878",bg:"#0E2226",sf:"#173135",ink:"#E4EDED",r:2,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif",hero:"center",svc:"grid"},
+  {n:"Espresso Noir",t:"Dark Espresso · Cream · Editorial",dark:true,p:"#C9A24B",bg:"#1B1512",sf:"#261D18",ink:"#EFE7DC",r:0,fh:"'Newsreader',serif",fb:"'Source Sans 3',sans-serif",hero:"statement",svc:"numbers"},
+  {n:"Schwarz & Gold",t:"Ink Black · Gold · Spectral",dark:true,p:"#C9A24B",bg:"#131211",sf:"#1D1B18",ink:"#ECE9E1",r:0,fh:"'Spectral',serif",fb:"'Source Sans 3',sans-serif",hero:"mono",svc:"index"},
+
+  {n:"Klare Fläche",t:"Cool White · Instrument Sans",p:"#2CA58D",bg:"#FBFBFA",sf:"#F0F1F0",ink:"#1F2422",r:0,fh:"'Instrument Sans',sans-serif",fb:"'Instrument Sans',sans-serif",hero:"statement",svc:"grid"},
+  {n:"Monolith",t:"Stone Greige · UPPERCASE",p:"#6B6357",bg:"#ECEAE4",sf:"#E1DED5",ink:"#211F1A",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif",hero:"mono",svc:"numbers"},
+  {n:"Papier & Tinte",t:"Cream · Espresso · Lora",p:"#8A6A4A",bg:"#F3EFE7",sf:"#EAE4D8",ink:"#241E17",r:0,fh:"'Lora',serif",fb:"'Inter',sans-serif",hero:"center",svc:"index"},
+  {n:"Grünschnitt Zentriert",t:"Off-White · Deep Green · zentriert",p:"#2CA58D",bg:"#F7F8F6",sf:"#EDF2EE",ink:"#1E2A24",r:0,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif",hero:"center",svc:"numbers"},
+  {n:"IBM Ingenieur",t:"Cool White · IBM Plex · sachlich",p:"#14B8A6",bg:"#F7F8F8",sf:"#EDF0F0",ink:"#1B2422",r:2,fh:"'IBM Plex Sans',sans-serif",fb:"'IBM Plex Sans',sans-serif",hero:"statement",svc:"grid"},
+  {n:"Navy Monograph",t:"Off-White · Navy · Fraunces",p:"#2FA36A",bg:"#F6F7FA",sf:"#EAEEF4",ink:"#16202E",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"statement",svc:"numbers"},
+  {n:"Kupfer Editorial",t:"Off-White · Petrol · UPPERCASE",p:"#C57B4E",bg:"#F5F8F8",sf:"#E8F0F0",ink:"#14343A",r:0,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"mono",svc:"index"},
+  {n:"Nacht Petrol Zentriert",t:"Dark Petrol · Pale · Serif zentriert",dark:true,p:"#E7A878",bg:"#0E2226",sf:"#173135",ink:"#E4EDED",r:0,fh:"'Fraunces',serif",fb:"'Inter',sans-serif",hero:"center",svc:"numbers"},
+  {n:"Reduktion Dark",t:"Near-Black · Mint · Space Grotesk",dark:true,p:"#7FE3C1",bg:"#131313",sf:"#1E1E1C",ink:"#ECEAE4",r:0,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif",hero:"statement",svc:"grid"}
+];
+
+const R=document.documentElement.style, el=id=>document.getElementById(id);
+let cur=0; const fontName=s=>s.split(',')[0].replace(/'/g,'');
+const HEROLABEL={mono:"Mono / UPPERCASE",statement:"Statement + Plate",center:"Zentriert"};
+
+function applyVariant(i){
+  cur=(i+variants.length)%variants.length; const v=variants[cur];
+  R.setProperty('--bg',v.bg); R.setProperty('--surface',v.sf); R.setProperty('--ink',v.ink);
+  R.setProperty('--accent',v.p); R.setProperty('--radius',(v.r!=null?v.r:0)+'px');
+  R.setProperty('--fh',v.fh); R.setProperty('--fb',v.fb);
+  document.body.className='hero-'+v.hero+' svc-'+v.svc+(v.dark?' dark':'');
+  el('vnum').textContent=(cur+1)+' / 25'; el('vname').textContent=v.n; el('vtag').textContent=v.t;
+  el('vmeta').innerHTML=
+    '<span class="lay">'+HEROLABEL[v.hero]+'</span>'+
+    '<span class="sws"><i style="background:'+v.bg+'"></i><i style="background:'+v.ink+'"></i><i style="background:'+v.p+'"></i></span>'+
+    '<span>Head <b>'+fontName(v.fh)+'</b> · Text <b>'+fontName(v.fb)+'</b></span>'+
+    '<span>Leistungen <b>'+v.svc+'</b>'+(v.dark?' · <b>Dark</b>':'')+'</span>';
+  [...el('chips').children].forEach((c,ci)=>c.classList.toggle('on',ci===cur));
+  const a=el('chips').children[cur]; if(a) a.scrollIntoView({block:'nearest',inline:'center'});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const chips=el('chips');
+variants.forEach((v,i)=>{const b=document.createElement('button');b.textContent=i+1;b.style.background=v.dark?v.bg:v.ink;b.style.color=v.dark?v.ink:'#fff';b.title=v.n;b.addEventListener('click',()=>applyVariant(i));chips.appendChild(b);});
+el('prev').addEventListener('click',()=>applyVariant(cur-1));
+el('next').addEventListener('click',()=>applyVariant(cur+1));
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')applyVariant(cur-1);if(e.key==='ArrowRight')applyVariant(cur+1);});
+applyVariant(0);
+</script>
+</body>
+</html>

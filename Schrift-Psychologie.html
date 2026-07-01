@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · Schrift-Psychologie &amp; Bedeutung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&family=Source+Sans+3:wght@400;600&family=Public+Sans:wght@400;600&family=Work+Sans:wght@400;600&family=Lato:wght@400;700&family=Atkinson+Hyperlegible:wght@400;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Merriweather:wght@400;700&family=Lora:wght@400;600&family=Spectral:wght@400;600&family=Manrope:wght@400;700&family=Instrument+Sans:wght@400;600&family=Montserrat:wght@400;600&family=Sora:wght@400;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;600&family=Oswald:wght@400;600&family=Libre+Franklin:wght@400;600&family=Open+Sans:wght@400;600&family=Noto+Sans:wght@400;600&family=PT+Sans:wght@400;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; color: #2E3A3A; background: #F5F7F8; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+  h1,h2,h3 { letter-spacing: -.01em; }
+  h2 { font-family:'Archivo',sans-serif; }
+
+  .masthead { background: #23282A; color: #F3F2EC; padding: 60px 0 52px; }
+  .masthead .eyebrow { font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: #7FB8A3; font-weight: 600; font-family:'Inter',sans-serif; }
+  .masthead h1 { font-family:'Archivo',sans-serif; font-weight: 800; font-size: clamp(2rem,4.5vw,3.1rem); line-height: 1.08; margin: 12px 0 14px; }
+  .masthead p { max-width: 64ch; color: #C7C9C2; font-size: 1.05rem; }
+
+  .intro { padding: 46px 0 10px; }
+  .intro h2 { font-size: 1.5rem; margin-bottom: 14px; }
+  .intro p { max-width: 72ch; color:#43443e; }
+  .src { font-size:.78rem; color:#8a8b82; margin-top: 6px; }
+
+  /* Serif vs Sans */
+  .vs { display:grid; grid-template-columns:1fr 1fr; gap:18px; margin:26px 0 10px; }
+  .vs .box { background:#fff; border:1px solid #e2e0d6; border-radius:14px; padding:26px; }
+  .vs .demo { font-size:2.4rem; line-height:1; margin-bottom:14px; color:#23282A; }
+  .vs h3 { font-family:'Archivo',sans-serif; font-size:1.05rem; margin-bottom:8px; }
+  .vs p { font-size:.9rem; color:#55605d; }
+  .vs .kw { font-size:.74rem;font-weight:600;color:#2F5D4A;background:#EEF4F0;padding:3px 9px;border-radius:999px;display:inline-block;margin:3px 4px 0 0; }
+
+  /* specimen cards */
+  section.specimens { padding: 30px 0; }
+  section.specimens > h2 { font-size:1.5rem;margin-bottom:6px; }
+  section.specimens > .lead { color:#55605d;max-width:70ch;margin-bottom:22px; }
+  .spec { background:#fff;border:1px solid #e2e0d6;border-radius:16px;overflow:hidden;margin-bottom:20px; }
+  .spec-top { padding:26px 28px 22px;border-bottom:1px solid #eceadf; }
+  .spec-role { font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#7a8b84; }
+  .spec-name { font-size:3rem;line-height:1;margin:8px 0 4px;color:#23282A; }
+  .spec-sub { font-family:'Inter',sans-serif;font-size:.9rem;color:#8a8b82; }
+  .spec-sample { font-size:1.6rem;line-height:1.15;color:#2E3A3A;margin-top:16px; }
+  .spec-body { padding:22px 28px 26px;display:grid;grid-template-columns:1.3fr 1fr;gap:26px; }
+  .spec-body h4 { font-family:'Archivo',sans-serif;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#8a8b82;margin-bottom:6px; }
+  .spec-body p { font-size:.92rem;color:#43443e;margin-bottom:14px; }
+  .spec-body .kw { font-size:.74rem;font-weight:600;color:#2F5D4A;background:#EEF4F0;padding:3px 9px;border-radius:999px;display:inline-block;margin:0 4px 6px 0; }
+  .usedin { font-size:.82rem;color:#55605d;border-top:1px solid #eceadf;padding-top:12px;margin-top:2px; }
+  .usedin b { color:#2F5D4A; }
+
+  /* pairing + rules */
+  section.rules { background:#fff;border-top:1px solid #e2e0d6;padding:46px 0; }
+  section.rules h2 { font-size:1.5rem;margin-bottom:18px; }
+  .rules-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+  .rule { border:1px solid #e6e4da;border-radius:12px;padding:20px; }
+  .rule b { font-family:'Archivo',sans-serif;display:block;font-size:.95rem;margin-bottom:6px;color:#2F5D4A; }
+  .rule p { font-size:.88rem;color:#55605d; }
+
+  section.weights { padding:46px 0 20px; }
+  section.weights h2 { font-size:1.5rem;margin-bottom:16px; }
+  .wrow { display:flex;align-items:baseline;gap:16px;padding:12px 0;border-bottom:1px solid #e6e4da; }
+  .wrow .n { font-family:'Archivo',sans-serif;font-size:1.6rem;color:#23282A;min-width:230px; }
+  .wrow .d { font-size:.9rem;color:#55605d; }
+
+  section.readab { padding: 30px 0 64px; }
+  section.readab h2 { font-size:1.5rem;margin-bottom:16px; }
+  .measure { background:#fff;border:1px solid #e2e0d6;border-radius:14px;padding:26px; }
+  .measure p { max-width:65ch;color:#43443e; }
+  .measure .note { font-size:.82rem;color:#8a8b82;margin-top:10px; }
+
+  /* readability data */
+  section.readdata { padding: 40px 0 10px; }
+  section.readdata h2 { font-size:1.5rem; margin-bottom:8px; }
+  section.readdata .lead { color:#55605d; max-width:72ch; margin-bottom:24px; }
+  section.readdata h3 { font-family:'Archivo',sans-serif; font-size:1.1rem; margin:24px 0 6px; }
+  .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:10px; }
+  .stat { background:#fff; border:1px solid #e2e0d6; border-radius:14px; padding:22px; }
+  .stat .big { font-family:'Archivo',sans-serif; font-weight:800; font-size:2.3rem; color:#2F5D4A; line-height:1; letter-spacing:-.02em; }
+  .stat .lbl { font-size:.88rem; color:#43443e; margin-top:8px; }
+  .stat .src { font-size:.73rem; color:#8a8b82; margin-top:8px; }
+  .factors { display:grid; grid-template-columns:1fr 1fr; gap:10px 22px; margin:14px 0 6px; }
+  .factors .f { font-size:.9rem; color:#43443e; padding-left:16px; position:relative; }
+  .factors .f::before { content:''; position:absolute; left:0; top:8px; width:7px; height:7px; border-radius:2px; background:#2CA58D; }
+  .factors .f b { color:#23282A; }
+  .tablewrap { overflow-x:auto; }
+  .ftable { width:100%; border-collapse:collapse; background:#fff; border:1px solid #e2e0d6; border-radius:14px; overflow:hidden; font-size:.87rem; min-width:640px; }
+  .ftable th, .ftable td { text-align:left; padding:11px 14px; border-bottom:1px solid #eceadf; vertical-align:top; }
+  .ftable th { font-family:'Archivo',sans-serif; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase; color:#8a8b82; background:#EEF2F3; }
+  .ftable tr:last-child td { border-bottom:none; }
+  .ftable .stars { color:#2CA58D; letter-spacing:1px; white-space:nowrap; }
+  .merksatz { background:#23282A; color:#F3F2EC; border-radius:16px; padding:26px 28px; margin-top:26px; }
+  .merksatz .q { font-family:'Fraunces',serif; font-weight:600; font-size:1.35rem; line-height:1.3; }
+  .merksatz .sub { font-size:.9rem; color:#C7C9C2; margin-top:12px; }
+
+  /* extended library */
+  section.library { padding: 8px 0 20px; }
+  section.library > h2 { font-size:1.5rem; margin-bottom:6px; }
+  section.library > .lead { color:#55605d; max-width:74ch; margin-bottom:6px; }
+  .libgroup { margin-top:22px; }
+  .libgroup h3 { font-family:'Archivo',sans-serif; font-size:1.05rem; margin-bottom:12px; color:#2F5D4A; }
+  .libgrid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .fcard { background:#fff; border:1px solid #e2e0d6; border-radius:12px; padding:16px 18px; }
+  .fcard .fname { font-size:1.45rem; color:#23282A; line-height:1.1; }
+  .fcard .meta { display:flex; align-items:center; gap:8px; margin:7px 0; flex-wrap:wrap; }
+  .fcard .role { font-size:.66rem; font-weight:600; letter-spacing:.05em; text-transform:uppercase; color:#7a8b84; background:#EEF4F0; padding:3px 8px; border-radius:999px; white-space:nowrap; }
+  .fcard .stars { color:#2CA58D; font-size:.8rem; letter-spacing:1px; }
+  .fcard .samp { font-size:1.02rem; color:#3a3f3a; line-height:1.25; margin-bottom:8px; }
+  .fcard p { font-size:.82rem; color:#55605d; }
+  @media (max-width:820px){ .libgrid{grid-template-columns:1fr 1fr} }
+  @media (max-width:520px){ .libgrid{grid-template-columns:1fr} }
+
+  /* nn/g reading-speed study */
+  section.study { padding: 8px 0 26px; }
+  section.study > h2 { font-size:1.5rem; margin-bottom:6px; }
+  section.study > .lead { color:#55605d; max-width:74ch; margin-bottom:18px; }
+  .wpm { background:#fff;border:1px solid #e2e0d6;border-radius:14px;padding:22px 24px;margin-bottom:20px; }
+  .wpm h4 { font-family:'Archivo',sans-serif;font-size:.95rem;margin-bottom:16px; }
+  .wrow2 { margin-bottom:13px; }
+  .wrow2 .lab2 { display:flex;justify-content:space-between;gap:12px;font-size:.85rem;color:#43443e;margin-bottom:5px; }
+  .wrow2 .lab2 b { font-family:'Archivo',sans-serif;color:#2F5D4A;white-space:nowrap; }
+  .wbar { height:14px;background:#EEF4F0;border-radius:99px;overflow:hidden; }
+  .wbar span { display:block;height:100%;background:linear-gradient(90deg,#2F5D4A,#2CA58D);border-radius:99px; }
+  .studygrid { display:grid;grid-template-columns:repeat(3,1fr);gap:12px; }
+  .scard { background:#fff;border:1px solid #e2e0d6;border-radius:10px;padding:13px 15px; }
+  .scard .sn { font-size:1.3rem;color:#23282A;line-height:1.05; }
+  .scard .ss { font-size:.9rem;color:#4a4b45;margin-top:3px; }
+  .scard .sd { font-size:.72rem;color:#8a8b82;margin-top:6px;font-family:'Archivo',sans-serif;letter-spacing:.02em; }
+  @media(max-width:820px){ .studygrid{grid-template-columns:1fr 1fr} }
+  @media(max-width:520px){ .studygrid{grid-template-columns:1fr} }
+
+  @media (max-width:760px){ .vs,.spec-body,.rules-grid,.stats,.factors{grid-template-columns:1fr} .wrow .n{min-width:0} }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap">
+    <div class="eyebrow">Vesta · Design-Grundlagen</div>
+    <h1>Schrift-Psychologie &amp; Bedeutung</h1>
+    <p>Schrift ist die Stimme der Marke. Sie entscheidet, ob wir technisch-präzise, autoritär-hochwertig oder warm-menschlich klingen — noch bevor ein Wort gelesen wird.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="intro">
+    <h2>Was Typografie kommuniziert</h2>
+    <p>Es gibt keine „beste" Schrift — die Wahl hängt von Kontext, Zielgruppe und Lesesituation ab. Für ein Fachpublikum am Bildschirm zählen zwei Dinge zugleich: <b>Persönlichkeit</b> (welchen Charakter die Headline vermittelt) und <b>Lesbarkeit</b> (wie mühelos der Fließtext funktioniert). Deshalb kombinieren wir immer eine charaktervolle Headline-Schrift mit einer neutralen, bildschirmoptimierten Textschrift.</p>
+    <div class="src">Grundlage: NN/g „Best Font for Online Reading: No Single Answer" · IxDF Gestalt &amp; Typografie</div>
+  </section>
+
+  <section>
+    <h2 style="font-family:'Archivo',sans-serif;font-size:1.5rem;margin:10px 0 4px">Serif vs. Sans-Serif — zwei Grundhaltungen</h2>
+    <div class="vs">
+      <div class="box">
+        <div class="demo" style="font-family:'Fraunces',serif;font-weight:600">Ag</div>
+        <h3>Serif</h3>
+        <p>Die kleinen Endstriche (Serifen) wirken traditionell, autoritär und redaktionell — sie signalisieren Erfahrung, Vertrauen und „Substanz". Ideal für Beratungs-Gravitas.</p>
+        <div style="margin-top:10px"><span class="kw">Autorität</span><span class="kw">Tradition</span><span class="kw">Wärme</span><span class="kw">Editorial</span></div>
+      </div>
+      <div class="box">
+        <div class="demo" style="font-family:'Archivo',sans-serif;font-weight:700">Ag</div>
+        <h3>Sans-Serif</h3>
+        <p>Ohne Serifen: klar, modern, sachlich, technisch. Wirkt effizient und geradlinig — die Standard-Sprache von Engineering, Tech und Datenkompetenz.</p>
+        <div style="margin-top:10px"><span class="kw">Klarheit</span><span class="kw">Modern</span><span class="kw">Technik</span><span class="kw">Neutralität</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+<section class="specimens">
+  <h2>Die Kandidaten im Detail</h2>
+  <p class="lead">Vier Schriften, die für die fünf Richtungen zur Wahl stehen — jede mit einem klaren Charakter.</p>
+
+  <!-- ARCHIVO -->
+  <div class="spec">
+    <div class="spec-top">
+      <div class="spec-role">Headline · Grotesk</div>
+      <div class="spec-name" style="font-family:'Archivo',sans-serif;font-weight:800">Archivo</div>
+      <div class="spec-sub">Grotesk-Sans, leicht kondensiert, geometrisch-industriell</div>
+      <div class="spec-sample" style="font-family:'Archivo',sans-serif;font-weight:700">Klare Orientierung bei komplexen Gebäudethemen.</div>
+    </div>
+    <div class="spec-body">
+      <div>
+        <h4>Was sie sagt</h4>
+        <p>Selbstbewusst, technisch, geradlinig. Die leicht kondensierte, industrielle Anmutung gibt Headlines Kraft und „Engineering"-Charakter, ohne kalt zu wirken. Vermittelt: <em>„Wir wissen genau, was wir tun."</em></p>
+        <div><span class="kw">Selbstbewusst</span><span class="kw">Industriell</span><span class="kw">Präzise</span></div>
+      </div>
+      <div>
+        <h4>Charakter</h4>
+        <div class="usedin"><b>Aktueller Kurs.</b> Verwendet in Richtung 01 (Ruhiger Wald), 04 (Lehm), 05 (Institutionell). Ruhig-technisch, maximale Kohärenz mit Inter.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INTER -->
+  <div class="spec">
+    <div class="spec-top">
+      <div class="spec-role">Fließtext · Grotesk</div>
+      <div class="spec-name" style="font-family:'Inter',sans-serif;font-weight:600">Inter</div>
+      <div class="spec-sub">Bildschirm-optimierte Grotesk, der Web-Body-Standard</div>
+      <div class="spec-sample" style="font-family:'Inter',sans-serif;font-weight:400">Fachlich fundierte Beratung für nachhaltiges Bauen — ruhig, präzise und sehr gut lesbar, auch in langen Texten und kleinen Größen.</div>
+    </div>
+    <div class="spec-body">
+      <div>
+        <h4>Was sie sagt</h4>
+        <p>Neutral, verlässlich, unaufdringlich. Inter ist speziell für Bildschirme gezeichnet (große x-Höhe, offene Formen) und bleibt auch bei 14–16 px mühelos lesbar. Ihre „Unsichtbarkeit" ist die Stärke: Der Inhalt tritt in den Vordergrund.</p>
+        <div><span class="kw">Neutral</span><span class="kw">Lesbar</span><span class="kw">Vertrauenswürdig</span></div>
+      </div>
+      <div>
+        <h4>Charakter</h4>
+        <div class="usedin"><b>Fließtext in allen fünf Richtungen.</b> Der ruhige Gegenpol zu jeder Headline-Schrift — die konstante Basis über alle Portale.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRAUNCES -->
+  <div class="spec">
+    <div class="spec-top">
+      <div class="spec-role">Headline · Serif (Option)</div>
+      <div class="spec-name" style="font-family:'Fraunces',serif;font-weight:600">Fraunces</div>
+      <div class="spec-sub">Zeitgenössische „Old-Style"-Serif mit weichem, warmem Charakter</div>
+      <div class="spec-sample" style="font-family:'Fraunces',serif;font-weight:600">Kompetenz, die keine Farbe schreien muss.</div>
+    </div>
+    <div class="spec-body">
+      <div>
+        <h4>Was sie sagt</h4>
+        <p>Autorität mit Wärme. Fraunces verbindet die Gravitas einer klassischen Serif (Beratung, Substanz, Think-Tank) mit einem modernen, leicht eigenwilligen Charakter — hochwertig, aber nicht verstaubt. Erzeugt starken Kontrast zum nüchternen Inter-Body.</p>
+        <div><span class="kw">Gravitas</span><span class="kw">Wertigkeit</span><span class="kw">Editorial</span><span class="kw">Wärme</span></div>
+      </div>
+      <div>
+        <h4>Charakter</h4>
+        <div class="usedin"><b>Der größte Hebel für „Beratungs-Autorität".</b> Verwendet in Richtung 03 (Architektur-Autorität). Braucht ausreichend Größe und Weißraum, um zu wirken.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACE GROTESK -->
+  <div class="spec">
+    <div class="spec-top">
+      <div class="spec-role">Headline · Technische Grotesk (Option)</div>
+      <div class="spec-name" style="font-family:'Space Grotesk',sans-serif;font-weight:700">Space Grotesk</div>
+      <div class="spec-sub">Technisch-eigenwillige Grotesk mit markanten Details</div>
+      <div class="spec-sample" style="font-family:'Space Grotesk',sans-serif;font-weight:600">Präzision, die man im Gebäude spürt.</div>
+    </div>
+    <div class="spec-body">
+      <div>
+        <h4>Was sie sagt</h4>
+        <p>Ingenieurwesen mit Persönlichkeit. Die ungewöhnlichen Buchstabenformen (markantes „a", „g") geben einen technischen, fast wissenschaftlichen Ton — moderner und distinktiver als eine neutrale Sans, ohne verspielt zu sein.</p>
+        <div><span class="kw">Technisch</span><span class="kw">Distinktiv</span><span class="kw">Modern</span></div>
+      </div>
+      <div>
+        <h4>Charakter</h4>
+        <div class="usedin"><b>Für ein Data-/Engineering-Profil.</b> Verwendet in Richtung 02 (Präzision &amp; Kupfer). Passt zu Portalen mit viel Zahlen/Diagrammen.</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+</div>
+
+<div class="wrap">
+<section class="library">
+  <h2>Erweiterte Font-Bibliothek</h2>
+  <p class="lead">Über die vier Kern-Kandidaten hinaus — bewährte, quelloffene Schriften (Google Fonts · SIL OFL, kommerziell frei) für seriöses B2B im Bauwesen, nach Rolle geordnet. Jede zeigt hier ihr eigenes Schriftbild inklusive Umlauten und der kritischen Zeichen <b>Il1O0</b>.</p>
+  <div style="background:#fff;border:1px solid #e2e0d6;border-left:4px solid #2CA58D;border-radius:12px;padding:18px 20px;margin:16px 0 6px">
+    <b style="font-family:'Archivo',sans-serif;color:#2F5D4A">„Es gibt keine einzige beste Schrift."</b>
+    <p style="font-size:.9rem;color:#43443e;margin-top:5px">NN/g maß 16 Schriften: Garamond war im Mittel am schnellsten (312 WPM), Open Sans am langsamsten (254 WPM) — 23 % Unterschied, doch die individuellen Unterschiede sind größer. Stärkster Einzelfaktor ist das <b>Alter</b> (~−1,5 WPM/Lebensjahr) — relevant für eine Zielgruppe 45+. Und: Nutzer können ihre optimale Schrift nicht selbst wählen. Konsequenz: hohe Grund-Lesbarkeit + ausreichende Größe schlagen die Suche nach „der einen" Schrift. Beide Lese-Ratgeber bestätigen zudem <b>16 px als Body-Richtwert am Bildschirm</b> (Print 11–12 pt).</p>
+    <div class="src" style="color:#8a8b82;margin-top:6px">NN/g „Best Fonts for Online Reading" · Fontfabric · DesignYourWay</div>
+  </div>
+
+  <div class="libgroup">
+    <h3>Body / Fließtext — Sans</h3>
+    <div class="libgrid">
+      <div class="fcard"><div class="fname" style="font-family:'IBM Plex Sans'">IBM Plex Sans</div><div class="meta"><span class="role">Body + Head</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'IBM Plex Sans'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Engineering-Neutralität mit Haltung; Superfamilie (Sans/Serif/Mono für Tabellen &amp; Formeln). Starker Fit fürs Bauwesen.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Source Sans 3'">Source Sans 3</div><div class="meta"><span class="role">Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Source Sans 3'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Humanistisch-warm, offene Fachkompetenz ohne Tech-Kälte. Wärmere Alternative zu Inter.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Public Sans'">Public Sans</div><div class="meta"><span class="role">Body + Head</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Public Sans'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Institutionell-neutral aus einem Behörden-Designsystem (USWDS). Stark für Kommunen/öffentliche Hand.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Work Sans'">Work Sans</div><div class="meta"><span class="role">Body + Head</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Work Sans'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Nüchterne, bildschirmgeborene Grotesk. Sachlich, unaufgeregt, „digital-first".</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Lato'">Lato</div><div class="meta"><span class="role">Body + Head</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Lato'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Warm-korporativ, halbrunde Formen — „seriös, aber nahbar". Verbreiteter Business-Standard.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Atkinson Hyperlegible'">Atkinson Hyperlegible</div><div class="meta"><span class="role">Body · A11y</span><span class="stars">★★★★★</span></div><div class="samp" style="font-family:'Atkinson Hyperlegible'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Maximale Zeichen-Differenzierung (Il1O0, bdpq) vom Braille Institute. Anker für Fußnoten, Formulare, Senioren-Dokumente.</p></div>
+    </div>
+  </div>
+
+  <div class="libgroup">
+    <h3>Serif — Headline &amp; Langtext</h3>
+    <div class="libgrid">
+      <div class="fcard"><div class="fname" style="font-family:'Source Serif 4'">Source Serif 4</div><div class="meta"><span class="role">Head + Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Source Serif 4'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Ruhige, akademisch-präzise Serife; Partner zu Source Sans, opsz-stabil auch klein.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Newsreader'">Newsreader</div><div class="meta"><span class="role">Head + Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Newsreader'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Redaktionelle Wärme + journalistische Autorität; opsz 6–72. Für Studien/Whitepaper/Blog.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Merriweather'">Merriweather</div><div class="meta"><span class="role">Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Merriweather'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Robuste Bildschirm-Lese-Serife, große x-Höhe, kräftige Serifen. Warm + seriös für lange Fachtexte.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Lora'">Lora</div><div class="meta"><span class="role">Head + Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Lora'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Warm, leicht kalligrafisch, nahbar — nimmt Serifen die Steifheit. Menschliche Serifen-Option.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Spectral'">Spectral</div><div class="meta"><span class="role">Head + Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Spectral'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Elegant-gehoben, fürs Display geboren (Google Docs). Prestige/Gravitas; klein feinkontrastig.</p></div>
+    </div>
+  </div>
+
+  <div class="libgroup">
+    <h3>Headline — Sans / Grotesk</h3>
+    <div class="libgrid">
+      <div class="fcard"><div class="fname" style="font-family:'Manrope'">Manrope</div><div class="meta"><span class="role">Head</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Manrope'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Geometrisch-modern, semi-condensed; clean, effizient, platzsparend. Ruhiger Gegenpol zu Space Grotesk.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Instrument Sans'">Instrument Sans</div><div class="meta"><span class="role">Head + Body</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Instrument Sans'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Zeitgenössisch-neutral mit Width-Achse; designbewusstes Understatement.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Montserrat'">Montserrat</div><div class="meta"><span class="role">Head</span><span class="stars">★★★★☆</span></div><div class="samp" style="font-family:'Montserrat'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Urban-geometrisch, selbstbewusst. Bonus: schnitt bei <b>älteren</b> Lesern (NN/g) relativ besser ab.</p></div>
+      <div class="fcard"><div class="fname" style="font-family:'Sora'">Sora</div><div class="meta"><span class="role">Head · UI</span><span class="stars">★★★☆☆</span></div><div class="samp" style="font-family:'Sora'">Bauphysik &amp; Ökobilanz — Il1O0</div><p>Technisch-digital, mono-beeinflusst; passt zum LCA-/Software-Aspekt, für lange Texte zu breit.</p></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="wrap">
+<section class="study">
+  <h2>Die NN/g-Lesestudie: 16 Schriften im Tempo-Test</h2>
+  <p class="lead">Die von dir verlinkte Quelle maß die Lesegeschwindigkeit von 16 Schriften. Vier Werte sind explizit genannt — hier im Vergleich. Wichtig bleibt: Der Abstand ist klein, und die individuellen Unterschiede sind größer als der Mittelwert.</p>
+  <div class="wpm">
+    <h4>Durchschnittliche Lesegeschwindigkeit (WPM)</h4>
+    <div class="wrow2"><div class="lab2"><span>Garamond — am schnellsten</span><b>312</b></div><div class="wbar"><span style="width:100%"></span></div></div>
+    <div class="wrow2"><div class="lab2"><span>Oswald</span><b>295</b></div><div class="wbar"><span style="width:94.5%"></span></div></div>
+    <div class="wrow2"><div class="lab2"><span>Franklin Gothic — häufigster Einzel-Sieger (Speed-Rank 59 %)</span><b>271</b></div><div class="wbar"><span style="width:86.9%"></span></div></div>
+    <div class="wrow2"><div class="lab2"><span>Open Sans — am langsamsten</span><b>254</b></div><div class="wbar"><span style="width:81.4%"></span></div></div>
+    <p class="note" style="margin-top:10px">Nur ~23 % Abstand zwischen schnellster und langsamster im Mittel — aber bis <b>35 %</b> zwischen der individuell besten und schlechtesten Schrift. Für <b>Leser 35+</b> schnitten Garamond, Montserrat und Poynter Gothic relativ besser ab; die übrigen 13 favorisierten jüngere Leser.</p>
+  </div>
+  <h3 style="font-family:'Archivo',sans-serif;font-size:1.05rem;margin:6px 0 12px;color:#2F5D4A">Die getesteten Schriften im Schriftbild</h3>
+  <div class="studygrid">
+    <div class="scard"><div class="sn" style="font-family:'EB Garamond',serif">Garamond</div><div class="ss" style="font-family:'EB Garamond',serif">Bauphysik &amp; Ökobilanz</div><div class="sd">312 WPM · Serif · EB Garamond</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Oswald',sans-serif">Oswald</div><div class="ss" style="font-family:'Oswald',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">295 WPM · Condensed · Headline</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Libre Franklin',sans-serif">Franklin Gothic</div><div class="ss" style="font-family:'Libre Franklin',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">271 WPM · ≈ Libre Franklin</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Open Sans',sans-serif">Open Sans</div><div class="ss" style="font-family:'Open Sans',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">254 WPM · Sans</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Montserrat',sans-serif">Montserrat</div><div class="ss" style="font-family:'Montserrat',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">altersfreundlich · Sans</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Noto Sans',sans-serif">Noto Sans</div><div class="ss" style="font-family:'Noto Sans',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Sans · Google</div></div>
+    <div class="scard"><div class="sn" style="font-family:'PT Sans',sans-serif">PT Sans</div><div class="ss" style="font-family:'PT Sans',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Sans · Google</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Roboto',sans-serif">Roboto</div><div class="ss" style="font-family:'Roboto',sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Sans · Google</div></div>
+    <div class="scard"><div class="sn" style="font-family:Arial,sans-serif">Arial</div><div class="ss" style="font-family:Arial,sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Systemschrift</div></div>
+    <div class="scard"><div class="sn" style="font-family:Helvetica,Arial,sans-serif">Helvetica</div><div class="ss" style="font-family:Helvetica,Arial,sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Systemschrift</div></div>
+    <div class="scard"><div class="sn" style="font-family:Calibri,sans-serif">Calibri</div><div class="ss" style="font-family:Calibri,sans-serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Systemschrift</div></div>
+    <div class="scard"><div class="sn" style="font-family:'Times New Roman',serif">Times</div><div class="ss" style="font-family:'Times New Roman',serif">Bauphysik &amp; Ökobilanz</div><div class="sd">Systemschrift · Serif</div></div>
+  </div>
+  <p class="src" style="margin-top:12px">Quelle: NN/g „The Best Fonts for Online Reading" (Studie mit 16 Schriften). Web-Entsprechungen via Google Fonts (Garamond → EB Garamond, Franklin Gothic → Libre Franklin); Poynter Gothic ist proprietär; Arial/Helvetica/Calibri/Times sind Systemschriften.</p>
+</section>
+</div>
+
+<div class="wrap">
+<section class="readdata">
+  <h2>Lesbarkeit in Zahlen</h2>
+  <p class="lead">Schriftwahl ist nicht nur Geschmack — sie ist messbar. Diese Werte sind die Faktenbasis hinter der Empfehlung „Inter für Text, Archivo für Headlines".</p>
+  <div class="stats">
+    <div class="stat"><div class="big">238 WPM</div><div class="lbl">Durchschnittliche stille Lesegeschwindigkeit für Sachtexte (Erwachsene). Spanne der meisten: 175–300 WPM. Für komplexe deutsche Fachtexte eher am unteren Ende.</div><div class="src">Brysbaert 2019 · Meta-Analyse, 190 Studien / 18.573 Personen</div></div>
+    <div class="stat"><div class="big">bis +35 %</div><div class="lbl">Unterschied in der Lesegeschwindigkeit zwischen der individuell schnellsten und langsamsten Schrift — ohne Einbußen beim Verständnis. Es gibt keine universell „schnellste" Schrift, aber klar untaugliche.</div><div class="src">Adobe / Wallace et al. 2022 · 352 Personen, 16 Fonts</div></div>
+    <div class="stat"><div class="big">≥ 16 px</div><div class="lbl">Empfohlene Mindestgröße für Fließtext, Zeilenhöhe 1,5×, Kontrast 4,5:1 — funktionsfähig bei 200 % Zoom (deshalb rem/em statt px).</div><div class="src">WCAG 2.x · 1.4.4 / 1.4.12</div></div>
+  </div>
+
+  <h3>Was eine Schrift schnell lesbar macht</h3>
+  <div class="factors">
+    <div class="f"><b>Hohe x-Höhe</b> — Kleinbuchstaben wirken größer, bessere Erkennbarkeit bei 14–16 px.</div>
+    <div class="f"><b>Offene Apertur</b> — offene Öffnungen bei c/e/a/s; geschlossene Formen „laufen zu".</div>
+    <div class="f"><b>Klare Differenzierung</b> — I l 1 und O 0 dürfen nicht verwechselbar sein (auch Barrierefreiheit).</div>
+    <div class="f"><b>Moderater Strichkontrast</b> — etwas Kontrast hilft, ultra-hoher schadet bei kleinen Graden.</div>
+    <div class="f"><b>Ausgewogene Breite</b> — zu kondensiert oder zu eng bremst; großzügige Punzen helfen.</div>
+    <div class="f"><b>Vertraute Formen</b> — grobe Fehlgriffe (Display-Schrift im Fließtext) kosten am meisten Tempo.</div>
+  </div>
+
+  <h3>Die vier Kandidaten im Lesbarkeits-Vergleich</h3>
+  <div class="tablewrap">
+    <table class="ftable">
+      <thead><tr><th>Font</th><th>Rolle</th><th>x-Höhe</th><th>Breite</th><th>Lesbarkeit</th><th>Kern-Einschätzung</th></tr></thead>
+      <tbody>
+        <tr><td><b>Inter</b></td><td>Body + UI</td><td>Hoch</td><td>Schmal-normal</td><td class="stars">★★★★★</td><td>Für Bildschirm-Fließtext gebaut; aktive Disambiguierung I/l/1, klein hervorragend.</td></tr>
+        <tr><td><b>Archivo</b></td><td>Headline (auch klein)</td><td>Mittel-hoch</td><td>Normal (+Breiten-Achse)</td><td class="stars">★★★★☆</td><td>Auch bei kleinen Graden sicher — beste Wahl für Sub-Headlines &amp; Card-Titel.</td></tr>
+        <tr><td><b>Fraunces</b></td><td>Headline (nur groß)</td><td>via opsz</td><td>via opsz</td><td class="stars">★★★☆☆</td><td>Groß exzellent, im Fließtext/klein heikel („wonky"). Bringt Serif-Wärme &amp; Gravitas.</td></tr>
+        <tr><td><b>Space Grotesk</b></td><td>Headline / kurze Akzente</td><td>Moderat</td><td>Normal</td><td class="stars">★★★☆☆</td><td>Charaktervoll, aber klein unruhig — für Persönlichkeit, nicht für lange Texte.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:.78rem;color:#8a8b82;margin-top:10px">Alle vier: Variable Fonts, Lizenz SIL OFL 1.1, kommerziell frei &amp; self-hosting erlaubt, Deutsch inkl. ä/ö/ü/ß sauber. Quellen: Brysbaert 2019 · Adobe/Wallace TOCHI 2022 · rsms.me/inter · Omnibus-Type · Google Fonts · WCAG 2.x.</p>
+
+  <div class="merksatz">
+    <div class="q">„Nicht die Schrift macht schnell — die falsche Schrift macht langsam."</div>
+    <div class="sub">Body ≥ 16 px, Zeilenhöhe 1,5×, hohe x-Höhe, offene Formen, klar unterscheidbare Il1/O0. Headlines dürfen Charakter haben — der Fließtext muss verschwinden. Empfohlenes Setup: <b>Inter (Text) + Archivo (Headlines, auch klein)</b>; Fraunces/Space Grotesk nur als große Charakter-Headline.</div>
+  </div>
+</section>
+</div>
+
+<section class="rules">
+  <div class="wrap">
+    <h2>Wie man Schriften richtig paart</h2>
+    <div class="rules-grid">
+      <div class="rule"><b>Kontrast, nicht Konflikt</b><p>Headline und Body sollen sich klar unterscheiden (Serif/Sans oder deutlich andere Strichstärke) — aber ein gemeinsames „Skelett" behalten, damit es harmonisch bleibt.</p></div>
+      <div class="rule"><b>Maximal zwei Familien</b><p>Eine Headline-Schrift, eine Textschrift. Hierarchie entsteht über Größe, Gewicht und Abstand — nicht über zusätzliche Schriften.</p></div>
+      <div class="rule"><b>Eine konstante Basis</b><p>Inter bleibt in allen Richtungen der Fließtext. So wechselt nur die „Stimme" der Headline, während die Lesbarkeit über alle Portale gleich verlässlich ist.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="weights">
+    <h2>Gewicht &amp; Laufweite tragen Bedeutung</h2>
+    <div class="wrow"><div class="n" style="font-family:'Inter';font-weight:400">Inter Regular 400</div><div class="d">Fließtext. Ruhig, unaufdringlich. Nie dünner — 300 wirkt auf Nicht-Retina-Displays „billig".</div></div>
+    <div class="wrow"><div class="n" style="font-family:'Inter';font-weight:500">Inter Medium 500</div><div class="d">UI-Labels, Buttons, Hervorhebungen. Klar, aber nicht laut.</div></div>
+    <div class="wrow"><div class="n" style="font-family:'Inter';font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:1rem">Eyebrow · Kicker</div><div class="d">Versalien + weite Laufweite (+0.06–0.14em) signalisieren Struktur und Kategorie — das „Vorwort" über der Headline.</div></div>
+    <div class="wrow"><div class="n" style="font-family:'Archivo';font-weight:700;letter-spacing:-.02em">Archivo Bold −Tracking</div><div class="d">Headlines. Enge Laufweite bei großen Graden wirkt entschlossen und hochwertig.</div></div>
+  </section>
+
+  <section class="readab">
+    <h2>Lesbarkeit ist nicht verhandelbar</h2>
+    <div class="measure">
+      <p>Optimale Zeilenlänge liegt bei 60–75 Zeichen — hier eingestellt auf <b>65ch</b>. Zu lange Zeilen ermüden das Auge, zu kurze zerhacken den Lesefluss. Die Zeilenhöhe im Fließtext beträgt 1.5–1.6, Headlines rücken enger zusammen (1.05–1.15). Die Schriftgrößen folgen einer modularen Skala (Verhältnis 1.25 am Desktop) und skalieren flüssig per <code>clamp()</code> mit — ganz ohne harte Sprünge.</p>
+      <div class="note">Diese Regeln gelten unabhängig von der gewählten Richtung — sie sind das Fundament, das Professionalität für das Fachpublikum unbewusst signalisiert (präzise = kompetent).</div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
