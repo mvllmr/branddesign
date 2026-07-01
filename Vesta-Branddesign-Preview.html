@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vesta Branddesign Vorschau</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --deep-green: #2F5D4A;
+      --teal: #3A6A5A;
+      --anthrazit: #2E3A3A;
+      --sand: #F4EDE2;
+      --sage: #DCE8DE;
+      --light: #F7F7F4;
+      --accent: #2CA58D;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--anthrazit);
+      background: linear-gradient(135deg, var(--light) 0%, var(--sand) 100%);
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 48px 24px 72px;
+    }
+
+    .hero {
+      background: white;
+      border-radius: 24px;
+      padding: 48px;
+      box-shadow: 0 20px 40px rgba(46, 58, 58, 0.08);
+      display: grid;
+      gap: 28px;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+    }
+
+    .eyebrow {
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 10px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Archivo', sans-serif;
+      margin: 0;
+      color: var(--anthrazit);
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #4f5a5a;
+      margin: 0;
+    }
+
+    .actions {
+      display: flex;
+      gap: 14px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--deep-green);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--sage);
+      color: var(--anthrazit);
+    }
+
+    .panel {
+      background: linear-gradient(135deg, var(--sage), var(--sand));
+      border-radius: 20px;
+      padding: 24px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .swatches {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .swatch {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      border: 2px solid rgba(46,58,58,0.14);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 24px rgba(46,58,58,0.06);
+    }
+
+    .card h3 { font-size: 1rem; margin-bottom: 8px; }
+
+    @media (max-width: 840px) {
+      .hero { grid-template-columns: 1fr; padding: 32px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Vesta • Brand Direction</div>
+        <h1>Klare Orientierung bei komplexen Gebäudethemen.</h1>
+        <p>Eine ruhige, moderne und fachlich starke Marke für Beratung, Nachhaltigkeit und Bauphysik – mit einem klaren visuellen System für alle Portale.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#">Kontakt aufnehmen</a>
+          <a class="btn btn-secondary" href="#">Mehr erfahren</a>
+        </div>
+      </div>
+      <div class="panel">
+        <div>
+          <h3>Erste Farbwelt</h3>
+          <p>Ein ruhiges Grün mit starkem Kontrast und klarer Akzentfarbe für CTAs und wichtige Hinweise.</p>
+        </div>
+        <div class="swatches">
+          <div class="swatch" style="background:#2F5D4A"></div>
+          <div class="swatch" style="background:#3A6A5A"></div>
+          <div class="swatch" style="background:#2E3A3A"></div>
+          <div class="swatch" style="background:#F4EDE2"></div>
+          <div class="swatch" style="background:#DCE8DE"></div>
+          <div class="swatch" style="background:#2CA58D"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Klare Hierarchie</h3>
+        <p>Wichtige Inhalte werden sofort sichtbar und ohne unnötige Ablenkung verstanden.</p>
+      </div>
+      <div class="card">
+        <h3>Vertrauen durch Ruhe</h3>
+        <p>Eine reduzierte, geordnete Gestaltung schafft Seriosität und fördert die Wahrnehmung von Kompetenz.</p>
+      </div>
+      <div class="card">
+        <h3>Einheit über alle Portale</h3>
+        <p>Ein gemeinsames System für Branding, Layout, CTA und Inhalte sorgt für Wiedererkennbarkeit.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
