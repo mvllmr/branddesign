@@ -58,9 +58,9 @@
   /* Header */
   header.site{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
   .hd{max-width:var(--maxw);margin:0 auto;padding:15px var(--pad);display:flex;align-items:center;gap:30px}
-  .logo{display:flex;flex-direction:column;line-height:1}
-  .logo b{font-family:var(--fh);font-weight:800;font-size:1.34rem;letter-spacing:-.03em}
-  .logo span{font-family:var(--fh);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:2px}
+  .logo{display:flex;align-items:center;line-height:1}
+  .logo img{height:30px;width:auto;display:block}
+  footer.site .logo img{height:30px}
   nav.main{display:flex;gap:26px;margin-left:14px}
   nav.main a{font-family:var(--fh);font-size:.9rem;font-weight:500;color:var(--muted);padding:6px 0;position:relative}
   nav.main a:hover{color:var(--ink)}
@@ -111,12 +111,42 @@
   .feat.t-sand .panel{background:var(--p-sand)}
   .feat.t-mint .panel{background:var(--p-mint)}
 
+  /* Bullet-Liste (Unterleistungen) */
+  .blist{margin-top:26px;display:flex;flex-direction:column;gap:13px;list-style:none}
+  .blist li{display:flex;align-items:flex-start;gap:14px;font-size:1.04rem;color:var(--ink)}
+  .blist li::before{content:"";width:9px;height:16px;border:solid var(--brand);border-width:0 2.6px 2.6px 0;transform:rotate(45deg);flex:none;margin:2px 4px 0 3px}
+
+  /* Team / Zu uns */
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:52px}
+  .person{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .person:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,30,30,.10);border-color:var(--line2)}
+  .person .pimg{aspect-ratio:1/1;background:var(--p-grey);overflow:hidden}
+  .person .pimg img{width:100%;height:100%;object-fit:cover;object-position:center top}
+  .person .pbody{padding:28px 30px 32px}
+  .person h3{font-size:1.5rem}
+  .person .role{margin-top:9px;color:var(--brand);font-family:var(--fh);font-weight:600;font-size:.95rem}
+  .person .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .person .tags span{font-family:var(--fh);font-weight:600;font-size:.78rem;color:var(--ink);background:var(--p-grey);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+
+  /* Wissensplattformen */
+  .wissen{background:var(--p-teal)}
+  .plat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:52px}
+  .plat{display:flex;flex-direction:column;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:32px 34px 30px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .plat:hover{transform:translateY(-4px);box-shadow:0 20px 46px rgba(20,30,30,.12);border-color:var(--line2)}
+  .plat .dom{font-family:var(--fh);font-weight:600;font-size:.82rem;color:var(--brand);display:inline-flex;align-items:center;gap:8px}
+  .plat .dom::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand-soft)}
+  .plat h3{font-size:1.5rem;margin:14px 0 10px;letter-spacing:-.02em}
+  .plat p{color:var(--muted);font-size:1rem;flex:1}
+  .plat .go{margin-top:24px;font-family:var(--fh);font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:8px}
+  .plat .go .arw{transition:transform .25s}
+  .plat:hover .go{color:var(--brand)}.plat:hover .go .arw{transform:translate(3px,-3px)}
+
   /* Referenzen (Scroll-Website-Stil: Index + Sticky Preview) */
   .refsec{background:var(--p-grey);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:48px}
   .sec-head h2{font-size:clamp(2rem,4vw,3rem);max-width:18ch}
   .sec-head .side{max-width:34ch;color:var(--muted);font-size:1rem;text-align:right}
-  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:stretch}
   .ref-list{border-top:1px solid var(--line2)}
   .ref-item{display:flex;gap:16px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line2);cursor:pointer;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;font:inherit}
   .ref-item .k{font-family:var(--fh);font-weight:700;font-size:.78rem;color:var(--accent);min-width:26px}
@@ -124,7 +154,7 @@
   .ref-item .m{margin-left:auto;font-family:var(--fh);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .3s}
   .ref-item.active h3,.ref-item:hover h3{opacity:1;transform:translateX(9px)}
   .ref-item.active .m{opacity:1}
-  .ref-preview{position:sticky;top:100px;height:76vh;min-height:460px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line2);background:var(--brand-deep)}
+  .ref-preview{position:relative;align-self:stretch;border-radius:var(--r);overflow:hidden;border:1px solid var(--line2);background:var(--brand-deep)}
   .ref-layer{position:absolute;inset:0;opacity:0;transform:scale(1.05);transition:opacity .7s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
   .ref-layer .ph{position:absolute;inset:0;background-size:cover;background-position:center}
   .ref-layer::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,42,50,.82),rgba(10,42,50,.08) 48%,transparent)}
@@ -174,6 +204,7 @@
     .cta-band{padding:40px 26px}
     .ft-top{grid-template-columns:1fr 1fr}
     .fcard.a{left:-8px}.fcard.b{right:-8px}
+    .team-grid,.plat-grid{grid-template-columns:1fr}
   }
   @media(prefers-reduced-motion:reduce){
     *{scroll-behavior:auto!important}
@@ -189,12 +220,14 @@
 
 <header class="site">
   <div class="hd">
-    <a class="logo" href="#top" aria-label="vesta — Startseite"><b>vesta</b><span>sustainability consulting</span></a>
+    <a class="logo" href="#top" aria-label="vesta — Startseite"><img src="Logo_b.svg" alt="vesta sustainability consulting" /></a>
     <nav class="main" aria-label="Hauptnavigation">
       <a href="#zertifizierung">Zertifizierung</a>
       <a href="#oekobilanz">Ökobilanz</a>
       <a href="#bauphysik">Bauphysik</a>
+      <a href="#team">Team</a>
       <a href="#referenzen">Referenzen</a>
+      <a href="#wissen">Wissen</a>
     </nav>
     <div class="hd-cta">
       <a class="hd-login" href="#kontakt">Kontakt</a>
@@ -235,10 +268,15 @@
   <section class="feat t-teal" id="zertifizierung">
     <div class="wrap fg">
       <div>
-        <span class="eyebrow" data-r>Nachhaltigkeitsberatung</span>
-        <h2 data-r data-d="1" style="margin-top:14px">Die Zertifizierung, die Türen öffnet.</h2>
-        <p class="desc" data-r data-d="1">DGNB, QNG und EU-Taxonomie – wir führen Ihr Projekt strukturiert durch Nachweise und Zertifizierung. Mit klaren Kriterien und Dokumentation, die standhält.</p>
-        <div class="chips" data-r data-d="2"><span>DGNB</span><span>QNG</span><span>EU-Taxonomie</span><span>ESG</span><span>Lebenszykluskosten</span></div>
+        <span class="eyebrow" data-r>Leistung 01</span>
+        <h2 data-r data-d="1" style="margin-top:14px">Nachhaltigkeitsberatung und Zertifizierung</h2>
+        <p class="desc" data-r data-d="1">Wir führen Ihr Projekt strukturiert durch Nachweise und Zertifizierung – mit klaren Kriterien und Dokumentation, die standhält.</p>
+        <ul class="blist" data-r data-d="2">
+          <li>Zertifizierung DGNB und QNG</li>
+          <li>Lebenszykluskostenanalyse</li>
+          <li>Nachhaltigkeitskonzepte</li>
+          <li>EU-Taxonomie und ESG</li>
+        </ul>
         <div class="act" data-r data-d="2"><a class="link-arw" href="#kontakt">Zertifizierung besprechen <span class="arw">→</span></a></div>
       </div>
       <div class="media" data-r data-d="1">
@@ -252,10 +290,14 @@
   <section class="feat t-sand rev" id="oekobilanz">
     <div class="wrap fg">
       <div>
-        <span class="eyebrow" data-r>Ökobilanzierung</span>
-        <h2 data-r data-d="1" style="margin-top:14px">Sichere dir belastbare Ökobilanzen.</h2>
-        <p class="desc" data-r data-d="1">Umweltwirkungen über den gesamten Lebenszyklus – Phasen A bis D nach EN 15978. Auf Gebäude- und Portfolioebene, in jeder Projektphase.</p>
-        <div class="chips" data-r data-d="2"><span>EN 15978</span><span>Phasen A–D</span><span>GWP</span><span>Gebäude &amp; Quartiere</span><span>Fördermittel</span></div>
+        <span class="eyebrow" data-r>Leistung 02</span>
+        <h2 data-r data-d="1" style="margin-top:14px">Ökobilanzierung für Gebäude und Quartiere</h2>
+        <p class="desc" data-r data-d="1">Umweltwirkungen über den gesamten Lebenszyklus nach EN 15978 – auf Gebäude- und Portfolioebene, in jeder Projektphase.</p>
+        <ul class="blist" data-r data-d="2">
+          <li>Portfolioanalysen</li>
+          <li>Bebauungspläne</li>
+          <li>Entwicklung von Klimaschutzkonzepten</li>
+        </ul>
         <div class="act" data-r data-d="2"><a class="link-arw" href="#kontakt">Ökobilanz anfragen <span class="arw">→</span></a></div>
       </div>
       <div class="media" data-r data-d="1">
@@ -269,15 +311,49 @@
   <section class="feat t-mint" id="bauphysik">
     <div class="wrap fg">
       <div>
-        <span class="eyebrow" data-r>Bauphysik</span>
-        <h2 data-r data-d="1" style="margin-top:14px">Energieeffizienz, leicht gemacht.</h2>
-        <p class="desc" data-r data-d="1">Thermische Simulationen, sommerlicher Wärmeschutz, Wärmebrücken und Sanierungskonzepte – wir optimieren die Physik Ihres Gebäudes für weniger Verluste und mehr Komfort.</p>
-        <div class="chips" data-r data-d="2"><span>Energiebilanz</span><span>Thermische Simulation</span><span>Wärmebrücken</span><span>Sanierung</span><span>Klimarisiko</span></div>
+        <span class="eyebrow" data-r>Leistung 03</span>
+        <h2 data-r data-d="1" style="margin-top:14px">Bauphysik für mehr Energieeffizienz und Komfort</h2>
+        <p class="desc" data-r data-d="1">Wir optimieren die Physik Ihres Gebäudes – für weniger Verluste, mehr Komfort und geringere Betriebskosten.</p>
+        <ul class="blist" data-r data-d="2">
+          <li>Wärmeschutz und Energiebilanzierung</li>
+          <li>Entwicklung von Sanierungskonzepten</li>
+          <li>Thermische Gebäudesimulationen</li>
+          <li>Sommerlicher Wärmeschutz</li>
+          <li>Berechnung von Wärmebrücken</li>
+          <li>Klimarisikoanalysen</li>
+        </ul>
         <div class="act" data-r data-d="2"><a class="link-arw" href="#kontakt">Gebäude optimieren <span class="arw">→</span></a></div>
       </div>
       <div class="media" data-r data-d="1">
         <div class="panel"><div class="ph" data-img="bau"></div></div>
         <div class="fcard b"><div class="ic">U</div><div><div class="k">0,15</div><div class="c">U-Wert · W/m²K</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM / ZU UNS -->
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Zu uns</span><h2 style="margin-top:12px">Zwei Ingenieure, ein Anspruch: belastbare Nachhaltigkeit.</h2></div>
+        <p class="side">Geführt von den Gründern — persönlich, fachlich fundiert und mit Verantwortung von der ersten bis zur letzten Kennzahl.</p>
+      </div>
+      <div class="team-grid">
+        <article class="person" data-r>
+          <div class="pimg"><img src="team-mv.jpg" alt="Dr.-Ing. Michael Vollmer" /></div>
+          <div class="pbody">
+            <h3>Dr.-Ing. Michael Vollmer</h3>
+            <div class="role">Geschäftsführender Gesellschafter</div>
+            <div class="tags"><span>DGNB Auditor</span><span>DGNB ESG-Manager</span><span>Energieeffizienz-Experte</span></div>
+          </div>
+        </article>
+        <article class="person" data-r data-d="1">
+          <div class="pimg"><img src="team-hmh.jpg" alt="Dr.-Ing. Hannes Harter" /></div>
+          <div class="pbody">
+            <h3>Dr.-Ing. Hannes Harter</h3>
+            <div class="role">Geschäftsführender Gesellschafter</div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -316,6 +392,42 @@
     </div>
   </section>
 
+  <!-- WISSENSPLATTFORMEN -->
+  <section class="wissen" id="wissen">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Wissen teilen</span><h2 style="margin-top:12px">Unsere Wissensplattformen.</h2></div>
+        <p class="side">Fachwissen, das wir öffentlich machen — rund um Ökobilanz, Bauphysik, Gesetzeslage und zukunftsfähiges Bauen.</p>
+      </div>
+      <div class="plat-grid">
+        <a class="plat" href="https://gebaeude-lca.de" target="_blank" rel="noopener" data-r>
+          <span class="dom">gebaeude-lca.de</span>
+          <h3>Gebäude-LCA</h3>
+          <p>Wissen und Werkzeuge rund um die Ökobilanzierung von Gebäuden nach EN 15978.</p>
+          <span class="go">Zur Plattform <span class="arw">↗</span></span>
+        </a>
+        <a class="plat" href="https://muenchen-bauphysik.de" target="_blank" rel="noopener" data-r data-d="1">
+          <span class="dom">muenchen-bauphysik.de</span>
+          <h3>München Bauphysik</h3>
+          <p>Bauphysik-Expertise für energieeffiziente, komfortable und zukunftssichere Gebäude.</p>
+          <span class="go">Zur Plattform <span class="arw">↗</span></span>
+        </a>
+        <a class="plat" href="https://gebaeudemodernisierungsgesetz.info" target="_blank" rel="noopener" data-r data-d="1">
+          <span class="dom">gebaeudemodernisierungsgesetz.info</span>
+          <h3>Gebäude&shy;modernisierungs&shy;gesetz</h3>
+          <p>Regeln und Pflichten zur Gebäudemodernisierung — verständlich aufbereitet.</p>
+          <span class="go">Zur Plattform <span class="arw">↗</span></span>
+        </a>
+        <a class="plat" href="https://akademie-zukunft-bauen.de/" target="_blank" rel="noopener" data-r data-d="2">
+          <span class="dom">akademie-zukunft-bauen.de</span>
+          <h3>Akademie Zukunft Bauen</h3>
+          <p>Weiterbildung und Wissen für zukunftsfähiges, nachhaltiges Bauen.</p>
+          <span class="go">Zur Plattform <span class="arw">↗</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
   <!-- CTA-BAND -->
   <section style="padding:40px 0 40px">
     <div class="wrap">
@@ -350,11 +462,11 @@
   <div class="wrap">
     <div class="ft-top">
       <div>
-        <a class="logo" href="#top"><b>vesta</b><span>sustainability consulting</span></a>
-        <p>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere — aus München.</p>
+        <a class="logo" href="#top"><img src="Logo_w.svg" alt="vesta sustainability consulting" /></a>
+        <p style="margin-top:20px">Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere — aus München.</p>
       </div>
       <div class="ft-col"><h4>Leistungen</h4><a href="#zertifizierung">Zertifizierung</a><a href="#oekobilanz">Ökobilanzierung</a><a href="#bauphysik">Bauphysik</a></div>
-      <div class="ft-col"><h4>Unternehmen</h4><a href="#referenzen">Referenzen</a><a href="#kontakt">Kontakt</a></div>
+      <div class="ft-col"><h4>Unternehmen</h4><a href="#team">Team</a><a href="#wissen">Wissen</a><a href="#referenzen">Referenzen</a><a href="#kontakt">Kontakt</a></div>
       <div class="ft-col"><h4>Rechtliches</h4><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
     </div>
     <div class="ft-bot">
