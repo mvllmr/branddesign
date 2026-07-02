@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vesta · Studio Scroll-Websites</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Sans+3:wght@400;600&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800&family=Spectral:wght@400;500;600;700&family=Lora:wght@500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#FBFBFA;--surface:#F1F1EF;--ink:#1C1C1A;--accent:#C0553B;--radius:4px;
+    --fh:'Fraunces',serif;--fb:'Inter',sans-serif;
+    --muted:color-mix(in srgb,var(--ink) 50%,var(--bg));
+    --line:color-mix(in srgb,var(--ink) 14%,var(--bg));
+    --line2:color-mix(in srgb,var(--ink) 32%,var(--bg));
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;line-height:1.55;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--fh);line-height:1.02;letter-spacing:-.02em;color:var(--ink);font-weight:600}
+  #site,#site *{transition:background-color .5s ease,color .5s ease,border-color .5s ease}
+  .cont{max-width:1320px;margin:0 auto;padding:0 44px}
+  .label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+  /* Switcher (identisch zur bestehenden Datei) */
+  #switcher{position:sticky;top:0;z-index:200;background:#111;color:#f2f3f2;border-bottom:1px solid #2a2a2a;font-family:'Inter',sans-serif}
+  .sw-top{max-width:1360px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+  .sw-title{font-weight:700;font-size:.9rem;color:#fff;white-space:nowrap}.sw-title span{color:#5fccae}
+  .sw-nav{display:flex;align-items:center;gap:14px}
+  .sw-nav button{width:34px;height:34px;border-radius:8px;border:1px solid #3a3a3a;background:transparent;color:#f2f3f2;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .sw-nav button:hover{background:#242424}
+  .sw-cur{min-width:230px;text-align:center;line-height:1.25}
+  .sw-cur #vnum{font-size:.72rem;color:#8b8b88;letter-spacing:.08em}
+  .sw-cur b{display:block;font-size:.96rem;color:#fff}.sw-cur em{font-style:normal;font-size:.75rem;color:#9a9a97}
+  .sw-meta{display:flex;align-items:center;gap:10px;margin-left:auto;flex-wrap:wrap;font-size:.73rem;color:#9a9a97}
+  .sw-meta .pill{padding:3px 9px;border-radius:999px;font-weight:600;border:1px solid #333}
+  .sw-meta .p-hero{background:#1f2a26;color:#7fe3c1;border-color:#2f5d4a}
+  .sw-meta .p-img{background:#2a2620;color:#e0a882;border-color:#4a3a30}
+  .sw-meta .p-fx{background:#22262e;color:#8fb6e6;border-color:#33445d}
+  .sw-meta .sws{display:flex;gap:5px}.sw-meta .sws i{width:15px;height:15px;border-radius:4px;border:1px solid rgba(255,255,255,.18)}
+  .sw-meta b{color:#d5d5d2;font-weight:600}
+  .sw-chips{max-width:1360px;margin:0 auto;padding:0 24px 12px;display:flex;gap:6px;flex-wrap:nowrap;overflow-x:auto}
+  .sw-chips button{flex:none;width:28px;height:26px;border-radius:6px;border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.68rem;font-weight:600;cursor:pointer;opacity:.5;transition:opacity .15s,transform .15s}
+  .sw-chips button:hover{opacity:.9;transform:translateY(-1px)}.sw-chips button.on{opacity:1;outline:2px solid #fff;outline-offset:1px}
+
+  #prog{position:fixed;top:0;left:0;height:3px;width:0;background:var(--accent);z-index:150}
+
+  /* Reveal + Masken */
+  html.js [data-reveal]{opacity:0;transform:translateY(34px);transition:opacity .85s cubic-bezier(.16,1,.3,1),transform .85s cubic-bezier(.16,1,.3,1)}
+  html.js [data-reveal].in{opacity:1;transform:none}
+  .ln{display:block;overflow:hidden}
+  .ln>span{display:block;transition:transform .95s cubic-bezier(.16,1,.3,1)}
+  html.js .ln>span{transform:translateY(112%)}
+  html.js .in .ln:nth-child(1)>span{transition-delay:.05s}
+  html.js .in .ln:nth-child(2)>span{transition-delay:.15s}
+  html.js .in .ln:nth-child(3)>span{transition-delay:.25s}
+  html.js .in .ln>span{transform:none}
+
+  /* Foto-Halter (alle Bilder laufen hierüber → Treatment zentral steuerbar) */
+  .ph{position:relative;background-size:cover;background-position:center;background-color:var(--surface);overflow:hidden}
+  .ph::after{content:"";position:absolute;inset:0;pointer-events:none;transition:opacity .5s ease}
+  /* img-duo: Duotone via Graustufe + Akzent-Multiply */
+  body.img-duo .ph{filter:grayscale(1) contrast(1.03)}
+  body.img-duo .ph::after{background:var(--accent);mix-blend-mode:multiply;opacity:.5}
+  body.img-duo.dark .ph::after{mix-blend-mode:screen;opacity:.34}
+  /* img-frame: eingerückt mit Passepartout */
+  body.img-frame .ph{border:12px solid var(--bg);outline:1px solid var(--line2);outline-offset:-1px}
+  /* fx-mask: horizontaler Clip-Reveal auf Bildblöcken */
+  html.js body.fx-mask .reveal-media .ph{clip-path:inset(0 100% 0 0);transition:clip-path 1.2s cubic-bezier(.16,1,.3,1)}
+  html.js body.fx-mask .reveal-media.in .ph{clip-path:inset(0 0 0 0)}
+
+  /* ============ COVER / HERO ============ */
+  .cover{position:relative;height:100vh;min-height:620px;overflow:hidden;background:var(--surface)}
+  .cover-media{position:absolute;inset:0;z-index:1;overflow:hidden}
+  .cover-media .ph{width:100%;height:100%;will-change:transform}
+  .scrim{position:absolute;inset:0;z-index:2;background:linear-gradient(to top,rgba(0,0,0,.62),rgba(0,0,0,.08) 55%,rgba(0,0,0,.30))}
+  .cover-body{position:absolute;inset:0;z-index:3;display:flex;flex-direction:column;justify-content:space-between;color:#fff;padding:26px 44px 8vh}
+  .ctop{display:flex;justify-content:space-between;align-items:center}
+  .ctop b{font-family:var(--fh);font-weight:700;font-size:1.25rem;color:inherit}
+  .ctop span{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;opacity:.82}
+  .cinner{max-width:1320px;width:100%;margin:0 auto}
+  .ckicker{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;display:inline-flex;align-items:center;gap:11px;opacity:.9}
+  .ckicker::before{content:"";width:9px;height:9px;background:var(--accent)}
+  .cinner h1{font-family:var(--fh);font-size:clamp(2.4rem,6vw,5.2rem);max-width:19ch;margin-top:18px;letter-spacing:-.02em;line-height:1.03;color:inherit}
+  .ccue{margin-top:34px;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.85;display:flex;align-items:center;gap:10px}
+  .ccue::after{content:"";width:1px;height:34px;background:currentColor;animation:cue 1.6s ease-in-out infinite}
+  @keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+
+  /* hero-split: Bild rechts, Text auf Fläche links */
+  body.hero-split .cover{display:grid;grid-template-columns:1.02fr 1fr}
+  body.hero-split .cover-media{position:relative;inset:auto;grid-column:2;grid-row:1}
+  body.hero-split .scrim{display:none}
+  body.hero-split .cover-body{position:relative;inset:auto;grid-column:1;grid-row:1;background:var(--surface);color:var(--ink);padding:32px 48px 44px}
+  body.hero-split .ctop span{opacity:.6}
+  body.hero-split .cinner h1{color:var(--ink)}
+  /* hero-stack: Bildband oben, großes Statement auf Fläche darunter */
+  body.hero-stack .cover{display:flex;flex-direction:column;height:auto;min-height:100vh}
+  body.hero-stack .cover-media{position:relative;inset:auto;height:56vh;flex:none}
+  body.hero-stack .scrim{background:linear-gradient(to top,rgba(0,0,0,.28),transparent 60%)}
+  body.hero-stack .cover-body{position:relative;inset:auto;flex:1;background:var(--bg);color:var(--ink);justify-content:center;padding:44px}
+  body.hero-stack .cinner h1{color:var(--ink);max-width:22ch}
+  /* hero-type: Übergroße Typo auf Fläche, Bild als schmales Band unten */
+  body.hero-type .cover{display:flex;flex-direction:column-reverse;height:auto;min-height:100vh;background:var(--bg)}
+  body.hero-type .cover-media{position:relative;inset:auto;height:34vh;flex:none}
+  body.hero-type .scrim{display:none}
+  body.hero-type .cover-body{position:relative;inset:auto;flex:1;color:var(--ink);justify-content:flex-end;padding:9vh 44px 5vh}
+  body.hero-type .cinner h1{color:var(--ink);font-size:clamp(3rem,11vw,9.5rem);line-height:.92;max-width:16ch;letter-spacing:-.03em}
+
+  /* ============ MANIFEST ============ */
+  .manifest{padding:22vh 0}
+  .manifest p{font-family:var(--fh);font-weight:500;font-size:clamp(1.8rem,4.6vw,3.7rem);line-height:1.14;letter-spacing:-.02em;max-width:24ch}
+  .manifest .ac{color:var(--accent)}
+  .manifest .m-meta{margin-top:60px;display:flex;gap:44px;flex-wrap:wrap;align-items:baseline}
+  .manifest .m-meta .num{font-family:var(--fh);font-weight:700;font-size:2rem;color:var(--accent)}
+  .manifest .m-meta .cap{font-size:.85rem;color:var(--muted);max-width:22ch;margin-top:4px}
+
+  /* ============ LEITPROJEKT ============ */
+  .lead-sec{padding:4vh 0 14vh}
+  .lead-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:30px}
+  .lead-top h2{font-size:clamp(1.6rem,3vw,2.6rem)}
+  .lead-media{position:relative;height:84vh;min-height:480px;overflow:hidden;margin:0 44px;border-radius:var(--radius)}
+  .lead-media .ph{position:absolute;left:0;right:0;top:-14%;height:128%;will-change:transform}
+  .lead-cap{max-width:1320px;margin:24px auto 0;padding:0 44px;display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap}
+  .lead-cap h3{font-size:clamp(1.2rem,2vw,1.7rem)}
+  .lead-cap p{color:var(--muted);max-width:44ch;font-size:.98rem}
+
+  /* ============ WERKE-INDEX (Hover/Scroll → Vorschaubild) ============ */
+  .werke{border-top:1px solid var(--line);padding:14vh 0}
+  .sec-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px}
+  .sec-top h2{font-size:clamp(1.6rem,3vw,2.6rem)}
+  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:26px}
+  .ref-item{display:flex;gap:18px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line);cursor:pointer}
+  .ref-item .k{font-family:var(--fh);font-weight:700;font-size:.8rem;color:var(--accent)}
+  .ref-item h3{font-size:clamp(1.15rem,2.2vw,1.9rem);opacity:.4;transition:opacity .3s,transform .4s cubic-bezier(.16,1,.3,1)}
+  .ref-item .m{margin-left:auto;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .3s}
+  .ref-item.active h3,.ref-item:hover h3{opacity:1;transform:translateX(10px)}
+  .ref-item.active .m{opacity:1}
+  .ref-preview{position:sticky;top:12vh;height:78vh;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--ink)}
+  .ref-layer{position:absolute;inset:0;display:flex;align-items:flex-end;padding:30px;color:#fff;opacity:0;transform:scale(1.06);transition:opacity .7s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .ref-layer .ph{position:absolute;inset:0}
+  .ref-layer::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(0,0,0,.64),rgba(0,0,0,.05) 46%,transparent)}
+  .ref-layer.on{opacity:1;transform:none}
+  .ref-layer .cap{position:relative;z-index:2;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+  .ref-layer h4{position:relative;z-index:2;font-family:var(--fh);font-weight:700;font-size:clamp(1.5rem,2.6vw,2.3rem);color:#fff;margin-top:6px}
+
+  /* ============ BILDSTREIFEN (horizontaler Parallax) ============ */
+  .strip{padding:10vh 0;overflow:hidden}
+  .strip .cont{margin-bottom:26px}
+  .strip-row{display:flex;gap:22px;padding:0 44px;will-change:transform}
+  .strip-row .cell{flex:0 0 42vw}
+  .strip-row .ph{height:54vh;border-radius:var(--radius)}
+  .strip-row .cell span{display:block;margin-top:12px;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+  /* ============ KENNZAHLEN (invertiertes Band) ============ */
+  .zahlen{background:var(--ink);color:var(--bg);padding:16vh 0}
+  .zahlen .z-head{font-family:var(--fh);font-size:clamp(1.6rem,3.4vw,2.8rem);max-width:20ch;margin-bottom:56px;color:var(--bg)}
+  .zahlen .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+  .zahlen .big{font-family:var(--fh);font-weight:700;font-size:clamp(3rem,7vw,6rem);color:var(--accent);line-height:1}
+  .zahlen .cap{margin-top:10px;font-size:.92rem;color:color-mix(in srgb,var(--bg) 74%,var(--ink))}
+
+  /* ============ KONTAKT + FOOTER ============ */
+  .kontakt{padding:18vh 0}
+  .kontakt h2{font-size:clamp(2.1rem,5.4vw,4.6rem);max-width:15ch}
+  .mail{display:inline-block;margin-top:26px;font-family:var(--fh);font-size:clamp(1.4rem,3.4vw,2.6rem);color:var(--ink);text-decoration:none;border-bottom:1px solid var(--ink)}
+  .mail:hover{color:var(--accent);border-color:var(--accent)}
+  .k-meta{margin-top:34px;display:flex;gap:24px;flex-wrap:wrap;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);align-items:center}
+  .site-footer{padding:48px 0;border-top:1px solid var(--line)}
+  .ft{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .ft a{color:var(--muted);text-decoration:none}.ft a:hover{color:var(--ink)}.ft b{color:var(--ink);font-weight:600}
+
+  @media(max-width:860px){
+    body.hero-split .cover{grid-template-columns:1fr;height:auto;min-height:100vh}
+    body.hero-split .cover-media{height:52vh}
+    .lead-media{margin:0 20px}
+    .ref-grid,.zahlen .grid{grid-template-columns:1fr;gap:30px}
+    .ref-preview{display:none}
+    .strip-row .cell{flex:0 0 76vw}
+    .cont{padding:0 22px}
+    .cover-body,body.hero-stack .cover-body,body.hero-type .cover-body{padding-left:22px;padding-right:22px}
+  }
+</style>
+</head>
+<body class="hero-cover img-full fx-para">
+<div id="prog"></div>
+
+<div id="switcher">
+  <div class="sw-top">
+    <div class="sw-title">VESTA <span>· Studio Scroll-Websites</span></div>
+    <div class="sw-nav"><button id="prev">‹</button><div class="sw-cur"><span id="vnum">1 / 30</span><b id="vname">—</b><em id="vtag">—</em></div><button id="next">›</button></div>
+    <div class="sw-meta" id="vmeta"></div>
+  </div>
+  <div class="sw-chips" id="chips"></div>
+</div>
+
+<div id="site">
+  <!-- COVER / HERO -->
+  <section class="cover">
+    <div class="cover-media reveal-media in"><div class="ph cimg" data-img="cover"></div><div class="scrim"></div></div>
+    <div class="cover-body">
+      <div class="ctop"><b>vesta</b><span>sustainability consulting</span></div>
+      <div class="cinner">
+        <div class="ckicker">Bauphysik · Ökobilanz · Nachhaltigkeit</div>
+        <h1 class="reveal-lines"><span class="ln"><span>Gebäude, die</span></span><span class="ln"><span>über ihren</span></span><span class="ln"><span>Lebenszyklus wirken.</span></span></h1>
+        <div class="ccue">Scrollen</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANIFEST -->
+  <section class="manifest">
+    <div class="cont">
+      <p data-reveal><span class="ln"><span>Wir glauben an die Kraft guter Planung,</span></span> <span class="ln"><span>Gebäude <span class="ac">messbar besser</span> zu machen —</span></span> <span class="ln"><span>ökologisch, ökonomisch, über den</span></span> <span class="ln"><span>gesamten Lebenszyklus.</span></span></p>
+      <div class="m-meta" data-reveal>
+        <div><div class="num">A–D</div><div class="cap">Lebenszyklusphasen im Blick nach EN 15978</div></div>
+        <div><div class="num">DGNB · QNG</div><div class="cap">Zertifizierung nachhaltiger Gebäude</div></div>
+        <div><div class="num">CO₂</div><div class="cap">Emissionen bewerten und gezielt senken</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEITPROJEKT -->
+  <section class="lead-sec">
+    <div class="cont"><div class="lead-top" data-reveal><h2>Leitprojekt</h2><span class="label">Ökobilanz · Bauphysik</span></div></div>
+    <div class="lead-media reveal-media" data-reveal><div class="ph" data-img="lead" data-parallax="0.06"></div></div>
+    <div class="lead-cap" data-reveal>
+      <h3>Quartier im Bestand — saniert statt abgerissen</h3>
+      <p>Ganzheitliche Ökobilanzierung von der frühen Planung bis zur Fertigstellung: graue Energie reduziert, Betriebskosten gesenkt, Fördermittelfähigkeit gesichert.</p>
+    </div>
+  </section>
+
+  <!-- WERKE-INDEX -->
+  <section class="werke" id="werke">
+    <div class="cont">
+      <div class="sec-top" data-reveal><h2>Referenzen &amp; Partner</h2><span class="label">Index · Preview</span></div>
+      <div class="ref-grid">
+        <div class="ref-list" id="reflist">
+          <div class="ref-item active" data-i="0"><span class="k">01</span><h3>Deutscher Alpenverein</h3><span class="m">Projekt</span></div>
+          <div class="ref-item" data-i="1"><span class="k">02</span><h3>Bauindustrie Bayern</h3><span class="m">Partner</span></div>
+          <div class="ref-item" data-i="2"><span class="k">03</span><h3>Riedelbau</h3><span class="m">Projekt</span></div>
+          <div class="ref-item" data-i="3"><span class="k">04</span><h3>Phase H</h3><span class="m">Projekt</span></div>
+          <div class="ref-item" data-i="4"><span class="k">05</span><h3>Lang Hugger Rampp</h3><span class="m">Architektur</span></div>
+          <div class="ref-item" data-i="5"><span class="k">06</span><h3>IKL Ingenieure</h3><span class="m">Projekt</span></div>
+          <div class="ref-item" data-i="6"><span class="k">07</span><h3>Geopard Digital</h3><span class="m">Partner</span></div>
+          <div class="ref-item" data-i="7"><span class="k">08</span><h3>DGNB</h3><span class="m">Zertifizierung</span></div>
+          <div class="ref-item" data-i="8"><span class="k">09</span><h3>Bauplan 21</h3><span class="m">Projekt</span></div>
+        </div>
+        <div class="ref-preview" id="refpreview">
+          <div class="ref-layer on"><div class="ph" data-img="w0"></div><div><span class="cap">01 · Referenzprojekt</span><h4>Deutscher Alpenverein</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w1"></div><div><span class="cap">02 · Partner</span><h4>Bauindustrie Bayern</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w2"></div><div><span class="cap">03 · Referenzprojekt</span><h4>Riedelbau</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w3"></div><div><span class="cap">04 · Referenzprojekt</span><h4>Phase H</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w4"></div><div><span class="cap">05 · Architektur</span><h4>Lang Hugger Rampp</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w5"></div><div><span class="cap">06 · Referenzprojekt</span><h4>IKL Ingenieure</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w6"></div><div><span class="cap">07 · Partner</span><h4>Geopard Digital</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w7"></div><div><span class="cap">08 · Zertifizierung</span><h4>DGNB</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w8"></div><div><span class="cap">09 · Referenzprojekt</span><h4>Bauplan 21</h4></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BILDSTREIFEN -->
+  <section class="strip">
+    <div class="cont"><span class="label" data-reveal>Einblicke · Nachhaltiges Bauen</span></div>
+    <div class="strip-row" id="striprow">
+      <div class="cell"><div class="ph" data-img="s0"></div><span>Material &amp; Kreislauf</span></div>
+      <div class="cell"><div class="ph" data-img="s1"></div><span>Energie &amp; Hülle</span></div>
+      <div class="cell"><div class="ph" data-img="s2"></div><span>Bestand &amp; Umbau</span></div>
+      <div class="cell"><div class="ph" data-img="s3"></div><span>Landschaft &amp; Klima</span></div>
+      <div class="cell"><div class="ph" data-img="s4"></div><span>Detail &amp; Konstruktion</span></div>
+    </div>
+  </section>
+
+  <!-- KENNZAHLEN -->
+  <section class="zahlen">
+    <div class="cont">
+      <div class="z-head" data-reveal>Nachhaltigkeit, die sich rechnen lässt.</div>
+      <div class="grid">
+        <div data-reveal><div class="big"><span class="count" data-to="15978">0</span></div><div class="cap">EN — Norm für Gebäude-Ökobilanzen</div></div>
+        <div data-reveal style="transition-delay:.12s"><div class="big"><span class="count" data-to="100">0</span>%</div><div class="cap">Lebenszyklus im Blick (Phasen A–D)</div></div>
+        <div data-reveal style="transition-delay:.24s"><div class="big"><span class="count" data-to="2">0</span></div><div class="cap">Zertifikate: DGNB &amp; QNG</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="kontakt" id="kontakt">
+    <div class="cont" data-reveal>
+      <span class="label">Kontakt</span>
+      <h2 style="margin-top:16px">Ihr Partner für nachhaltiges Bauen aus München</h2>
+      <a class="mail" href="mailto:info@vesta-consult.de">info@vesta-consult.de</a>
+      <div class="k-meta"><span>Bauphysik · Ökobilanz · Zertifizierung</span><span>c/o ImpactHub · Gotzinger Str. 8 · München</span></div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="cont"><div class="ft"><span>©2026 <b>vesta sustainability consulting UG</b></span><span>c/o ImpactHub · Gotzinger Str. 8 · 81371 München</span><span><a href="#">Instagram</a> · <a href="#">LinkedIn</a> · <a href="#">Impressum</a> · <a href="#">AGB</a></span></div></div>
+  </footer>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+window.addEventListener('error',function(){document.documentElement.classList.remove('js');document.querySelectorAll('[data-reveal]').forEach(e=>e.classList.add('in'));});
+
+/* ---- Bilder zentral: hier tauschen (Unsplash-Platzhalter, später eigene URLs/Dateien) ---- */
+const U=(id,w)=>'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||1600)+'&q=80';
+const IMG={
+  cover:U('1487958449943-2429e8be8625',1920),
+  lead: U('1470723710355-95304d8aece4',1800),
+  w0:U('1449824913935-59a10b8d2000',1200), w1:U('1511818966892-d7d671e672a2',1200),
+  w2:U('1486406146926-c627a92ad1ab',1200), w3:U('1518005020951-eccb494ad742',1200),
+  w4:U('1479839672679-a46483c0e7c8',1200), w5:U('1460574283810-2aab119d8511',1200),
+  w6:U('1600585154340-be6161a56a0c',1200), w7:U('1416331108676-a22ccb276e35',1200),
+  w8:U('1441974231531-c6227db76b6e',1200),
+  s0:U('1523217582562-09d0def993a6',1000), s1:U('1518005020951-eccb494ad742',1000),
+  s2:U('1470723710355-95304d8aece4',1000), s3:U('1441974231531-c6227db76b6e',1000),
+  s4:U('1486406146926-c627a92ad1ab',1000)
+};
+document.querySelectorAll('.ph[data-img]').forEach(p=>{p.style.backgroundImage='url("'+IMG[p.dataset.img]+'")';});
+
+/* ---- Varianten: Palette × Hero × Bild-Treatment × Scroll-FX × Typo ---- */
+const V=[
+  // — HELL —
+  {n:"Beton & Licht",t:"Off-White · Coral · Cover",hero:"cover",img:"full",fx:"para",bg:"#FBFBFA",sf:"#F1F1EF",ink:"#1C1C1A",ac:"#C0553B",r:4,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Weißraum",t:"Off-White · Oversized Type",hero:"type",img:"full",fx:"fade",bg:"#FBFBFA",sf:"#F0F1F0",ink:"#1A1A18",ac:"#2CA58D",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Lehm-Editorial",t:"Sand · Clay · Split",hero:"split",img:"full",fx:"para",bg:"#F1ECE4",sf:"#E6DED2",ink:"#33261E",ac:"#9A4A32",r:2,fh:"'Spectral',serif",fb:"'Source Sans 3',sans-serif"},
+  {n:"Sandstein Index",t:"Sand · Frame · Mask",hero:"cover",img:"frame",fx:"mask",bg:"#F3EFE7",sf:"#EAE4D8",ink:"#241E17",ac:"#8A6A4A",r:2,fh:"'Newsreader',serif",fb:"'Inter',sans-serif"},
+  {n:"Stein & Schatten",t:"Stone Greige · Duotone",hero:"stack",img:"duo",fx:"para",bg:"#ECEAE4",sf:"#E1DED5",ink:"#26251F",ac:"#5E6B60",r:0,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Kalkputz",t:"Stone · Frame · ruhig",hero:"cover",img:"frame",fx:"fade",bg:"#ECEAE4",sf:"#E1DED5",ink:"#211F1A",ac:"#6B6357",r:2,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Waldschnitt",t:"Off-White · Green · Split",hero:"split",img:"full",fx:"mask",bg:"#F7F8F6",sf:"#EDF2EE",ink:"#1E2A24",ac:"#2CA58D",r:6,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Grüner Horizont",t:"Off-White · Green · Duotone",hero:"cover",img:"duo",fx:"para",bg:"#F7F8F6",sf:"#EDF2EE",ink:"#1E2A24",ac:"#2CA58D",r:4,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Marine Editorial",t:"Navy · Oversized Type",hero:"type",img:"full",fx:"para",bg:"#F6F7FA",sf:"#EAEEF4",ink:"#16202E",ac:"#2FA36A",r:2,fh:"'Montserrat',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Navy Monograph",t:"Navy · Duotone · Mask",hero:"cover",img:"duo",fx:"mask",bg:"#F6F7FA",sf:"#EAEEF4",ink:"#16202E",ac:"#2FA36A",r:6,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Creme & Serif",t:"Cream · Espresso · Split",hero:"split",img:"frame",fx:"fade",bg:"#F3EFE7",sf:"#EAE4D8",ink:"#241E17",ac:"#8A6A4A",r:2,fh:"'Newsreader',serif",fb:"'Source Sans 3',sans-serif"},
+  {n:"Papierschnitt",t:"Cream · Lora · Cover",hero:"cover",img:"full",fx:"para",bg:"#F3EFE7",sf:"#EAE4D8",ink:"#241E17",ac:"#8A6A4A",r:0,fh:"'Lora',serif",fb:"'Inter',sans-serif"},
+  {n:"Salbei Studio",t:"Pale Mint · Gold · Stack",hero:"stack",img:"full",fx:"mask",bg:"#F1F5F1",sf:"#E6EFE8",ink:"#1A2B22",ac:"#C9A24B",r:2,fh:"'Spectral',serif",fb:"'Inter',sans-serif"},
+  {n:"Reduktion Hell",t:"Cool White · Instrument",hero:"cover",img:"full",fx:"fade",bg:"#FBFBFA",sf:"#F0F1F0",ink:"#1F2422",ac:"#2CA58D",r:0,fh:"'Instrument Sans',sans-serif",fb:"'Instrument Sans',sans-serif"},
+  {n:"Kupfer & Kalk",t:"Stone · Kupfer · Split",hero:"split",img:"duo",fx:"para",bg:"#F5F4EF",sf:"#E9E7DE",ink:"#231F1A",ac:"#C57B4E",r:2,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+
+  // — DUNKEL —
+  {n:"Nachtstudio",t:"Near-Black · Coral · Cover",dark:true,hero:"cover",img:"full",fx:"para",bg:"#131312",sf:"#1E1E1C",ink:"#ECEAE4",ac:"#C0553B",r:4,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Kohle & Creme",t:"Charcoal · Cream · Split",dark:true,hero:"split",img:"full",fx:"mask",bg:"#1A1917",sf:"#24221E",ink:"#EFE9DE",ac:"#B98E5A",r:2,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Tiefwald",t:"Dark Green · Mint · Duotone",dark:true,hero:"cover",img:"duo",fx:"para",bg:"#12201A",sf:"#1C2B23",ink:"#E7ECE7",ac:"#7FE3C1",r:6,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Obsidian",t:"Ink Black · Mint · Type",dark:true,hero:"type",img:"full",fx:"fade",bg:"#0F0F0F",sf:"#191919",ink:"#EDEDEA",ac:"#3CC98F",r:0,fh:"'Archivo',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Petrol Noir",t:"Dark Petrol · Amber · Stack",dark:true,hero:"stack",img:"full",fx:"para",bg:"#0E2226",sf:"#173135",ink:"#E4EDED",ac:"#E7A878",r:2,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Espresso Noir",t:"Dark Espresso · Gold · Frame",dark:true,hero:"split",img:"frame",fx:"mask",bg:"#1B1512",sf:"#261D18",ink:"#EFE7DC",ac:"#C9A24B",r:0,fh:"'Newsreader',serif",fb:"'Source Sans 3',sans-serif"},
+  {n:"Nacht Editorial",t:"Near-Black · Coral · Duotone",dark:true,hero:"cover",img:"duo",fx:"mask",bg:"#141312",sf:"#201E1B",ink:"#EFE9DE",ac:"#C0553B",r:2,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Waldnacht",t:"Dark Green · Mint · Split",dark:true,hero:"split",img:"full",fx:"para",bg:"#122019",sf:"#1C2B22",ink:"#E7ECE6",ac:"#7FE3C1",r:6,fh:"'Manrope',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Amber Dunkel",t:"Dark Petrol · Amber · Duotone",dark:true,hero:"cover",img:"duo",fx:"fade",bg:"#0E2226",sf:"#173135",ink:"#E4EDED",ac:"#E7A878",r:2,fh:"'Spectral',serif",fb:"'Inter',sans-serif"},
+  {n:"Gold & Kohle",t:"Dark Espresso · Gold · Type",dark:true,hero:"type",img:"full",fx:"para",bg:"#1B1512",sf:"#261D18",ink:"#EFE7DC",ac:"#C9A24B",r:0,fh:"'Spectral',serif",fb:"'Source Sans 3',sans-serif"},
+  {n:"Obsidian Index",t:"Ink Black · Mint · Frame",dark:true,hero:"cover",img:"frame",fx:"mask",bg:"#0F0F0F",sf:"#191919",ink:"#EDEDEA",ac:"#3CC98F",r:2,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Mitternacht Navy",t:"Dark Navy · Green · Cover",dark:true,hero:"cover",img:"full",fx:"para",bg:"#101B29",sf:"#182739",ink:"#E5EAF0",ac:"#3CC98F",r:6,fh:"'Montserrat',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Nachtwald Stack",t:"Dark Green · Gold · Duotone",dark:true,hero:"stack",img:"duo",fx:"mask",bg:"#122019",sf:"#1C2B22",ink:"#E7ECE6",ac:"#C9A24B",r:2,fh:"'Fraunces',serif",fb:"'Inter',sans-serif"},
+  {n:"Kupfer Noir",t:"Dark · Kupfer · Split",dark:true,hero:"split",img:"frame",fx:"para",bg:"#171310",sf:"#221B16",ink:"#EEE6DD",ac:"#C57B4E",r:6,fh:"'Space Grotesk',sans-serif",fb:"'Inter',sans-serif"},
+  {n:"Reine Nacht",t:"Near-Black · Mint · Type",dark:true,hero:"type",img:"full",fx:"fade",bg:"#131313",sf:"#1E1E1C",ink:"#ECEAE4",ac:"#7FE3C1",r:0,fh:"'Instrument Sans',sans-serif",fb:"'Instrument Sans',sans-serif"}
+];
+
+const R=document.documentElement.style, el=id=>document.getElementById(id);
+let cur=0; const fn=s=>s.split(',')[0].replace(/'/g,'');
+const HL={cover:"Hero: Cover",split:"Hero: Split",stack:"Hero: Stack",type:"Hero: Type"};
+const IL={full:"Voll-Farbe",duo:"Duotone",frame:"Gerahmt"};
+const FL={para:"FX: Parallax",mask:"FX: Mask-Reveal",fade:"FX: Fade"};
+
+function apply(i){
+  cur=(i+V.length)%V.length; const v=V[cur];
+  R.setProperty('--bg',v.bg);R.setProperty('--surface',v.sf);R.setProperty('--ink',v.ink);
+  R.setProperty('--accent',v.ac);R.setProperty('--radius',(v.r!=null?v.r:4)+'px');
+  R.setProperty('--fh',v.fh);R.setProperty('--fb',v.fb);
+  document.body.className='hero-'+v.hero+' img-'+v.img+' fx-'+v.fx+(v.dark?' dark':'');
+  el('vnum').textContent=(cur+1)+' / '+V.length;el('vname').textContent=v.n;el('vtag').textContent=v.t;
+  el('vmeta').innerHTML='<span class="pill p-hero">'+HL[v.hero]+'</span><span class="pill p-img">'+IL[v.img]+'</span><span class="pill p-fx">'+FL[v.fx]+'</span><span class="sws"><i style="background:'+v.bg+'"></i><i style="background:'+v.ink+'"></i><i style="background:'+v.ac+'"></i></span><span><b>'+fn(v.fh)+'</b> · <b>'+fn(v.fb)+'</b>'+(v.dark?' · <b>Dark</b>':'')+'</span>';
+  [...el('chips').children].forEach((c,ci)=>c.classList.toggle('on',ci===cur));
+  const a=el('chips').children[cur]; if(a)a.scrollIntoView({block:'nearest',inline:'center'});
+  window.scrollTo({top:0,behavior:'auto'});
+  setTimeout(()=>document.querySelectorAll('[data-reveal],.reveal-media').forEach(e=>{const r=e.getBoundingClientRect();if(r.top<window.innerHeight*0.92)e.classList.add('in');}),40);
+}
+const chips=el('chips');
+V.forEach((v,i)=>{const b=document.createElement('button');b.textContent=i+1;b.style.background=v.dark?v.bg:v.ink;b.style.color=v.dark?v.ink:'#fff';b.title=v.n;b.addEventListener('click',()=>apply(i));chips.appendChild(b);});
+el('prev').addEventListener('click',()=>apply(cur-1));el('next').addEventListener('click',()=>apply(cur+1));
+document.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')apply(cur-1);if(e.key==='ArrowRight')apply(cur+1);});
+
+/* Werke-Index: Hover + Scroll-Sync */
+const refItems=[...document.querySelectorAll('.ref-item')],refLayers=[...document.querySelectorAll('.ref-layer')];
+function setRef(i){refItems.forEach((it,n)=>it.classList.toggle('active',n===i));refLayers.forEach((l,n)=>l.classList.toggle('on',n===i));}
+refItems.forEach((it,i)=>it.addEventListener('mouseenter',()=>setRef(i)));
+
+/* Scroll-Handler: Progress, Cover-Zoom, Parallax, Bildstreifen, Werke-Sync */
+const prog=el('prog'),reflist=el('reflist'),striprow=el('striprow'),cimg=document.querySelector('.cimg');
+const paras=[...document.querySelectorAll('[data-parallax]')];let tick=false;
+function onScroll(){
+  const st=window.scrollY,dh=document.documentElement.scrollHeight-window.innerHeight;
+  prog.style.width=(dh>0?st/dh*100:0)+'%';
+  const para=document.body.classList.contains('fx-para');
+  // Cover-Zoom (Signatur — immer sanft aktiv)
+  if(cimg&&st<window.innerHeight){cimg.style.transform='scale(1.08) translateY('+(st*0.05)+'px)';}
+  // vertikaler Parallax nur bei fx-para
+  paras.forEach(e=>{if(!para){e.style.transform='';return;}const r=e.getBoundingClientRect();const off=(window.innerHeight/2-(r.top+r.height/2));e.style.transform='translateY('+(off*parseFloat(e.dataset.parallax))+'px)';});
+  // horizontaler Bildstreifen-Drift bei fx-para
+  if(striprow){if(!para){striprow.style.transform='';}else{const r=striprow.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0){const p=(window.innerHeight-r.top)/(window.innerHeight+r.height);striprow.style.transform='translateX('+((0.5-p)*280)+'px)';}}}
+  // Werke-Index folgt dem Scroll
+  if(reflist){const s=reflist.getBoundingClientRect();if(s.top<window.innerHeight&&s.bottom>0){const mid=window.innerHeight*0.42;let best=0,bd=1e9;refItems.forEach((it,i)=>{const r=it.getBoundingClientRect();const d=Math.abs((r.top+r.height/2)-mid);if(d<bd){bd=d;best=i;}});setRef(best);}}
+  tick=false;
+}
+window.addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(onScroll);tick=true;}},{passive:true});
+window.addEventListener('resize',onScroll);
+
+/* Reveal + Masken */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('in');}),{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('[data-reveal],.reveal-media').forEach(e=>io.observe(e));
+
+/* Count-up */
+const cIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el2=e.target,to=+el2.dataset.to,t0=performance.now();function t(x){const k=Math.min((x-t0)/1200,1),ez=1-Math.pow(1-k,3);el2.textContent=Math.round(to*ez).toLocaleString('de-DE');if(k<1)requestAnimationFrame(t);}requestAnimationFrame(t);cIO.unobserve(el2);}}),{threshold:.6});
+document.querySelectorAll('.count').forEach(e=>cIO.observe(e));
+
+apply(0); onScroll();
+</script>
+</body>
+</html>

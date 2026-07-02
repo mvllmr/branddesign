@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>vesta · Bauphysik & Nachhaltigkeitsberatung für Gebäude und Quartiere</title>
+<meta name="description" content="vesta sustainability consulting — Bauphysik, Ökobilanzierung und Nachhaltigkeitsberatung für Gebäude und Quartiere. DGNB, QNG, EN 15978. Aus München." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     VESTA — synthetisiert aus Farb-, Schrift-, Layout- & Brand-Recherche
+     Farbe:  Petrol #14505E (Marke) · Kupfer #C57B4E (Akzent 10%) · Warm-Neutral
+             → zurück zu Grün? Nur --brand + --brand-deep tauschen.
+     Typo:   Fraunces (Display) · Archivo (Struktur/Labels) · Inter (Text)
+     Layout: Swiss-Grid, 8px-Raster, 60/30/10, ein Primär-CTA/View, Radius 6px
+     ============================================================ */
+  :root{
+    --brand:#14505E;        /* Petrol — Marke & Primär-CTA */
+    --brand-deep:#0E3D48;   /* dunkles Petrol — Hover, dunkle Bänder */
+    --brand-tint:#E7EFF0;   /* helles Petrol — zarte Flächen */
+    --brand-soft:#6FA0A9;   /* helles Teal — Linien auf dunkel, Zweitakzent */
+    --accent:#C57B4E;       /* Kupfer — 10% Akzent, Daten/Detail */
+    --bg:#F7F7F4;           /* warmes Off-White (70%) */
+    --surface:#FFFFFF;      /* Karten */
+    --alt:#EFEFEA;          /* alternierendes Band */
+    --ink:#26302E;          /* Primärtext */
+    --muted:#5B635F;        /* Sekundärtext */
+    --faint:#8A8F89;        /* Tertiär */
+    --line:#E3E2DA;         /* Rahmen/Trenner */
+    --line2:#CFCEC4;
+    --radius:6px;
+    --fd:'Archivo',sans-serif;  /* Display (serifenlos) */
+    --fh:'Archivo',sans-serif;  /* Struktur/Labels */
+    --fb:'Inter',sans-serif;    /* Text */
+    --maxw:1240px;
+    --pad:40px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--fd);font-weight:700;line-height:1.06;letter-spacing:-.022em;color:var(--ink)}
+  a{color:inherit}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--brand);color:#fff}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:3px}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+  .eyebrow{font-family:var(--fh);font-weight:600;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:11px}
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--accent);flex:none}
+  section{padding:104px 0}
+  .lead{font-size:1.18rem;color:var(--muted);max-width:56ch;line-height:1.6}
+
+  /* Skip link */
+  .skip{position:absolute;left:-999px;top:0;z-index:300;background:var(--brand);color:#fff;padding:12px 20px;border-radius:var(--radius)}
+  .skip:focus{left:16px;top:16px}
+
+  /* Reveal (respektiert reduced-motion) */
+  [data-r]{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  [data-r].in{opacity:1;transform:none}
+  [data-r][data-d="1"]{transition-delay:.08s}[data-r][data-d="2"]{transition-delay:.16s}[data-r][data-d="3"]{transition-delay:.24s}
+
+  /* ===== Buttons — alle Zustände, ein Primär pro View ===== */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fb);font-weight:600;font-size:.96rem;line-height:1;text-decoration:none;cursor:pointer;border-radius:var(--radius);min-height:46px;padding:0 24px;border:1.5px solid transparent;transition:background-color .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+  .btn .arw{transition:transform .25s}
+  .btn:hover .arw{transform:translateX(4px)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-deep);transform:translateY(-2px);box-shadow:0 10px 24px rgba(20,80,94,.24)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-outline{border-color:var(--line2);color:var(--ink);background:transparent}
+  .btn-outline:hover{border-color:var(--brand);color:var(--brand)}
+  .btn-text{padding:0;min-height:0;border:0;color:var(--ink);border-bottom:1.5px solid var(--ink);border-radius:0;padding-bottom:4px}
+  .btn-text:hover{color:var(--brand);border-color:var(--brand)}
+  .btn-ghost-light{border-color:rgba(255,255,255,.4);color:#fff}
+  .btn-ghost-light:hover{border-color:#fff;background:rgba(255,255,255,.1)}
+
+  /* ===== Header ===== */
+  header.site{position:sticky;top:0;z-index:100;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .hd{max-width:var(--maxw);margin:0 auto;padding:16px var(--pad);display:flex;align-items:center;gap:28px}
+  .logo{display:flex;flex-direction:column;line-height:1.02;text-decoration:none}
+  .logo b{font-family:var(--fh);font-weight:700;font-size:1.28rem;letter-spacing:-.02em;color:var(--ink)}
+  .logo span{font-family:var(--fh);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600}
+  nav.main{display:flex;gap:28px;margin-left:22px}
+  nav.main a{font-family:var(--fh);font-size:.82rem;font-weight:500;letter-spacing:.02em;text-decoration:none;color:var(--muted);padding:6px 0;position:relative}
+  nav.main a::after{content:"";position:absolute;left:0;bottom:0;height:1.5px;width:0;background:var(--brand);transition:width .25s}
+  nav.main a:hover{color:var(--ink)}nav.main a:hover::after{width:100%}
+  .hd-cta{margin-left:auto;display:flex;align-items:center;gap:18px}
+  .hd-loc{font-family:var(--fh);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+  .burger{display:none;margin-left:auto;background:none;border:1px solid var(--line2);border-radius:var(--radius);width:44px;height:44px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+  .burger i{width:18px;height:2px;background:var(--ink);display:block}
+
+  /* ===== Hero (Split, Z-Pattern, kein Karussell) ===== */
+  .hero{padding:88px 0 96px}
+  .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:64px;align-items:center}
+  .hero h1{font-size:clamp(2.6rem,5.6vw,4.7rem);max-width:15ch}
+  .hero .lead{margin-top:26px}
+  .hero-actions{margin-top:38px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .hero-media{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/5;border:1px solid var(--line);background:var(--brand-tint)}
+  .hero-media .ph{position:absolute;inset:-8% 0;height:116%;background-size:cover;background-position:center;will-change:transform}
+  .hero-media .chip{position:absolute;left:18px;bottom:18px;right:18px;background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;display:flex;align-items:center;gap:16px}
+  .hero-media .chip .k{font-family:var(--fh);font-weight:700;font-size:1.5rem;color:var(--brand);line-height:1}
+  .hero-media .chip .t{font-size:.82rem;color:var(--muted);line-height:1.35}
+
+  /* ===== Trust-Leiste ===== */
+  .trust{padding:34px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--alt)}
+  .trust .wrap{display:flex;align-items:center;gap:34px;flex-wrap:wrap}
+  .trust .lbl{font-family:var(--fh);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  .trust ul{list-style:none;display:flex;gap:30px;flex-wrap:wrap;margin-left:auto}
+  .trust li{font-family:var(--fh);font-weight:600;font-size:.98rem;letter-spacing:.02em;color:var(--ink);display:flex;align-items:center;gap:9px}
+  .trust li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--brand-soft)}
+
+  /* ===== Section head ===== */
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:52px}
+  .sec-head h2{font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:20ch}
+  .sec-head .side{max-width:34ch;color:var(--muted);font-size:.98rem;text-align:right}
+  .idx{font-family:var(--fh);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:600}
+
+  /* ===== Leistungen (Karten, gleichförmig — Ähnlichkeit) ===== */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px 28px 32px;display:flex;flex-direction:column;transition:border-color .3s,transform .3s,box-shadow .3s}
+  .card:hover{border-color:var(--line2);transform:translateY(-4px);box-shadow:0 14px 34px rgba(38,48,46,.09)}
+  .card .n{font-family:var(--fh);font-weight:700;font-size:.82rem;letter-spacing:.14em;color:var(--accent)}
+  .card h3{font-family:var(--fd);font-size:1.42rem;margin:16px 0 12px;line-height:1.12}
+  .card p{color:var(--muted);font-size:.97rem}
+  .card ul{list-style:none;margin-top:18px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:9px}
+  .card li{font-size:.9rem;color:var(--ink);display:flex;gap:10px;align-items:flex-start}
+  .card li::before{content:"";width:7px;height:7px;margin-top:7px;flex:none;background:var(--brand);border-radius:1px}
+
+  /* ===== Ansatz / Lebenszyklus (Sticky-Scroll) ===== */
+  .ansatz{background:var(--alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .cycle{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:start}
+  .cycle-sticky{position:sticky;top:120px}
+  .cycle-sticky h2{font-size:clamp(1.9rem,3.4vw,2.8rem);margin:16px 0 20px}
+  .cycle-sticky .lead{font-size:1.05rem}
+  .cycle-sticky .badge{margin-top:26px;display:inline-flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:12px 18px;font-family:var(--fh);font-weight:600;font-size:.86rem;color:var(--brand)}
+  .phases{display:flex;flex-direction:column;gap:14px}
+  .phase{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px 26px;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start}
+  .phase .mod{font-family:var(--fh);font-weight:700;font-size:1.05rem;color:#fff;background:var(--brand);border-radius:var(--radius);min-width:58px;height:44px;display:flex;align-items:center;justify-content:center;letter-spacing:.02em}
+  .phase.d .mod{background:var(--accent)}
+  .phase h3{font-family:var(--fd);font-size:1.24rem;margin-bottom:6px}
+  .phase p{color:var(--muted);font-size:.94rem}
+
+  /* ===== Wirkung-Band (dunkles Petrol) ===== */
+  .impact{background:var(--brand-deep);color:#fff;position:relative;overflow:hidden}
+  .impact::after{content:"";position:absolute;right:-6%;top:-30%;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(111,160,169,.22),transparent 62%)}
+  .impact .wrap{position:relative;z-index:1}
+  .impact .eyebrow{color:rgba(255,255,255,.72)}
+  .impact .eyebrow::before{background:var(--accent)}
+  .impact h2{color:#fff;font-size:clamp(2rem,4.4vw,3.4rem);max-width:20ch;margin:18px 0 0}
+  .impact p{color:rgba(255,255,255,.8);max-width:52ch;margin-top:22px;font-size:1.08rem}
+  .impact .actions{margin-top:36px}
+
+  /* ===== Kennzahlen / Grundlagen ===== */
+  .facts{border-top:1px solid rgba(255,255,255,.16);margin-top:64px;padding-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+  .fact .big{font-family:var(--fd);font-weight:600;font-size:clamp(2.2rem,4vw,3.1rem);color:#fff;line-height:1}
+  .fact .big .u{color:var(--brand-soft)}
+  .fact .cap{margin-top:10px;font-size:.9rem;color:rgba(255,255,255,.68)}
+
+  /* ===== Referenzen (Index + Sticky Preview) ===== */
+  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .ref-list{border-top:1px solid var(--line)}
+  .ref-item{display:flex;gap:16px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--line);cursor:pointer;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;font:inherit}
+  .ref-item .k{font-family:var(--fh);font-weight:700;font-size:.78rem;color:var(--accent);min-width:26px}
+  .ref-item h3{font-family:var(--fd);font-size:clamp(1.15rem,2vw,1.7rem);opacity:.42;transition:opacity .3s,transform .4s cubic-bezier(.16,1,.3,1)}
+  .ref-item .m{margin-left:auto;font-family:var(--fh);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .3s}
+  .ref-item.active h3,.ref-item:hover h3{opacity:1;transform:translateX(9px)}
+  .ref-item.active .m{opacity:1}
+  .ref-preview{position:sticky;top:110px;height:74vh;min-height:440px;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);background:var(--brand-deep)}
+  .ref-layer{position:absolute;inset:0;opacity:0;transform:scale(1.05);transition:opacity .7s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .ref-layer .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+  .ref-layer::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,42,50,.82),rgba(10,42,50,.1) 48%,transparent)}
+  .ref-layer .cap{position:absolute;left:28px;bottom:28px;right:28px;z-index:2;color:#fff}
+  .ref-layer .cap span{font-family:var(--fh);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .ref-layer .cap h4{font-family:var(--fd);font-weight:600;color:#fff;font-size:clamp(1.5rem,2.4vw,2.2rem);margin-top:6px}
+  .ref-layer.on{opacity:1;transform:none}
+
+  /* ===== Kontakt ===== */
+  .kontakt h2{font-size:clamp(2.2rem,5vw,4rem);max-width:16ch}
+  .kontakt .lead{margin-top:22px}
+  .mail{display:inline-block;margin-top:30px;font-family:var(--fd);font-size:clamp(1.5rem,3.4vw,2.6rem);color:var(--brand);text-decoration:none;border-bottom:1.5px solid var(--brand);transition:color .2s,border-color .2s}
+  .mail:hover{color:var(--brand-deep);border-color:var(--brand-deep)}
+  .k-actions{margin-top:38px;display:flex;gap:20px;flex-wrap:wrap;align-items:center}
+  .k-info{margin-top:44px;display:flex;gap:44px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
+  .k-info div span{font-family:var(--fh);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
+  .k-info div p{font-size:.98rem;color:var(--ink)}
+
+  /* ===== Footer ===== */
+  footer.site{background:var(--ink);color:#d9dcd6;padding:72px 0 40px}
+  .ft-top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,.12)}
+  footer.site .logo b{color:#fff}footer.site .logo span{color:#9aa09a}
+  .ft-top p{font-size:.92rem;color:#9aa09a;margin-top:16px;max-width:34ch}
+  .ft-col h4{font-family:var(--fh);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+  .ft-col a{display:block;font-size:.92rem;color:#b7bbb4;text-decoration:none;padding:5px 0}
+  .ft-col a:hover{color:#fff}
+  .ft-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-family:var(--fh);font-size:.76rem;letter-spacing:.06em;color:#8a8f88}
+
+  /* ===== Scroll-Progress (dezent) ===== */
+  #prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--brand);z-index:200}
+
+  /* ===== Responsive ===== */
+  @media(max-width:980px){
+    .hero-grid,.cycle,.ref-grid{grid-template-columns:1fr;gap:44px}
+    .cycle-sticky{position:static}
+    .ref-preview{display:none}
+    .svc-grid{grid-template-columns:1fr}
+    .facts{grid-template-columns:repeat(2,1fr)}
+    .ft-top{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:720px){
+    :root{--pad:22px}
+    section{padding:72px 0}
+    nav.main,.hd-loc{display:none}
+    .burger{display:flex}
+    .hd-cta .btn{display:none}
+    .sec-head{flex-direction:column;align-items:flex-start}
+    .sec-head .side{text-align:left}
+    .facts{grid-template-columns:1fr 1fr;gap:22px}
+    .ft-top{grid-template-columns:1fr}
+    .trust ul{margin-left:0}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    [data-r]{opacity:1!important;transform:none!important;transition:none!important}
+    .hero-media .ph{position:absolute;inset:0;height:100%}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div id="prog"></div>
+
+<header class="site">
+  <div class="hd">
+    <a class="logo" href="#top" aria-label="vesta sustainability consulting — Startseite"><b>vesta</b><span>sustainability consulting</span></a>
+    <nav class="main" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#ansatz">Ansatz</a>
+      <a href="#referenzen">Referenzen</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="hd-cta">
+      <span class="hd-loc">München</span>
+      <a class="btn btn-primary" href="#kontakt">Erstberatung anfragen <span class="arw">→</span></a>
+    </div>
+    <button class="burger" aria-label="Menü" onclick="document.querySelector('nav.main').scrollIntoView()"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow" data-r>Bauphysik · Ökobilanz · Nachhaltigkeit</span>
+        <h1 data-r style="margin-top:22px">Gebäude, die über ihren Lebenszyklus überzeugen.</h1>
+        <p class="lead" data-r data-d="1">Wir begleiten Planung und Umsetzung nachhaltiger, energieeffizienter Gebäude und Quartiere — mit belastbaren Kennzahlen statt vager Versprechen.</p>
+        <div class="hero-actions" data-r data-d="2">
+          <a class="btn btn-primary" href="#kontakt">Erstberatung anfragen <span class="arw">→</span></a>
+          <a class="btn btn-text" href="#leistungen">Unsere Leistungen</a>
+        </div>
+      </div>
+      <div class="hero-media" data-r data-d="1">
+        <div class="ph" data-img="hero"></div>
+        <div class="chip">
+          <span class="k">EN 15978</span>
+          <span class="t">Ökobilanz über den gesamten Lebenszyklus — Phasen A bis D.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST -->
+  <div class="trust">
+    <div class="wrap">
+      <span class="lbl">Arbeitsgrundlagen &amp; Standards</span>
+      <ul>
+        <li>DGNB</li><li>QNG</li><li>EN 15978</li><li>EU-Taxonomie</li><li>GEG</li><li>ESG</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="idx">(01) Leistungen</span><h2 style="margin-top:14px">Drei Felder, ein Ziel: messbar nachhaltige Gebäude.</h2></div>
+        <p class="side">Von der frühen Planungsphase bis nach Fertigstellung — für Zertifizierung, Wettbewerbe, B-Pläne und Fördermittel.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="card" data-r>
+          <span class="n">01</span>
+          <h3>Nachhaltigkeitsberatung &amp; Zertifizierung</h3>
+          <p>Wir führen Ihr Projekt strukturiert durch Zertifizierung und Nachweise — mit klaren Kriterien und belastbarer Dokumentation.</p>
+          <ul>
+            <li>Zertifizierungen nach DGNB und QNG</li>
+            <li>Lebenszykluskostenanalysen</li>
+            <li>Konformitätsprüfung nach EU-Taxonomie und ESG</li>
+            <li>Individuelle Nachhaltigkeitskonzepte</li>
+          </ul>
+        </article>
+        <article class="card" data-r data-d="1">
+          <span class="n">02</span>
+          <h3>Ökobilanzierung für Gebäude &amp; Quartiere</h3>
+          <p>Umweltwirkungen bewerten und gezielt optimieren — auf Gebäude- und Portfolioebene, in jeder Projektphase.</p>
+          <ul>
+            <li>Bilanzierung auf Gebäude- und Portfolioebene</li>
+            <li>Von der frühen Planung bis nach Fertigstellung</li>
+            <li>Für Zertifizierungen, B-Pläne, Wettbewerbe</li>
+            <li>Grundlage für Fördermittelanträge</li>
+          </ul>
+        </article>
+        <article class="card" data-r data-d="2">
+          <span class="n">03</span>
+          <h3>Bauphysik für Energieeffizienz &amp; Komfort</h3>
+          <p>Wir optimieren die physikalische Qualität Ihres Gebäudes — für weniger Verluste, mehr Komfort und geringere Betriebskosten.</p>
+          <ul>
+            <li>Energiebilanzierungen &amp; thermische Simulationen</li>
+            <li>Sommerlicher Wärmeschutz &amp; Wärmebrücken</li>
+            <li>Sanierungskonzepte</li>
+            <li>Klimarisikoanalysen</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANSATZ / LEBENSZYKLUS -->
+  <section class="ansatz" id="ansatz">
+    <div class="wrap cycle">
+      <div class="cycle-sticky" data-r>
+        <span class="idx">(02) Ansatz</span>
+        <h2>Der ganze Lebenszyklus — nach EN 15978.</h2>
+        <p class="lead">Nachhaltigkeit endet nicht bei der Fertigstellung. Wir bewerten jede Phase — von der Herstellung der Materialien bis zum Recyclingpotenzial nach dem Rückbau — und machen Wirkung vergleichbar.</p>
+        <div class="badge">Module A · B · C · D</div>
+      </div>
+      <div class="phases">
+        <div class="phase" data-r>
+          <span class="mod">A1–A3</span>
+          <div><h3>Herstellung</h3><p>Rohstoffe, Transport und Produktion der Baustoffe — die „graue Energie", die vor dem ersten Tag entsteht.</p></div>
+        </div>
+        <div class="phase" data-r data-d="1">
+          <span class="mod">A4–A5</span>
+          <div><h3>Errichtung</h3><p>Transport zur Baustelle und Bauprozess — Emissionen und Ressourcen der Bauphase.</p></div>
+        </div>
+        <div class="phase" data-r data-d="2">
+          <span class="mod">B1–B7</span>
+          <div><h3>Nutzung</h3><p>Betrieb, Instandhaltung, Energie- und Wasserverbrauch über die gesamte Nutzungsdauer.</p></div>
+        </div>
+        <div class="phase" data-r>
+          <span class="mod">C1–C4</span>
+          <div><h3>Entsorgung</h3><p>Rückbau, Transport und Verwertung am Ende der Lebensdauer.</p></div>
+        </div>
+        <div class="phase d" data-r data-d="1">
+          <span class="mod">D</span>
+          <div><h3>Darüber hinaus</h3><p>Potenziale jenseits der Systemgrenze — Wiederverwendung und Recycling als Gutschrift für die Zukunft.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIRKUNG -->
+  <section class="impact">
+    <div class="wrap">
+      <span class="eyebrow" data-r>Wirkung</span>
+      <h2 data-r data-d="1">Nachhaltiges Bauen sichert Wert und schützt die Umwelt.</h2>
+      <p data-r data-d="2">Belastbare Lebenszyklus-Bewertung statt vager Nachhaltigkeitsversprechen: Wir liefern die Kennzahlen, mit denen sich Entscheidungen begründen, Förderungen sichern und Emissionen nachweislich senken lassen.</p>
+      <div class="actions" data-r data-d="2"><a class="btn btn-ghost-light" href="#kontakt">Projekt besprechen <span class="arw">→</span></a></div>
+
+      <div class="facts">
+        <div class="fact" data-r><div class="big"><span class="count" data-to="15978">0</span></div><div class="cap">EN — Norm für Gebäude-Ökobilanzen</div></div>
+        <div class="fact" data-r data-d="1"><div class="big">A<span class="u">–</span>D</div><div class="cap">Lebenszyklusphasen vollständig im Blick</div></div>
+        <div class="fact" data-r data-d="2"><div class="big"><span class="count" data-to="2">0</span></div><div class="cap">Zertifizierungssysteme: DGNB &amp; QNG</div></div>
+        <div class="fact" data-r data-d="3"><div class="big"><span class="count" data-to="3">0</span></div><div class="cap">Leistungsfelder aus einer Hand</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENZEN -->
+  <section id="referenzen">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="idx">(03) Referenzen &amp; Partner</span><h2 style="margin-top:14px">Vertrauen aus gemeinsamen Projekten.</h2></div>
+        <p class="side">Auswahl aus Projekten und Partnerschaften — von Verbänden bis zu Architektur- und Ingenieurbüros.</p>
+      </div>
+      <div class="ref-grid">
+        <div class="ref-list" id="reflist">
+          <button class="ref-item active" data-i="0"><span class="k">01</span><h3>Deutscher Alpenverein</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="1"><span class="k">02</span><h3>Bauindustrie Bayern</h3><span class="m">Partner</span></button>
+          <button class="ref-item" data-i="2"><span class="k">03</span><h3>Riedelbau</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="3"><span class="k">04</span><h3>Phase H</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="4"><span class="k">05</span><h3>Lang Hugger Rampp</h3><span class="m">Architektur</span></button>
+          <button class="ref-item" data-i="5"><span class="k">06</span><h3>IKL Ingenieure</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="6"><span class="k">07</span><h3>Geopard Digital</h3><span class="m">Partner</span></button>
+          <button class="ref-item" data-i="7"><span class="k">08</span><h3>DGNB</h3><span class="m">Zertifizierung</span></button>
+          <button class="ref-item" data-i="8"><span class="k">09</span><h3>Bauplan 21</h3><span class="m">Projekt</span></button>
+        </div>
+        <div class="ref-preview" id="refpreview" aria-hidden="true">
+          <div class="ref-layer on"><div class="ph" data-img="w0"></div><div class="cap"><span>01 · Referenzprojekt</span><h4>Deutscher Alpenverein</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w1"></div><div class="cap"><span>02 · Partner</span><h4>Bauindustrie Bayern</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w2"></div><div class="cap"><span>03 · Referenzprojekt</span><h4>Riedelbau</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w3"></div><div class="cap"><span>04 · Referenzprojekt</span><h4>Phase H</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w4"></div><div class="cap"><span>05 · Architektur</span><h4>Lang Hugger Rampp</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w5"></div><div class="cap"><span>06 · Referenzprojekt</span><h4>IKL Ingenieure</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w6"></div><div class="cap"><span>07 · Partner</span><h4>Geopard Digital</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w7"></div><div class="cap"><span>08 · Zertifizierung</span><h4>DGNB</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w8"></div><div class="cap"><span>09 · Referenzprojekt</span><h4>Bauplan 21</h4></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="kontakt" id="kontakt">
+    <div class="wrap" data-r>
+      <span class="idx">(04) Kontakt</span>
+      <h2 style="margin-top:14px">Ihr Partner für nachhaltiges Bauen aus München.</h2>
+      <p class="lead">Sie suchen Expertise für energieeffiziente, nachhaltige Gebäude? Schreiben Sie uns — wir melden uns persönlich.</p>
+      <a class="mail" href="mailto:info@vesta-consult.de">info@vesta-consult.de</a>
+      <div class="k-actions">
+        <a class="btn btn-primary" href="mailto:info@vesta-consult.de">Erstberatung anfragen <span class="arw">→</span></a>
+        <a class="btn btn-outline" href="#leistungen">Leistungen ansehen</a>
+      </div>
+      <div class="k-info">
+        <div><span>Adresse</span><p>c/o ImpactHub<br>Gotzinger Str. 8 · 81371 München</p></div>
+        <div><span>E-Mail</span><p>info@vesta-consult.de</p></div>
+        <div><span>Schwerpunkte</span><p>Bauphysik · Ökobilanz · Zertifizierung</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <a class="logo" href="#top"><b>vesta</b><span>sustainability consulting</span></a>
+        <p>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere — aus München.</p>
+      </div>
+      <div class="ft-col">
+        <h4>Leistungen</h4>
+        <a href="#leistungen">Nachhaltigkeitsberatung</a>
+        <a href="#leistungen">Ökobilanzierung</a>
+        <a href="#leistungen">Bauphysik</a>
+      </div>
+      <div class="ft-col">
+        <h4>Unternehmen</h4>
+        <a href="#ansatz">Ansatz</a>
+        <a href="#referenzen">Referenzen</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="ft-col">
+        <h4>Rechtliches</h4>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">AGB</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 vesta sustainability consulting UG</span>
+      <span>c/o ImpactHub · Gotzinger Str. 8 · 81371 München</span>
+      <span>LinkedIn · Instagram</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---- Bilder zentral (Unsplash-Platzhalter → später eigene URLs/Dateien) ---- */
+const U=(id,w)=>'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||1400)+'&q=80';
+const IMG={
+  hero:U('1518005020951-eccb494ad742',1400),
+  w0:U('1449824913935-59a10b8d2000',1200), w1:U('1511818966892-d7d671e672a2',1200),
+  w2:U('1486406146926-c627a92ad1ab',1200), w3:U('1470723710355-95304d8aece4',1200),
+  w4:U('1479839672679-a46483c0e7c8',1200), w5:U('1460574283810-2aab119d8511',1200),
+  w6:U('1600585154340-be6161a56a0c',1200), w7:U('1416331108676-a22ccb276e35',1200),
+  w8:U('1441974231531-c6227db76b6e',1200)
+};
+document.querySelectorAll('.ph[data-img]').forEach(p=>{p.style.backgroundImage='url("'+IMG[p.dataset.img]+'")';});
+
+/* ---- Reveal ---- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('[data-r]').forEach(e=>io.observe(e));
+
+/* ---- Count-up ---- */
+const cIO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const el=e.target,to=+el.dataset.to,t0=performance.now();(function t(x){const k=Math.min((x-t0)/1300,1),ez=1-Math.pow(1-k,3);el.textContent=Math.round(to*ez).toLocaleString('de-DE');if(k<1)requestAnimationFrame(t);})(t0);cIO.unobserve(el);}}),{threshold:.6});
+document.querySelectorAll('.count').forEach(e=>cIO.observe(e));
+
+/* ---- Referenzen: Hover + Scroll-Sync ---- */
+const items=[...document.querySelectorAll('.ref-item')],layers=[...document.querySelectorAll('.ref-layer')],reflist=document.getElementById('reflist');
+function setRef(i){items.forEach((it,n)=>it.classList.toggle('active',n===i));layers.forEach((l,n)=>l.classList.toggle('on',n===i));}
+items.forEach((it,i)=>{it.addEventListener('mouseenter',()=>setRef(i));it.addEventListener('focus',()=>setRef(i));});
+
+/* ---- Scroll: Progress, Hero-Parallax, Referenz-Sync ---- */
+const prog=document.getElementById('prog'),heroPh=document.querySelector('.hero-media .ph');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let tick=false;
+function onScroll(){
+  const st=scrollY,dh=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(dh>0?st/dh*100:0)+'%';
+  if(!reduce&&heroPh&&st<innerHeight){heroPh.style.transform='translateY('+(st*0.06)+'px)';}
+  if(reflist){const s=reflist.getBoundingClientRect();if(s.top<innerHeight&&s.bottom>0){const mid=innerHeight*0.42;let best=0,bd=1e9;items.forEach((it,i)=>{const r=it.getBoundingClientRect(),d=Math.abs((r.top+r.height/2)-mid);if(d<bd){bd=d;best=i;}});setRef(best);}}
+  tick=false;
+}
+addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(onScroll);tick=true;}},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+</script>
+</body>
+</html>

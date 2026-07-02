@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>vesta · Nachhaltiges Bauen. Belastbar, ohne grüne Versprechen.</title>
+<meta name="description" content="vesta sustainability consulting — Bauphysik, Ökobilanz und Zertifizierung für Gebäude und Quartiere. DGNB, QNG, EN 15978. Aus München." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     VESTA · N26-Stil — geometrische Sans, viel Weißraum,
+     alternierende Feature-Panels, schwebende UI-Karten, Petrol-CTAs.
+     ============================================================ */
+  :root{
+    --ink:#141719;--bg:#ffffff;--muted:#5c635f;--faint:#8b918c;
+    --brand:#14505E;--brand-deep:#0E3D48;--brand-soft:#6FA0A9;
+    --accent:#C57B4E;
+    --p-teal:#E4EFEF;--p-sand:#F4ECE0;--p-mint:#E7F1EA;--p-grey:#F2F4F3;
+    --line:#E9E9E3;--line2:#DBDBD2;
+    --r:26px;--rb:12px;
+    --fh:'Poppins',sans-serif;--fb:'Inter',sans-serif;
+    --maxw:1200px;--pad:40px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--fh);font-weight:700;line-height:1.05;letter-spacing:-.025em;color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--brand);color:#fff}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+  section{padding:110px 0}
+  .eyebrow{font-family:var(--fh);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+  .skip{position:absolute;left:-999px;top:0;z-index:400;background:var(--brand);color:#fff;padding:12px 20px;border-radius:var(--rb)}
+  .skip:focus{left:16px;top:16px}
+
+  /* Reveal */
+  [data-r]{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  [data-r].in{opacity:1;transform:none}
+  [data-r][data-d="1"]{transition-delay:.09s}[data-r][data-d="2"]{transition-delay:.18s}[data-r][data-d="3"]{transition-delay:.27s}
+
+  /* Buttons */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fb);font-weight:600;font-size:1rem;line-height:1;cursor:pointer;border-radius:var(--rb);min-height:52px;padding:0 28px;border:1.5px solid transparent;transition:background-color .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+  .btn .arw{transition:transform .25s}.btn:hover .arw{transform:translateX(4px)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-deep);transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,80,94,.26)}
+  .btn-primary:active{transform:translateY(0)}
+  .btn-light{background:#fff;color:var(--ink);border-color:var(--line2)}
+  .btn-light:hover{border-color:var(--brand);color:var(--brand)}
+  .btn-ghost-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .link-arw{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--brand)}
+  .link-arw .arw{transition:transform .25s}.link-arw:hover .arw{transform:translateX(4px)}
+
+  /* Header */
+  header.site{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .hd{max-width:var(--maxw);margin:0 auto;padding:15px var(--pad);display:flex;align-items:center;gap:30px}
+  .logo{display:flex;flex-direction:column;line-height:1}
+  .logo b{font-family:var(--fh);font-weight:800;font-size:1.34rem;letter-spacing:-.03em}
+  .logo span{font-family:var(--fh);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:2px}
+  nav.main{display:flex;gap:26px;margin-left:14px}
+  nav.main a{font-family:var(--fh);font-size:.9rem;font-weight:500;color:var(--muted);padding:6px 0;position:relative}
+  nav.main a:hover{color:var(--ink)}
+  .hd-cta{margin-left:auto;display:flex;align-items:center;gap:16px}
+  .hd-login{font-family:var(--fh);font-weight:600;font-size:.9rem;color:var(--ink)}
+  .btn-sm{min-height:44px;padding:0 20px;font-size:.92rem}
+  .burger{display:none;margin-left:auto;background:none;border:1px solid var(--line2);border-radius:var(--rb);width:46px;height:46px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+  .burger i{width:18px;height:2px;background:var(--ink)}
+
+  /* Hero */
+  .hero{padding:96px 0 104px}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:60px;align-items:center}
+  .hero h1{font-size:clamp(2.7rem,6vw,4.9rem);letter-spacing:-.035em}
+  .hero h1 .fade{color:var(--muted)}
+  .hero .sub{font-size:1.22rem;color:var(--muted);max-width:44ch;margin-top:26px}
+  .hero-actions{margin-top:38px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .hero-trust{margin-top:40px;display:flex;gap:22px;flex-wrap:wrap;align-items:center;font-family:var(--fh);font-weight:600;font-size:.82rem;color:var(--faint)}
+  .hero-trust b{color:var(--ink)}
+  .hero-trust .dot{width:5px;height:5px;border-radius:50%;background:var(--brand-soft)}
+
+  /* Media panel + floating UI cards (N26-Signatur) */
+  .media{position:relative}
+  .panel{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:5/5.4;background:var(--p-teal)}
+  .panel .ph{position:absolute;inset:0;background-size:cover;background-position:center;will-change:transform}
+  .fcard{position:absolute;background:#fff;border-radius:16px;box-shadow:0 18px 40px rgba(20,30,30,.16);padding:15px 17px;display:flex;align-items:center;gap:13px;animation:float 6s ease-in-out infinite}
+  .fcard .ic{width:40px;height:40px;border-radius:11px;background:var(--brand-tint,#E7EFF0);display:flex;align-items:center;justify-content:center;flex:none;color:var(--brand);font-family:var(--fh);font-weight:700;font-size:.9rem}
+  .fcard .ic.cop{background:#F5E7DA;color:var(--accent)}
+  .fcard .k{font-family:var(--fh);font-weight:700;font-size:1.15rem;line-height:1.05}
+  .fcard .c{font-size:.74rem;color:var(--muted);line-height:1.25}
+  .fcard.a{top:6%;left:-26px}.fcard.b{bottom:9%;right:-24px;animation-delay:-3s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* Bars mini (in fcard) */
+  .bars{display:flex;align-items:flex-end;gap:3px;height:34px}
+  .bars i{width:6px;background:var(--brand-soft);border-radius:2px}
+  .bars i:last-child{background:var(--brand)}
+
+  /* Feature sections */
+  .feat{padding:96px 0}
+  .feat .fg{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+  .feat.rev .fg{direction:rtl}.feat.rev .fg>*{direction:ltr}
+  .feat h2{font-size:clamp(2rem,4.4vw,3.3rem)}
+  .feat .desc{font-size:1.12rem;color:var(--muted);margin-top:22px;max-width:42ch}
+  .chips{margin-top:26px;display:flex;flex-wrap:wrap;gap:9px}
+  .chips span{font-family:var(--fh);font-weight:600;font-size:.82rem;color:var(--ink);background:var(--p-grey);border:1px solid var(--line);border-radius:999px;padding:8px 15px}
+  .feat .act{margin-top:32px}
+  .feat.t-teal .panel{background:var(--p-teal)}
+  .feat.t-sand .panel{background:var(--p-sand)}
+  .feat.t-mint .panel{background:var(--p-mint)}
+
+  /* Referenzen (Scroll-Website-Stil: Index + Sticky Preview) */
+  .refsec{background:var(--p-grey);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:48px}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);max-width:18ch}
+  .sec-head .side{max-width:34ch;color:var(--muted);font-size:1rem;text-align:right}
+  .ref-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+  .ref-list{border-top:1px solid var(--line2)}
+  .ref-item{display:flex;gap:16px;align-items:baseline;padding:22px 0;border-bottom:1px solid var(--line2);cursor:pointer;width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;font:inherit}
+  .ref-item .k{font-family:var(--fh);font-weight:700;font-size:.78rem;color:var(--accent);min-width:26px}
+  .ref-item h3{font-family:var(--fh);font-weight:700;font-size:clamp(1.2rem,2vw,1.8rem);opacity:.4;transition:opacity .3s,transform .4s cubic-bezier(.16,1,.3,1);letter-spacing:-.02em}
+  .ref-item .m{margin-left:auto;font-family:var(--fh);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);opacity:0;transition:opacity .3s}
+  .ref-item.active h3,.ref-item:hover h3{opacity:1;transform:translateX(9px)}
+  .ref-item.active .m{opacity:1}
+  .ref-preview{position:sticky;top:100px;height:76vh;min-height:460px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line2);background:var(--brand-deep)}
+  .ref-layer{position:absolute;inset:0;opacity:0;transform:scale(1.05);transition:opacity .7s ease,transform 1.3s cubic-bezier(.16,1,.3,1)}
+  .ref-layer .ph{position:absolute;inset:0;background-size:cover;background-position:center}
+  .ref-layer::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(10,42,50,.82),rgba(10,42,50,.08) 48%,transparent)}
+  .ref-layer .cap{position:absolute;left:28px;bottom:28px;right:28px;z-index:2;color:#fff}
+  .ref-layer .cap span{font-family:var(--fh);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.82)}
+  .ref-layer .cap h4{font-family:var(--fh);font-weight:700;color:#fff;font-size:clamp(1.5rem,2.4vw,2.2rem);margin-top:6px;letter-spacing:-.02em}
+  .ref-layer.on{opacity:1;transform:none}
+
+  /* CTA-Band */
+  .cta-band{background:var(--brand);color:#fff;border-radius:var(--r);padding:64px;position:relative;overflow:hidden}
+  .cta-band::after{content:"";position:absolute;right:-8%;top:-40%;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(111,160,169,.28),transparent 62%)}
+  .cta-inner{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+  .cta-band h2{color:#fff;font-size:clamp(1.9rem,3.6vw,2.9rem);max-width:20ch}
+  .cta-band p{color:rgba(255,255,255,.82);margin-top:14px;max-width:46ch}
+
+  /* Kontakt */
+  .kontakt h2{font-size:clamp(2.1rem,4.6vw,3.6rem);max-width:16ch}
+  .mail{display:inline-block;margin-top:26px;font-family:var(--fh);font-weight:700;font-size:clamp(1.4rem,3.2vw,2.4rem);color:var(--brand);border-bottom:2px solid var(--brand);letter-spacing:-.02em}
+  .mail:hover{color:var(--brand-deep);border-color:var(--brand-deep)}
+  .k-info{margin-top:44px;display:flex;gap:44px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
+  .k-info div span{font-family:var(--fh);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
+
+  /* Footer */
+  footer.site{background:var(--ink);color:#d7dad4;padding:72px 0 40px}
+  .ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:46px;border-bottom:1px solid rgba(255,255,255,.12)}
+  footer.site .logo b{color:#fff}footer.site .logo span{color:#9aa09a}
+  .ft-top p{font-size:.92rem;color:#9aa09a;margin-top:16px;max-width:32ch}
+  .ft-col h4{font-family:var(--fh);font-weight:600;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+  .ft-col a{display:block;font-size:.92rem;color:#b7bbb4;padding:5px 0}.ft-col a:hover{color:#fff}
+  .ft-bot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-family:var(--fh);font-size:.78rem;color:#8b918c}
+
+  #prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--brand);z-index:200}
+
+  @media(max-width:980px){
+    .hero-grid,.feat .fg,.ref-grid{grid-template-columns:1fr;gap:48px}
+    .feat.rev .fg{direction:ltr}
+    .media{max-width:460px;margin:0 auto}
+    .ref-preview{display:none}
+    .cta-inner{flex-direction:column;align-items:flex-start}
+  }
+  @media(max-width:720px){
+    :root{--pad:20px}
+    section,.feat{padding:66px 0}
+    nav.main,.hd-login{display:none}
+    .burger{display:flex}.hd-cta .btn-primary{display:none}
+    .sec-head{flex-direction:column;align-items:flex-start}.sec-head .side{text-align:left}
+    .cta-band{padding:40px 26px}
+    .ft-top{grid-template-columns:1fr 1fr}
+    .fcard.a{left:-8px}.fcard.b{right:-8px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    [data-r]{opacity:1!important;transform:none!important;transition:none!important}
+    .fcard{animation:none}
+    .panel .ph{position:absolute;inset:0}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div id="prog"></div>
+
+<header class="site">
+  <div class="hd">
+    <a class="logo" href="#top" aria-label="vesta — Startseite"><b>vesta</b><span>sustainability consulting</span></a>
+    <nav class="main" aria-label="Hauptnavigation">
+      <a href="#zertifizierung">Zertifizierung</a>
+      <a href="#oekobilanz">Ökobilanz</a>
+      <a href="#bauphysik">Bauphysik</a>
+      <a href="#referenzen">Referenzen</a>
+    </nav>
+    <div class="hd-cta">
+      <a class="hd-login" href="#kontakt">Kontakt</a>
+      <a class="btn btn-primary btn-sm" href="#kontakt">Erstberatung anfragen</a>
+    </div>
+    <button class="burger" aria-label="Menü" onclick="document.querySelector('nav.main').scrollIntoView()"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- HERO / KEY MESSAGE -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 data-r>Nachhaltiges Bauen.<br><span class="fade">Belastbar, ohne grüne Versprechen.</span></h1>
+        <p class="sub" data-r data-d="1">Bauphysik, Ökobilanz und Zertifizierung – belastbare Kennzahlen für Gebäude und Quartiere. Von der ersten Skizze bis nach der Fertigstellung.</p>
+        <div class="hero-actions" data-r data-d="2">
+          <a class="btn btn-primary" href="#kontakt">Erstberatung anfragen <span class="arw">→</span></a>
+          <a class="link-arw" href="#zertifizierung">So arbeiten wir <span class="arw">→</span></a>
+        </div>
+        <div class="hero-trust" data-r data-d="3">
+          <span><b>DGNB</b> · QNG</span><span class="dot"></span>
+          <span><b>EN 15978</b> · A–D</span><span class="dot"></span>
+          <span><b>München</b></span>
+        </div>
+      </div>
+      <div class="media" data-r data-d="1">
+        <div class="panel"><div class="ph" data-img="hero"></div></div>
+        <div class="fcard a"><div class="ic">A–D</div><div><div class="k">EN 15978</div><div class="c">Lebenszyklus komplett</div></div></div>
+        <div class="fcard b"><div class="ic cop">↓</div><div><div class="k">−38&nbsp;%</div><div class="c">GWP ggü. Referenz</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 1 · ZERTIFIZIERUNG (← „Die Karte, die dich feiert") -->
+  <section class="feat t-teal" id="zertifizierung">
+    <div class="wrap fg">
+      <div>
+        <span class="eyebrow" data-r>Nachhaltigkeitsberatung</span>
+        <h2 data-r data-d="1" style="margin-top:14px">Die Zertifizierung, die Türen öffnet.</h2>
+        <p class="desc" data-r data-d="1">DGNB, QNG und EU-Taxonomie – wir führen Ihr Projekt strukturiert durch Nachweise und Zertifizierung. Mit klaren Kriterien und Dokumentation, die standhält.</p>
+        <div class="chips" data-r data-d="2"><span>DGNB</span><span>QNG</span><span>EU-Taxonomie</span><span>ESG</span><span>Lebenszykluskosten</span></div>
+        <div class="act" data-r data-d="2"><a class="link-arw" href="#kontakt">Zertifizierung besprechen <span class="arw">→</span></a></div>
+      </div>
+      <div class="media" data-r data-d="1">
+        <div class="panel"><div class="ph" data-img="zert"></div></div>
+        <div class="fcard a"><div class="ic">✓</div><div><div class="k">DGNB Gold</div><div class="c">Nachweis erbracht</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 2 · ÖKOBILANZIERUNG (← „Sichere dir kostenlose Virtual Cards") -->
+  <section class="feat t-sand rev" id="oekobilanz">
+    <div class="wrap fg">
+      <div>
+        <span class="eyebrow" data-r>Ökobilanzierung</span>
+        <h2 data-r data-d="1" style="margin-top:14px">Sichere dir belastbare Ökobilanzen.</h2>
+        <p class="desc" data-r data-d="1">Umweltwirkungen über den gesamten Lebenszyklus – Phasen A bis D nach EN 15978. Auf Gebäude- und Portfolioebene, in jeder Projektphase.</p>
+        <div class="chips" data-r data-d="2"><span>EN 15978</span><span>Phasen A–D</span><span>GWP</span><span>Gebäude &amp; Quartiere</span><span>Fördermittel</span></div>
+        <div class="act" data-r data-d="2"><a class="link-arw" href="#kontakt">Ökobilanz anfragen <span class="arw">→</span></a></div>
+      </div>
+      <div class="media" data-r data-d="1">
+        <div class="panel"><div class="ph" data-img="oeko"></div></div>
+        <div class="fcard a"><div class="ic"><div class="bars"><i style="height:40%"></i><i style="height:66%"></i><i style="height:52%"></i><i style="height:82%"></i></div></div><div><div class="k">412 kg</div><div class="c">CO₂e / m²·a</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE 3 · BAUPHYSIK (← „Gemeinsame Finanzen leicht gemacht") -->
+  <section class="feat t-mint" id="bauphysik">
+    <div class="wrap fg">
+      <div>
+        <span class="eyebrow" data-r>Bauphysik</span>
+        <h2 data-r data-d="1" style="margin-top:14px">Energieeffizienz, leicht gemacht.</h2>
+        <p class="desc" data-r data-d="1">Thermische Simulationen, sommerlicher Wärmeschutz, Wärmebrücken und Sanierungskonzepte – wir optimieren die Physik Ihres Gebäudes für weniger Verluste und mehr Komfort.</p>
+        <div class="chips" data-r data-d="2"><span>Energiebilanz</span><span>Thermische Simulation</span><span>Wärmebrücken</span><span>Sanierung</span><span>Klimarisiko</span></div>
+        <div class="act" data-r data-d="2"><a class="link-arw" href="#kontakt">Gebäude optimieren <span class="arw">→</span></a></div>
+      </div>
+      <div class="media" data-r data-d="1">
+        <div class="panel"><div class="ph" data-img="bau"></div></div>
+        <div class="fcard b"><div class="ic">U</div><div><div class="k">0,15</div><div class="c">U-Wert · W/m²K</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFERENZEN (Scroll-Website-Stil) -->
+  <section class="refsec" id="referenzen">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Referenzen &amp; Partner</span><h2 style="margin-top:12px">Vertrauen aus gemeinsamen Projekten.</h2></div>
+        <p class="side">Auswahl aus Projekten und Partnerschaften — von Verbänden bis zu Architektur- und Ingenieurbüros.</p>
+      </div>
+      <div class="ref-grid">
+        <div class="ref-list" id="reflist">
+          <button class="ref-item active" data-i="0"><span class="k">01</span><h3>Deutscher Alpenverein</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="1"><span class="k">02</span><h3>Bauindustrie Bayern</h3><span class="m">Partner</span></button>
+          <button class="ref-item" data-i="2"><span class="k">03</span><h3>Riedelbau</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="3"><span class="k">04</span><h3>Phase H</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="4"><span class="k">05</span><h3>Lang Hugger Rampp</h3><span class="m">Architektur</span></button>
+          <button class="ref-item" data-i="5"><span class="k">06</span><h3>IKL Ingenieure</h3><span class="m">Projekt</span></button>
+          <button class="ref-item" data-i="6"><span class="k">07</span><h3>Geopard Digital</h3><span class="m">Partner</span></button>
+          <button class="ref-item" data-i="7"><span class="k">08</span><h3>DGNB</h3><span class="m">Zertifizierung</span></button>
+          <button class="ref-item" data-i="8"><span class="k">09</span><h3>Bauplan 21</h3><span class="m">Projekt</span></button>
+        </div>
+        <div class="ref-preview" id="refpreview" aria-hidden="true">
+          <div class="ref-layer on"><div class="ph" data-img="w0"></div><div class="cap"><span>01 · Referenzprojekt</span><h4>Deutscher Alpenverein</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w1"></div><div class="cap"><span>02 · Partner</span><h4>Bauindustrie Bayern</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w2"></div><div class="cap"><span>03 · Referenzprojekt</span><h4>Riedelbau</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w3"></div><div class="cap"><span>04 · Referenzprojekt</span><h4>Phase H</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w4"></div><div class="cap"><span>05 · Architektur</span><h4>Lang Hugger Rampp</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w5"></div><div class="cap"><span>06 · Referenzprojekt</span><h4>IKL Ingenieure</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w6"></div><div class="cap"><span>07 · Partner</span><h4>Geopard Digital</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w7"></div><div class="cap"><span>08 · Zertifizierung</span><h4>DGNB</h4></div></div>
+          <div class="ref-layer"><div class="ph" data-img="w8"></div><div class="cap"><span>09 · Referenzprojekt</span><h4>Bauplan 21</h4></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA-BAND -->
+  <section style="padding:40px 0 40px">
+    <div class="wrap">
+      <div class="cta-band" data-r>
+        <div class="cta-inner">
+          <div>
+            <h2>Bereit für belastbare Nachhaltigkeit?</h2>
+            <p>Erzählen Sie uns von Ihrem Projekt — wir melden uns persönlich mit den nächsten Schritten.</p>
+          </div>
+          <a class="btn btn-ghost-light" href="#kontakt">Erstberatung anfragen <span class="arw">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="kontakt" id="kontakt">
+    <div class="wrap" data-r>
+      <span class="eyebrow">Kontakt</span>
+      <h2 style="margin-top:12px">Ihr Partner für nachhaltiges Bauen aus München.</h2>
+      <a class="mail" href="mailto:info@vesta-consult.de">info@vesta-consult.de</a>
+      <div class="k-info">
+        <div><span>Adresse</span><p>c/o ImpactHub<br>Gotzinger Str. 8 · 81371 München</p></div>
+        <div><span>E-Mail</span><p>info@vesta-consult.de</p></div>
+        <div><span>Schwerpunkte</span><p>Bauphysik · Ökobilanz · Zertifizierung</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <a class="logo" href="#top"><b>vesta</b><span>sustainability consulting</span></a>
+        <p>Bauphysik und Nachhaltigkeitsberatung für Gebäude und Quartiere — aus München.</p>
+      </div>
+      <div class="ft-col"><h4>Leistungen</h4><a href="#zertifizierung">Zertifizierung</a><a href="#oekobilanz">Ökobilanzierung</a><a href="#bauphysik">Bauphysik</a></div>
+      <div class="ft-col"><h4>Unternehmen</h4><a href="#referenzen">Referenzen</a><a href="#kontakt">Kontakt</a></div>
+      <div class="ft-col"><h4>Rechtliches</h4><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">AGB</a></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 vesta sustainability consulting UG</span>
+      <span>c/o ImpactHub · Gotzinger Str. 8 · 81371 München</span>
+      <span>LinkedIn · Instagram</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const U=(id,w)=>'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||1300)+'&q=80';
+const IMG={
+  hero:U('1600585154340-be6161a56a0c',1400),
+  zert:U('1486406146926-c627a92ad1ab',1300),
+  oeko:U('1441974231531-c6227db76b6e',1300),
+  bau:U('1518005020951-eccb494ad742',1300),
+  w0:U('1449824913935-59a10b8d2000',1200), w1:U('1511818966892-d7d671e672a2',1200),
+  w2:U('1486406146926-c627a92ad1ab',1200), w3:U('1470723710355-95304d8aece4',1200),
+  w4:U('1479839672679-a46483c0e7c8',1200), w5:U('1460574283810-2aab119d8511',1200),
+  w6:U('1600585154340-be6161a56a0c',1200), w7:U('1416331108676-a22ccb276e35',1200),
+  w8:U('1441974231531-c6227db76b6e',1200)
+};
+document.querySelectorAll('.ph[data-img]').forEach(p=>{p.style.backgroundImage='url("'+IMG[p.dataset.img]+'")';});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('[data-r]').forEach(e=>io.observe(e));
+
+const items=[...document.querySelectorAll('.ref-item')],layers=[...document.querySelectorAll('.ref-layer')],reflist=document.getElementById('reflist');
+function setRef(i){items.forEach((it,n)=>it.classList.toggle('active',n===i));layers.forEach((l,n)=>l.classList.toggle('on',n===i));}
+items.forEach((it,i)=>{it.addEventListener('mouseenter',()=>setRef(i));it.addEventListener('focus',()=>setRef(i));});
+
+const prog=document.getElementById('prog'),heroPh=document.querySelector('.hero .ph');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let tick=false;
+function onScroll(){
+  const st=scrollY,dh=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(dh>0?st/dh*100:0)+'%';
+  if(!reduce&&heroPh&&st<innerHeight){heroPh.style.transform='scale(1.04) translateY('+(st*0.05)+'px)';}
+  if(reflist){const s=reflist.getBoundingClientRect();if(s.top<innerHeight&&s.bottom>0){const mid=innerHeight*0.42;let best=0,bd=1e9;items.forEach((it,i)=>{const r=it.getBoundingClientRect(),d=Math.abs((r.top+r.height/2)-mid);if(d<bd){bd=d;best=i;}});setRef(best);}}
+  tick=false;
+}
+addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(onScroll);tick=true;}},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+</script>
+</body>
+</html>
