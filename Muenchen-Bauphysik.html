@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>München Bauphysik · Bauphysik, Regulierung und Nachhaltigkeit</title>
+<meta name="description" content="München Bauphysik — strategische Bauphysik für Dekarbonisierung, Klimaresilienz und zukunftsfähige Gebäudeportfolios. Unter dem Dach von vesta sustainability consulting." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     MÜNCHEN BAUPHYSIK — gleiche Designsprache wie Vesta-Website-final
+     ============================================================ */
+  :root{
+    --ink:#141719;--bg:#ffffff;--muted:#5c635f;--faint:#8b918c;
+    --brand:#14505E;--brand-deep:#0E3D48;--brand-soft:#6FA0A9;--accent:#C57B4E;
+    --p-teal:#E4EFEF;--p-sand:#F4ECE0;--p-mint:#E7F1EA;--p-grey:#F2F4F3;
+    --line:#E9E9E3;--line2:#DBDBD2;
+    --r:26px;--rb:12px;
+    --fh:'Poppins',sans-serif;--fb:'Inter',sans-serif;
+    --maxw:1200px;--pad:40px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--fb);color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--fh);font-weight:700;line-height:1.06;letter-spacing:-.025em;color:var(--ink)}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  ::selection{background:var(--brand);color:#fff}
+  :focus-visible{outline:3px solid var(--brand);outline-offset:3px;border-radius:4px}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
+  section{padding:100px 0}
+  .eyebrow{font-family:var(--fh);font-weight:600;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--brand)}
+  .skip{position:absolute;left:-999px;top:0;z-index:400;background:var(--brand);color:#fff;padding:12px 20px;border-radius:var(--rb)}
+  .skip:focus{left:16px;top:16px}
+  [data-r]{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+  [data-r].in{opacity:1;transform:none}
+  [data-r][data-d="1"]{transition-delay:.09s}[data-r][data-d="2"]{transition-delay:.18s}[data-r][data-d="3"]{transition-delay:.27s}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-family:var(--fb);font-weight:600;font-size:1rem;line-height:1;cursor:pointer;border-radius:var(--rb);min-height:52px;padding:0 28px;border:1.5px solid transparent;transition:background-color .2s,color .2s,border-color .2s,transform .2s,box-shadow .2s}
+  .btn .arw{transition:transform .25s}.btn:hover .arw{transform:translateX(4px)}
+  .btn-primary{background:var(--brand);color:#fff}
+  .btn-primary:hover{background:var(--brand-deep);transform:translateY(-2px);box-shadow:0 12px 26px rgba(20,80,94,.26)}
+  .btn-ghost-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+  .btn-ghost-light:hover{background:rgba(255,255,255,.12);border-color:#fff}
+  .link-arw{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--brand)}
+  .link-arw .arw{transition:transform .25s}.link-arw:hover .arw{transform:translateX(4px)}
+
+  /* Header */
+  header.site{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .hd{max-width:var(--maxw);margin:0 auto;padding:15px var(--pad);display:flex;align-items:center;gap:26px}
+  .logo{display:flex;flex-direction:column;line-height:1.05}
+  .logo b{font-family:var(--fh);font-weight:800;font-size:1.2rem;letter-spacing:-.02em}
+  .logo b i{font-style:normal;color:var(--brand)}
+  .logo span{font-family:var(--fh);font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-top:3px}
+  nav.main{display:flex;gap:22px;margin-left:12px}
+  nav.main a{font-family:var(--fh);font-size:.88rem;font-weight:500;color:var(--muted);padding:6px 0;white-space:nowrap}
+  nav.main a:hover{color:var(--ink)}
+  .hd-cta{margin-left:auto;display:flex;align-items:center;gap:14px}
+  .btn-sm{min-height:44px;padding:0 20px;font-size:.9rem}
+  .burger{display:none;margin-left:auto;background:none;border:1px solid var(--line2);border-radius:var(--rb);width:46px;height:46px;cursor:pointer;flex-direction:column;gap:5px;align-items:center;justify-content:center}
+  .burger i{width:18px;height:2px;background:var(--ink)}
+
+  /* Hero */
+  .hero{padding:88px 0 96px}
+  .hero-grid{display:grid;grid-template-columns:1.04fr .96fr;gap:60px;align-items:center}
+  .hero h1{font-size:clamp(2.5rem,5.4vw,4.4rem);letter-spacing:-.035em}
+  .hero .sub{font-size:1.16rem;color:var(--muted);max-width:48ch;margin-top:26px}
+  .hero-actions{margin-top:38px;display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .hero-trust{margin-top:40px;display:flex;gap:22px;flex-wrap:wrap;align-items:center;font-family:var(--fh);font-weight:600;font-size:.82rem;color:var(--faint)}
+  .hero-trust b{color:var(--ink)}.hero-trust .dot{width:5px;height:5px;border-radius:50%;background:var(--brand-soft)}
+  .media{position:relative}
+  .panel{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:5/5.4;background:var(--p-teal)}
+  .panel .ph{position:absolute;inset:0;background-size:cover;background-position:center;will-change:transform}
+  .fcard{position:absolute;background:#fff;border-radius:16px;box-shadow:0 18px 40px rgba(20,30,30,.16);padding:15px 17px;display:flex;align-items:center;gap:13px;animation:float 6s ease-in-out infinite}
+  .fcard .ic{width:40px;height:40px;border-radius:11px;background:#E7EFF0;display:flex;align-items:center;justify-content:center;flex:none;color:var(--brand);font-family:var(--fh);font-weight:700;font-size:.9rem}
+  .fcard .ic.cop{background:#F5E7DA;color:var(--accent)}
+  .fcard .k{font-family:var(--fh);font-weight:700;font-size:1.1rem;line-height:1.05}
+  .fcard .c{font-size:.74rem;color:var(--muted);line-height:1.25}
+  .fcard.a{top:6%;left:-26px}.fcard.b{bottom:9%;right:-24px;animation-delay:-3s}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* Section head */
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:50px}
+  .sec-head h2{font-size:clamp(1.9rem,3.8vw,2.9rem);max-width:22ch}
+  .sec-head .side{max-width:38ch;color:var(--muted);font-size:1rem;text-align:right}
+  .intro-lead{font-size:1.16rem;color:var(--muted);max-width:60ch;margin-bottom:10px}
+
+  /* Leistungen (6 Cards) */
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .scard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 30px 32px;display:flex;flex-direction:column;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .scard:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,30,30,.10);border-color:var(--line2)}
+  .scard .n{font-family:var(--fh);font-weight:700;font-size:.82rem;color:var(--accent)}
+  .scard h3{font-size:1.3rem;margin:14px 0 10px;letter-spacing:-.02em}
+  .scard p{color:var(--muted);font-size:.96rem}
+
+  /* Team */
+  .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;margin-top:52px}
+  .person{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .person:hover{transform:translateY(-4px);box-shadow:0 18px 44px rgba(20,30,30,.10);border-color:var(--line2)}
+  .person .pimg{aspect-ratio:1/1;background:var(--p-grey);overflow:hidden}
+  .person .pimg img{width:100%;height:100%;object-fit:cover;object-position:center top}
+  .person .pbody{padding:28px 30px 32px}
+  .person h3{font-size:1.5rem}
+  .person .role{margin-top:9px;color:var(--brand);font-family:var(--fh);font-weight:600;font-size:.95rem}
+  .person .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px}
+  .person .tags span{font-family:var(--fh);font-weight:600;font-size:.78rem;color:var(--ink);background:var(--p-grey);border:1px solid var(--line);border-radius:999px;padding:7px 14px}
+
+  /* Relevanz (dunkles Band) */
+  .relevanz{background:var(--brand-deep);color:#fff;position:relative;overflow:hidden}
+  .relevanz::after{content:"";position:absolute;right:-6%;top:-34%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(111,160,169,.24),transparent 62%)}
+  .relevanz .wrap{position:relative;z-index:1}
+  .relevanz .eyebrow{color:rgba(255,255,255,.72)}
+  .relevanz h2{color:#fff;font-size:clamp(1.9rem,3.6vw,2.7rem);max-width:24ch}
+  .relevanz .r-lead{color:rgba(255,255,255,.8);font-size:1.1rem;margin-top:18px;max-width:56ch}
+  .rel-grid{margin-top:52px;display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+  .rel .rn{font-family:var(--fh);font-weight:700;color:var(--brand-soft);font-size:.82rem}
+  .rel{border-top:2px solid var(--brand-soft);padding-top:20px}
+  .rel h3{color:#fff;font-size:1.32rem;margin-top:10px}
+  .rel p{color:rgba(255,255,255,.78);margin-top:12px;font-size:.96rem}
+  .r-close{margin-top:46px;font-family:var(--fh);font-weight:600;font-size:1.25rem;color:#fff;max-width:40ch;line-height:1.35}
+
+  /* Hot Topics (2x2 Cards) */
+  .hot{background:var(--p-grey)}
+  .topic-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:52px}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:32px 34px}
+  .tcard .tn{font-family:var(--fh);font-weight:700;color:var(--accent);font-size:.82rem}
+  .tcard h3{font-size:1.4rem;margin:12px 0 12px}
+  .tcard p{color:var(--muted);font-size:.98rem}
+
+  /* Regulatorik / Timeline */
+  .timeline{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:22px;margin-top:56px}
+  .timeline::before{content:"";position:absolute;left:9px;right:9px;top:9px;height:2px;background:var(--line2)}
+  .tl{position:relative;padding-top:36px}
+  .tl::before{content:"";position:absolute;top:0;left:0;width:20px;height:20px;border-radius:50%;background:var(--brand);border:4px solid var(--bg)}
+  .tl.hot2::before{background:var(--accent)}
+  .tl .date{font-family:var(--fh);font-weight:700;color:var(--brand);font-size:1.05rem}
+  .tl .tag{font-family:var(--fh);font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);margin-top:2px}
+  .tl.hot2 .date{color:var(--accent)}
+  .tl .txt{margin-top:9px;font-size:.9rem;color:var(--muted)}
+
+  /* Energieausweis (heute/morgen) */
+  .ea-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:44px}
+  .eacard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:34px 36px}
+  .eacard.soon{background:var(--p-teal);border-color:var(--brand-soft)}
+  .eacard .tag{display:inline-block;font-family:var(--fh);font-weight:700;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;background:var(--brand);border-radius:999px;padding:6px 14px}
+  .eacard.soon .tag{background:var(--accent)}
+  .eacard h3{font-size:1.4rem;margin:16px 0 16px}
+  .ealist{list-style:none;display:flex;flex-direction:column;gap:13px}
+  .ealist li{display:flex;gap:12px;align-items:flex-start;font-size:.98rem;color:var(--ink)}
+  .ealist li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);flex:none;margin-top:8px}
+
+  /* Nachhaltigkeit */
+  .nachhalt{background:var(--p-grey)}
+  .nh-points{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:44px}
+  .np{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px 30px}
+  .np b{font-family:var(--fh);font-weight:700;font-size:1.12rem;color:var(--brand);display:block;margin-bottom:8px}
+  .np p{color:var(--muted);font-size:.97rem}
+  .np a{color:var(--brand);border-bottom:1px solid var(--brand-soft)}
+
+  /* Portfolio */
+  .portfolio{background:var(--p-teal)}
+  .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:48px}
+  .pcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px 30px 32px}
+  .pcard .pn{font-family:var(--fh);font-weight:800;font-size:2.4rem;color:var(--brand-soft);line-height:1}
+  .pcard h3{font-size:1.18rem;margin:14px 0 10px}
+  .pcard p{color:var(--muted);font-size:.95rem}
+  .port-close{margin-top:40px;background:var(--brand-deep);color:#fff;border-radius:var(--r);padding:36px 40px}
+  .port-close b{font-family:var(--fh);font-weight:700;font-size:1.3rem;color:#fff;display:block;margin-bottom:8px}
+  .port-close p{color:rgba(255,255,255,.82);max-width:64ch}
+
+  /* Podcast */
+  .podcast .pod-card{display:flex;align-items:center;gap:34px;background:var(--ink);color:#fff;border-radius:var(--r);padding:44px 48px;flex-wrap:wrap}
+  .pod-ic{width:76px;height:76px;border-radius:20px;background:var(--brand);display:flex;align-items:center;justify-content:center;flex:none;font-size:2rem}
+  .pod-card h3{color:#fff;font-size:1.7rem}
+  .pod-card .pe{color:rgba(255,255,255,.72);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-family:var(--fh);font-weight:600}
+  .pod-card p{color:rgba(255,255,255,.82);margin-top:8px;max-width:52ch}
+  .pod-links{margin-left:auto;display:flex;gap:12px;flex-wrap:wrap}
+  .pod-links a{font-family:var(--fh);font-weight:600;font-size:.9rem;color:#fff;border:1.5px solid rgba(255,255,255,.4);border-radius:999px;padding:10px 20px}
+  .pod-links a:hover{background:rgba(255,255,255,.12);border-color:#fff}
+
+  /* FAQ */
+  .faq-wrap{max-width:900px}
+  .faq details{border-bottom:1px solid var(--line);padding:24px 0}
+  .faq summary{font-family:var(--fh);font-weight:600;font-size:1.16rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--ink)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--fh);font-size:1.6rem;color:var(--brand);transition:transform .25s;line-height:1}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq p{margin-top:14px;color:var(--muted);font-size:1.02rem;max-width:74ch}
+
+  /* CTA-Band */
+  .cta-band{background:var(--brand);color:#fff;border-radius:var(--r);padding:60px;position:relative;overflow:hidden}
+  .cta-band::after{content:"";position:absolute;right:-8%;top:-40%;width:460px;height:460px;border-radius:50%;background:radial-gradient(circle,rgba(111,160,169,.28),transparent 62%)}
+  .cta-inner{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap}
+  .cta-band h2{color:#fff;font-size:clamp(1.8rem,3.4vw,2.7rem);max-width:22ch}
+  .cta-band p{color:rgba(255,255,255,.82);margin-top:14px;max-width:52ch}
+
+  /* Kontakt */
+  .kontakt h2{font-size:clamp(2.1rem,4.6vw,3.6rem);max-width:16ch}
+  .kontakt .sub{margin-top:20px;font-size:1.12rem;color:var(--muted);max-width:52ch}
+  .mail{display:inline-block;margin-top:26px;font-family:var(--fh);font-weight:700;font-size:clamp(1.4rem,3.2vw,2.4rem);color:var(--brand);border-bottom:2px solid var(--brand);letter-spacing:-.02em}
+  .mail:hover{color:var(--brand-deep);border-color:var(--brand-deep)}
+  .k-info{margin-top:44px;display:flex;gap:44px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:26px}
+  .k-info div span{font-family:var(--fh);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:6px}
+
+  /* Footer */
+  footer.site{background:var(--ink);color:#d7dad4;padding:72px 0 40px}
+  .ft-top{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:40px;padding-bottom:46px;border-bottom:1px solid rgba(255,255,255,.12)}
+  footer.site .logo b{color:#fff}footer.site .logo b i{color:var(--brand-soft)}footer.site .logo span{color:#9aa09a}
+  .ft-top p{font-size:.92rem;color:#9aa09a;margin-top:18px;max-width:34ch}
+  .ft-col h4{font-family:var(--fh);font-weight:600;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:#fff;margin-bottom:14px}
+  .ft-col a{display:block;font-size:.92rem;color:#b7bbb4;padding:5px 0}.ft-col a:hover{color:#fff}
+  .ft-bot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;font-family:var(--fh);font-size:.74rem;color:#8b918c}
+
+  #prog{position:fixed;top:0;left:0;height:2px;width:0;background:var(--brand);z-index:200}
+
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:48px}
+    .media{max-width:460px;margin:0 auto}
+    .svc-grid,.rel-grid,.port-grid{grid-template-columns:1fr 1fr}
+    .cta-inner{flex-direction:column;align-items:flex-start}
+    .pod-links{margin-left:0}
+    .timeline{grid-template-columns:1fr;gap:0}
+    .timeline::before{left:9px;top:9px;bottom:9px;right:auto;width:2px;height:auto}
+    .tl{padding:0 0 30px 40px}.tl::before{top:2px;left:0}
+  }
+  @media(max-width:720px){
+    :root{--pad:20px}
+    section{padding:62px 0}
+    nav.main{display:none}
+    .burger{display:flex}.hd-cta .btn-primary{display:none}
+    .sec-head{flex-direction:column;align-items:flex-start}.sec-head .side{text-align:left}
+    .svc-grid,.rel-grid,.team-grid,.topic-grid,.ea-grid,.nh-points,.port-grid{grid-template-columns:1fr}
+    .cta-band{padding:40px 26px}.pod-card{padding:32px 26px}
+    .ft-top{grid-template-columns:1fr 1fr}
+    .fcard.a{left:-8px}.fcard.b{right:-8px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    [data-r]{opacity:1!important;transform:none!important;transition:none!important}
+    .fcard{animation:none}.panel .ph{position:absolute;inset:0}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+<div id="prog"></div>
+
+<header class="site">
+  <div class="hd">
+    <a class="logo" href="#top" aria-label="München Bauphysik — Startseite"><b>münchen<i>·</i>bauphysik</b><span>by vesta sustainability consulting</span></a>
+    <nav class="main" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#relevanz">Relevanz</a>
+      <a href="#regulatorik">Regulatorik</a>
+      <a href="#nachhaltigkeit">Nachhaltigkeit</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="hd-cta">
+      <a class="btn btn-primary btn-sm" href="#kontakt">Erstgespräch vereinbaren</a>
+    </div>
+    <button class="burger" aria-label="Menü" onclick="document.querySelector('nav.main').scrollIntoView()"><i></i><i></i><i></i></button>
+  </div>
+</header>
+
+<main id="main">
+  <span id="top"></span>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow" data-r>Bauphysik wird zur Zukunftsdisziplin</span>
+        <h1 data-r data-d="1" style="margin-top:18px">Bauphysik, Regulierung und Nachhaltigkeit.</h1>
+        <p class="sub" data-r data-d="1">Wer heute nur U-Werte und Schallschutz betrachtet, plant am Markt von morgen vorbei. Bauphysik entscheidet zunehmend über Dekarbonisierung, Klimaresilienz, Energieausweise, Materialwahl und die Zukunftsfähigkeit von Beständen.</p>
+        <div class="hero-actions" data-r data-d="2">
+          <a class="btn btn-primary" href="#kontakt">Erstgespräch vereinbaren <span class="arw">→</span></a>
+          <a class="link-arw" href="#leistungen">Zu unseren Leistungen <span class="arw">→</span></a>
+        </div>
+        <div class="hero-trust" data-r data-d="3">
+          <span><b>GEG</b> · EPBD</span><span class="dot"></span>
+          <span><b>DGNB</b> · QNG</span><span class="dot"></span>
+          <span><b>München</b></span>
+        </div>
+      </div>
+      <div class="media" data-r data-d="1">
+        <div class="panel"><div class="ph" data-img="hero"></div></div>
+        <div class="fcard a"><div class="ic">EPBD</div><div><div class="k">29.05.2026</div><div class="c">Umsetzungsfrist</div></div></div>
+        <div class="fcard b"><div class="ic cop">°C</div><div><div class="k">Hitzeschutz</div><div class="c">Sommerlicher Wärmeschutz</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEISTUNGEN -->
+  <section id="leistungen">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Leistungen</span><h2 style="margin-top:12px">Wobei wir unterstützen</h2></div>
+        <p class="side">Strategische Bauphysik für Neubau und Bestand — früh gedacht, bis zum Portfolio weitergedacht.</p>
+      </div>
+      <div class="svc-grid">
+        <article class="scard" data-r><span class="n">01</span><h3>Bauphysikalische Strategie</h3><p>Strategische bauphysikalische Beratung für Neubau und Bestand. Integration von Wärmeschutz, Feuchteschutz, Schallschutz und Energieeffizienz in die frühe Planungsphase.</p></article>
+        <article class="scard" data-r data-d="1"><span class="n">02</span><h3>Sommerlicher Wärmeschutz</h3><p>Analyse und Nachweis des sommerlichen Wärmeschutzes, Überhitzungsrisiko-Bewertung, passive Kühlstrategien für Neubau und Sanierung.</p></article>
+        <article class="scard" data-r data-d="2"><span class="n">03</span><h3>Energetische Sanierung</h3><p>Maßnahmenpfade für die energetische Ertüchtigung von Bestandsgebäuden. Von der Einzelmaßnahme bis zum umfassenden Sanierungsfahrplan mit Kosteneinordnung.</p></article>
+        <article class="scard" data-r><span class="n">04</span><h3>Energieausweis &amp; Regulatorik</h3><p>Energieausweis-Erstellung, Nachweis-Readiness für kommende EPBD-Anforderungen, Begleitung bei GEG-Novelle und regulatorischer Einordnung.</p></article>
+        <article class="scard" data-r data-d="1"><span class="n">05</span><h3>Ökobilanzierung &amp; Nachhaltigkeit</h3><p>Gebäude-Ökobilanzierung (LCA) an der Schnittstelle zu Material- und Nachhaltigkeitskonzepten. GWP-Berechnung, KfW/QNG-Nachweise, DGNB-Zertifizierung.</p></article>
+        <article class="scard" data-r data-d="2"><span class="n">06</span><h3>Portfolio-Screening</h3><p>Technisches Screening für Dekarbonisierung und Priorisierung. Gebäudehülle, Anlagentechnik, Energieperformance und Modernisierungsstand strukturiert erfassen und bewerten.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section id="team">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Team</span><h2 style="margin-top:12px">Gegründet von zwei Experten für nachhaltiges Bauen.</h2></div>
+        <p class="side">München Bauphysik operiert unter dem Dach von vesta sustainability consulting.</p>
+      </div>
+      <div class="team-grid">
+        <article class="person" data-r>
+          <div class="pimg"><img src="team-mv.jpg" alt="Dr.-Ing. Michael Vollmer" /></div>
+          <div class="pbody">
+            <h3>Dr.-Ing. Michael Vollmer</h3>
+            <div class="role">Gründer &amp; Geschäftsführender Gesellschafter</div>
+            <div class="tags"><span>DGNB Auditor</span><span>DGNB ESG-Manager</span><span>Energieeffizienz-Experte</span></div>
+          </div>
+        </article>
+        <article class="person" data-r data-d="1">
+          <div class="pimg"><img src="team-hmh.jpg" alt="Dr.-Ing. Hannes Harter" /></div>
+          <div class="pbody">
+            <h3>Dr.-Ing. Hannes Harter</h3>
+            <div class="role">Gründer &amp; Geschäftsführender Gesellschafter</div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- RELEVANZ -->
+  <section class="relevanz" id="relevanz">
+    <div class="wrap">
+      <span class="eyebrow" data-r>Relevanz</span>
+      <h2 data-r data-d="1" style="margin-top:16px">Warum das Thema gerade jetzt relevant ist</h2>
+      <p class="r-lead" data-r data-d="1">Die bauphysikalische Planung verschiebt sich von der Einzelanforderung zur integrierten Zukunftsstrategie.</p>
+      <div class="rel-grid">
+        <div class="rel" data-r><div class="rn">01</div><h3>Regulierung verdichtet sich</h3><p>EPBD, nationale Renovierungspläne, neue Anforderungen an Neubau, Datenqualität und Dekarbonisierung erhöhen den Handlungsdruck. Die angekündigte GEG-Novelle verschärft die Anforderungen voraussichtlich weiter.</p></div>
+        <div class="rel" data-r data-d="1"><div class="rn">02</div><h3>Klimaresilienz wird messbar</h3><p>Überhitzung, passive Kühlung und Innenraumqualität werden im Bestand wie im Neubau zu harten Planungs- und Haftungsthemen.</p></div>
+        <div class="rel" data-r data-d="2"><div class="rn">03</div><h3>Nachhaltigkeit wird bauphysikalisch</h3><p>Nicht nur Betriebsenergie, sondern auch Materialwahl, Lebenszyklus-Emissionen und Rückbaubarkeit rücken in die Entscheidung.</p></div>
+      </div>
+      <p class="r-close" data-r>Bauphysik wird damit zum Bindeglied zwischen Technik, Recht, Nachhaltigkeit und Immobilienwert.</p>
+    </div>
+  </section>
+
+  <!-- HOT TOPICS -->
+  <section class="hot" id="hot-topics">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Hot Topics</span><h2 style="margin-top:12px">Die aktuellen Hot Topics der Bauphysik</h2></div>
+      </div>
+      <div class="topic-grid">
+        <article class="tcard" data-r><div class="tn">01</div><h3>Sommerlicher Wärmeschutz und Hitzeschutz</h3><p>Die Frage ist nicht mehr, ob Gebäude im Sommer überhitzen, sondern wie sich Komfort ohne hohe Kühlenergie sichern lässt. Fassaden, Verschattung, Speichermassen, Nachtlüftung und robuste Hüllkonzepte werden strategisch wichtiger. Besonders in Sanierungen und dichten urbanen Lagen wird Überhitzung zum Qualitäts- und Risikothema.</p></article>
+        <article class="tcard" data-r data-d="1"><div class="tn">02</div><h3>Lebenszyklus statt nur Betriebsenergie</h3><p>Die Regulierung bewegt sich klar in Richtung Lebenszyklus-Treibhauspotenzial (GWP). Damit werden Konstruktion, Baustoffe, Ersatzzyklen und Demontagefähigkeit zu bauphysikalischen Mitentscheidern. Gute Gebäude müssen künftig nicht nur effizient, sondern auch material- und CO₂-intelligent sein.</p></article>
+        <article class="tcard" data-r><div class="tn">03</div><h3>Digitale Gebäudedaten und smarter Betrieb</h3><p>Energieausweise, Gebäudedaten, Monitoring, Gebäudeautomation und perspektivisch Smart-Readiness-Indikatoren verschmelzen stärker zu einer Datenbasis für Sanierung und Betrieb. Ohne belastbare Daten wird aus technischer Planung kein skalierbares Portfoliomanagement.</p></article>
+        <article class="tcard" data-r data-d="1"><div class="tn">04</div><h3>Sanierungsstrategie auf Portfolioebene</h3><p>Der Fokus verschiebt sich vom Einzelobjekt zum Maßnahmenpfad über ganze Bestände. Relevant sind Priorisierung, Sequenzierung, CAPEX-Pfade und Dekarbonisierungsrisiken. Wer spät reagiert, erhöht das Risiko von Stranded Assets und regulatorischem Nachsteuerungsdruck.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGULATORIK / EPBD -->
+  <section id="regulatorik">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Regulatorik</span><h2 style="margin-top:12px">EPBD, deutsche Umsetzung und was realistisch auf den Markt zukommt</h2></div>
+        <p class="side">Die europäische Gebäuderichtlinie und ihre nationale Umsetzung geben den Takt vor — wir bereiten Sie darauf vor.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl" data-r><div class="date">05.24</div><div class="tag">In Kraft</div><div class="txt">Die Richtlinie (EU) 2024/1275 setzt den Rahmen für Nullemissionsgebäude, Renovierungspläne, Energieausweise und Lebenszyklusbetrachtungen.</div></div>
+        <div class="tl" data-r data-d="1"><div class="date">12.25</div><div class="tag">EU</div><div class="txt">Die EU erwartet von den Mitgliedstaaten belastbare Transformationspfade für den Gebäudebestand.</div></div>
+        <div class="tl" data-r data-d="1"><div class="date">05.26</div><div class="tag">Umsetzungsfrist</div><div class="txt">Spätestens bis zum 29. Mai 2026 müssen viele EPBD-Regelungen in nationales Recht überführt sein. Die angekündigte nationale Umsetzung ist in Vorbereitung.</div></div>
+        <div class="tl hot2" data-r data-d="2"><div class="date">01.28</div><div class="tag">Nullemission</div><div class="txt">Parallel startet die LCA-Offenlegung für neue große Gebäude über 1.000 m².</div></div>
+        <div class="tl hot2" data-r data-d="3"><div class="date">01.30</div><div class="tag">Alle Neubauten</div><div class="txt">Dann greift auch die LCA-Offenlegung für alle Neubauten.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENERGIEAUSWEIS -->
+  <section id="energieausweis">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Energieausweis</span><h2 style="margin-top:12px">Der Energieausweis entwickelt sich vom Informationsblatt zum Datenträger</h2></div>
+      </div>
+      <p class="intro-lead" data-r>Der deutsche Energieausweis ist heute primär ein Informationsinstrument. Die EU-Logik schiebt ihn in Richtung digitaler, vergleichbarer und deutlich aussagekräftigerer Gebäudeinformation.</p>
+      <div class="ea-grid">
+        <div class="eacard" data-r>
+          <span class="tag">Heute · nach GEG</span>
+          <h3>Informationsinstrument</h3>
+          <ul class="ealist">
+            <li>Nach GEG dient der Energieausweis heute ausschließlich der Information über die energetischen Eigenschaften eines Gebäudes.</li>
+            <li>Er wird je nach Gebäudetyp und -alter als Bedarfs- oder Verbrauchsausweis ausgestellt.</li>
+            <li>Die Gültigkeit beträgt grundsätzlich zehn Jahre ab Ausstellungsdatum.</li>
+          </ul>
+        </div>
+        <div class="eacard soon" data-r data-d="1">
+          <span class="tag">Morgen · nach EPBD</span>
+          <h3>Digitaler Datenträger</h3>
+          <ul class="ealist">
+            <li>Die EPBD verlangt ein stärker harmonisiertes, digitales und maschinenlesbares System.</li>
+            <li>Klasse A steht für Nullemissionsgebäude, Klasse G für die national schlechtesten 15 % des Bestands.</li>
+            <li>Empfehlungen zur Verbesserung, Daten zur Gebäudehülle, technische Systeme und perspektivisch weitere Nachhaltigkeitsindikatoren.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NACHHALTIGKEIT -->
+  <section class="nachhalt" id="nachhaltigkeit">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Nachhaltigkeit</span><h2 style="margin-top:12px">Bauphysik an der Schnittstelle zu Nachhaltigkeit und Ökobilanzierung</h2></div>
+        <p class="side">Die klassische bauphysikalische Optimierung reicht künftig nicht mehr aus, wenn sie nur den Betrieb betrachtet. Relevant wird der ganze Lebenszyklus.</p>
+      </div>
+      <div class="nh-points">
+        <div class="np" data-r><b>Betriebsenergie</b><p>Heiz-, Kühl- und Lüftungsbedarf bleiben zentral, aber sie sind nur noch ein Teil der Gesamtbetrachtung.</p></div>
+        <div class="np" data-r data-d="1"><b>Graue Emissionen</b><p>Konstruktion, Baustoffwahl, Ersatzzyklen und Rückbau schlagen direkt auf die CO₂-Bilanz durch. Mehr dazu auf unserer Wissensplattform <a href="https://gebaeude-lca.de" target="_blank" rel="noopener">Gebäude-LCA</a>.</p></div>
+        <div class="np" data-r><b>Nachweis- und Förderfähigkeit</b><p>Nachhaltigkeitsbewertungen wie QNG machen Material- und Lebenszyklusdaten für viele Projekte wirtschaftlich relevant.</p></div>
+        <div class="np" data-r data-d="1"><b>Integration statt Silodenken</b><p>Bauphysik, TGA, Architektur, Ausschreibung und Nachhaltigkeitsberatung müssen früher zusammengedacht werden. Gute Lösungen entstehen dort, wo Wärmeschutz, Feuchtesicherheit, Behaglichkeit, Emissionsbilanz und Ausführbarkeit miteinander optimiert werden.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">Portfolio-Perspektive</span><h2 style="margin-top:12px">Was das für Gebäude und Portfolien der Zukunft bedeutet</h2></div>
+      </div>
+      <div class="port-grid">
+        <div class="pcard" data-r><div class="pn">01</div><h3>Weniger Bauchgefühl, mehr Maßnahmenpfade</h3><p>Bestände brauchen belastbare Sanierungsfahrpläne mit technischer Tiefe, Kostenschritten und Prioritätenlogik.</p></div>
+        <div class="pcard" data-r data-d="1"><div class="pn">02</div><h3>Höhere Datenanforderungen</h3><p>Portfolios müssen Gebäudehülle, Anlagentechnik, Energieperformance, Modernisierungsstand und perspektivisch Lebenszyklusdaten strukturiert zusammenführen.</p></div>
+        <div class="pcard" data-r data-d="2"><div class="pn">03</div><h3>Wachsende Übergangsrisiken</h3><p>Wenn Gebäude regulatorische, energetische und klimabezogene Anforderungen verfehlen, steigt das Risiko von Wertabschlägen, höherem CAPEX-Druck und eingeschränkter Exit-Fähigkeit.</p></div>
+      </div>
+      <div class="port-close" data-r>
+        <b>Bauphysik als Kernbaustein</b>
+        <p>Bauphysik wird damit zu einem Kernbaustein für Dekarbonisierungsstrategien, ESG-Readiness und die Vermeidung von Stranded Assets.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODCAST -->
+  <section class="podcast" id="podcast">
+    <div class="wrap">
+      <div class="pod-card" data-r>
+        <div class="pod-ic">🎧</div>
+        <div>
+          <div class="pe">Zum Reinhören · Podcast</div>
+          <h3>Nachhaltigkeit Uncut</h3>
+          <p>Der Podcast über zukunftsfähiges Leben und Bauen, nachhaltiges Wirtschaften und die Herausforderungen unserer Zeit.</p>
+        </div>
+        <div class="pod-links">
+          <a href="#" target="_blank" rel="noopener">Spotify</a>
+          <a href="#" target="_blank" rel="noopener">Podbean</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head" data-r>
+        <div><span class="eyebrow">FAQ</span><h2 style="margin-top:12px">Häufige Fragen</h2></div>
+      </div>
+      <div class="faq faq-wrap" data-r>
+        <details>
+          <summary>Ist das Gebäudemodernisierungsgesetz schon beschlossen?</summary>
+          <p>Stand April 2026 sollte das nicht als gesicherte Rechtslage kommuniziert werden. Belastbar sind die EU-Vorgaben der EPBD und die Erwartung einer deutschen Umsetzung, nicht aber ein abschließend verifizierter Bundesgesetzestext unter diesem Namen.</p>
+        </details>
+        <details>
+          <summary>Wird der Energieausweis künftig wichtiger?</summary>
+          <p>Ja. Die regulatorische Richtung geht klar zu mehr Vergleichbarkeit, Digitalisierung und Datentiefe. Für Marktkommunikation, Sanierungsplanung und Investitionsentscheidungen wird der Energieausweis wichtiger, nicht nebensächlicher.</p>
+        </details>
+        <details>
+          <summary>Warum wird Ökobilanzierung für die Bauphysik relevanter?</summary>
+          <p>Weil sich die Anforderungen vom reinen Betriebsenergie-Blick zur Lebenszyklus-Betrachtung verschieben. Damit beeinflussen Baustoffe, Konstruktion und Ersatzzyklen die Zukunftsfähigkeit von Gebäuden wesentlich stärker.</p>
+        </details>
+        <details>
+          <summary>Was ist für Portfolios der wichtigste erste Schritt?</summary>
+          <p>Ein belastbares technisches Screening. Erst wenn Gebäudehülle, Anlagentechnik, Energieperformance, Überhitzungsrisiken und Modernisierungsstände strukturiert vorliegen, lassen sich Maßnahmenpfade sinnvoll priorisieren.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEG QUICK-CHECK CTA -->
+  <section style="padding:36px 0">
+    <div class="wrap">
+      <div class="cta-band" data-r>
+        <div class="cta-inner">
+          <div>
+            <h2>GEG Quick-Check</h2>
+            <p>Das GEG Quick-Check-Tool prüft Ihr Gebäude in wenigen Minuten auf Konformität mit dem aktuellen Gebäudeenergiegesetz: U-Werte, Dämmdicken, Gebäudetechnik und KfW-Förderstufen (EH 55 / EH 40). Direkt im Browser, mit PDF-Export.</p>
+          </div>
+          <a class="btn btn-ghost-light" href="#kontakt">GEG Quick-Check starten <span class="arw">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
+  <section class="kontakt" id="kontakt">
+    <div class="wrap" data-r>
+      <span class="eyebrow">Kontakt</span>
+      <h2 style="margin-top:12px">Sprechen wir über Ihr Gebäude.</h2>
+      <p class="sub">Ob einzelnes Objekt oder großes Portfolio: wir analysieren Ihre Ausgangssituation und zeigen Ihnen den effizientesten Weg zur Zukunftsfähigkeit. Wir antworten in der Regel innerhalb von 24 Stunden.</p>
+      <a class="mail" href="mailto:info@muenchen-bauphysik.de">info@muenchen-bauphysik.de</a>
+      <div class="k-info">
+        <div><span>Adresse</span><p>c/o ImpactHub · Gotzinger Str. 8 · 81371 München</p></div>
+        <div><span>E-Mail</span><p>info@muenchen-bauphysik.de</p></div>
+        <div><span>Reaktionszeit</span><p>in der Regel innerhalb von 24 Stunden</p></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="ft-top">
+      <div>
+        <a class="logo" href="#top"><b>münchen<i>·</i>bauphysik</b><span>by vesta sustainability consulting</span></a>
+        <p>Strategische Bauphysik für Dekarbonisierung, Klimaresilienz und zukunftsfähige Gebäudeportfolios — aus München.</p>
+      </div>
+      <div class="ft-col"><h4>Themen</h4><a href="#leistungen">Leistungen</a><a href="#relevanz">Relevanz</a><a href="#regulatorik">EPBD &amp; Regulatorik</a><a href="#energieausweis">Energieausweis</a><a href="#portfolio">Portfolio</a></div>
+      <div class="ft-col"><h4>Themenportale</h4><a href="https://gebaeude-lca.de" target="_blank" rel="noopener">Gebäude-LCA</a><a href="https://gebaeudemodernisierungsgesetz.info" target="_blank" rel="noopener">Gebäudemodernisierungsgesetz</a><a href="#podcast">Podcast</a><a href="#faq">FAQ</a></div>
+      <div class="ft-col"><h4>Rechtliches</h4><a href="#">Impressum</a><a href="#">Datenschutz</a><a href="#">Cookie-Richtlinie</a><a href="#kontakt">Kontakt</a></div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 München Bauphysik — Alle Rechte vorbehalten.</span>
+      <span>vesta sustainability consulting UG (haftungsbeschränkt) · HRB 259944 · Amtsgericht München · USt-IdNr. DE357474319</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const U=(id,w)=>'https://images.unsplash.com/photo-'+id+'?auto=format&fit=crop&w='+(w||1300)+'&q=80';
+const IMG={ hero:U('1479839672679-a46483c0e7c8',1400) };
+document.querySelectorAll('.ph[data-img]').forEach(p=>{p.style.backgroundImage='url("'+IMG[p.dataset.img]+'")';});
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('[data-r]').forEach(e=>io.observe(e));
+
+const prog=document.getElementById('prog'),heroPh=document.querySelector('.hero .ph');
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;let tick=false;
+function onScroll(){
+  const st=scrollY,dh=document.documentElement.scrollHeight-innerHeight;
+  prog.style.width=(dh>0?st/dh*100:0)+'%';
+  if(!reduce&&heroPh&&st<innerHeight){heroPh.style.transform='scale(1.04) translateY('+(st*0.05)+'px)';}
+  tick=false;
+}
+addEventListener('scroll',()=>{if(!tick){requestAnimationFrame(onScroll);tick=true;}},{passive:true});
+addEventListener('resize',onScroll);onScroll();
+</script>
+</body>
+</html>
